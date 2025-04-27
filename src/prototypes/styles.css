@@ -1,15 +1,16 @@
 :root {
-    --bck-grd-clr: rgb(205, 205, 205);    /*Cor do fundo do site*/
-    --bck-dtl-clr:  rgb(255, 255, 255);   /*Cor de contraste com o fundo para as seções do site*/
-    --bck-nav-ftr: rgb(145, 157, 163);    /*Cor de fundo da nav e do footer*/
-    --brd-clr: rgb(0, 0, 0);              /* Border padronized color*/
+    --bck-grd-clr: #040123;    /*Cor do fundo do site*/
+    --bck-dtl-clr:  #746D89;   /*Cor de contraste com o fundo para as seções do site*/
+    --bck-nav-ftr: rgb(0, 0, 0);    /*Cor de fundo da nav e do footer*/
+    --brd-clr: #E5D0B1;              /* Border padronized color*/
+    --card-clr: #ffffff;
 
-    --txt-clr:  rgb(0, 0, 0);             /* Cor padrão do texto*/
-    --txt-inv-clr: rgb(255, 255, 255);    /*Cor complementar da original*/
-    --txt-dtl-clr: rgb(246, 59, 59);      /* Cor de detalhe*/
+    --txt-clr:  #E5D0B1;             /* Cor padrão do texto*/
+    --txt-inv-clr: rgb(0, 0, 0);     /*Cor complementar da original*/
+    --txt-dtl-clr: #daad5f;         /* Cor de detalhe*/
 
-    --btn-clr: rgb(0, 0, 0);
-    --btn-txt-clr: rgb(255, 255, 255);
+    --btn-clr: #040123;
+    --btn-txt-clr: #E5D0B1;
 }
 /* ESTILOS GERAIS */
 html {
@@ -56,6 +57,7 @@ a:hover {
 button {
     background-color: var(--btn-clr);
     color: var(--btn-txt-clr);
+    border: none;
 }
 
 main {
@@ -68,6 +70,9 @@ main > * {
 }
 
 .product-card {
+    background-color: var(--card-clr);
+    color: var(--txt-inv-clr);
+
     padding: 0% 2% 2% 2%;
     border: solid .5px var(--brd-clr);
     border-radius: 8px;
@@ -120,6 +125,11 @@ header {
     gap: 30%;
 }
 
+#header-title {
+    text-decoration: none;
+    color: var(--txt-clr);
+}
+
 nav {
     flex: 1;
 
@@ -134,6 +144,8 @@ nav {
 footer {
     background-color: var(--bck-nav-ftr);
     padding: 2% 15% 5% 15%;
+    border-top: solid 2px var(--brd-clr);
+
 
     text-align: left;
     text-wrap: nowrap;
