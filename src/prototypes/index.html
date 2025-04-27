@@ -3,24 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gidole&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <title>ArcNet</title>
 </head>
 <body>
-    <section class="header">
-        <h1>ArcaNet</h1>
-
-        <div class="header-nav-line">
+    <header>
+        <div class="header-title-div">
             <img src="#" alt="[image icon]">
-
-            <nav>
-                <a href="#" class="nav-link">Home</a>
-                <a href="#" class="nav-link">Products</a>
-                <a href="#" class="nav-link">Wheel of Fortune</a>
-                <a href="#" class="nav-link">Login</a>
-                <a href="#"><img id="chart-icon" src="#" alt="[chart icon]"></a>
-            </nav>
+            <h1 id="header-title">ArcaNet</h1>
         </div>
-    </section>
+
+        <nav>
+            <a href="#" class="nav-link">Products</a>
+            <a href="#" class="nav-link">Wheel of Fortune</a>
+            <a href="#" class="nav-link">Login</a>
+            <a href="#"><img id="chart-icon" src="#" alt="[chart icon]"></a>
+        </nav>
+    </header>
 
     <main>
         <section class="description">
@@ -47,61 +51,97 @@
         </section>
 
         <section class="item-list">
+            <h3>Highlights</h3>
+        
             <div class="carousel">
+            <button class="carousel-btn prev">&#10094;</button>
+    
                 <div class="carousel-track">
-                    <div class="carousel-slide">
-                        <div class="product-card">
-                            <img src="#" alt="Product">
+                    <!-- Multiple slides! -->
+                    <div class="carousel-slide product-card">
+                        <img src="#" alt="Product">
+                        <div class="product-card-bottom">
+                            <p class="product-title">Test - 22$</p>
+                            <button>More about!</button>
+                        </div>
+                    </div>
+        
+                    <div class="carousel-slide product-card">
+                        <img src="#" alt="Product 2">
+                        <div class="product-card-bottom">
+                            <p class="product-title">Another - 35$</p>
+                            <button>More about!</button>
+                        </div>
+                    </div>
+        
+                    <div class="carousel-slide product-card">
+                        <img src="#" alt="Product 3">
+                        <div class="product-card-bottom">
+                            <p class="product-title">Third - 18$</p>
+                            <button>More about!</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next">&#10095;</button>
+            </div>
+        </section>
+        
 
+        <section class="item-list">
+            <h3>Last in stock!!</h3>
+
+            <div class="carousel">
+                <button class="carousel-btn prev">&#10094;</button>
+        
+                    <div class="carousel-track">
+                        <!-- Multiple slides! -->
+                        <div class="carousel-slide product-card">
+                            <img src="#" alt="Product">
                             <div class="product-card-bottom">
-                                <p class="product-title">Test</p>
-                                <p class="product-price">22 $</p>
-                                <button>See</button>
+                                <p class="product-title">Test - 22$</p>
+                                <button>More about!</button>
+                            </div>
+                        </div>
+            
+                        <div class="carousel-slide product-card">
+                            <img src="#" alt="Product 2">
+                            <div class="product-card-bottom">
+                                <p class="product-title">Another - 35$</p>
+                                <button>More about!</button>
+                            </div>
+                        </div>
+            
+                        <div class="carousel-slide product-card">
+                            <img src="#" alt="Product 3">
+                            <div class="product-card-bottom">
+                                <p class="product-title">Third - 18$</p>
+                                <button>More about!</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="carousel-slide">item 2</div>
-
-                    <div class="carousel-slide">item 3</div>
-
-                    <div class="carousel-slide">item 4</div>
+                    <button class="carousel-btn next">&#10095;</button>
                 </div>
-            </div>
-        </section>
-
-        <section class="item-list">
-            <div class="carousel">
-                <div class="carousel-slide">
-                    <div class="carousel-slide">item 1</div>
-
-                    <div class="carousel-slide">item 2</div>
-
-                    <div class="carousel-slide">item 3</div>
-
-                    <div class="carousel-slide">item 4</div>
-                </div>
-            </div>
         </section>
     </main>
 
     <footer>
         <div class="footer-item">
             <p>Social Networks</p>
-            <img src="#" alt="Instagram icon">
-            <img src="#" alt="Linkedin icon">
-            <img src="#" alt="X icon">
-            <img src="#" alt="Facebook icon">
+            <a href="#"><img class="footer-icon" src="#" alt="[Instagram icon]"></a>
+            <a href="#"><img class="footer-icon" src="#" alt="[Linkedin icon]"></a>
+            <a href="#"><img class="footer-icon" src="#" alt="[X icon]"></a>
+            <a href="#"><img class="footer-icon" src="#" alt="[Facebook icon]"></a>
         </div>
 
         <div class="footer-item">
             <p>Contact us</p>
 
-            <img src="#" alt="email icon">
-            <p><small>sales@arcanet.com</small></p>
+            <img class="footer-icon" src="#" alt="[email icon]">
+            <span class="footer-contact-txt">sales@arcanet.com</span>
+            <br>
 
-            <img src="#" alt="telephone icon">
-            <p><small>+55 (16) 99627-8250</small></p>
+            <img class="footer-icon" src="#" alt="[tel icon]">
+            <span class="footer-contact-txt">+55 (16) 99627-8250</span>
         </div>
     </footer>
 </body>
