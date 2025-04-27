@@ -61,13 +61,12 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
 
 3. User interfaces
     Here is the link for the Figma mock-ups (where is also the navigation diagram):
-   - [https://www.figma.com/design/F4yVIgxYHlghHsNsOMQDcE/ArcaNet?node-id=39-1246&t=cLRZ0zj6Dxyo2PNW-1]
+   - [Navigatian Diagram](https://www.figma.com/design/F4yVIgxYHlghHsNsOMQDcE/ArcaNet?node-id=39-1246&t=cLRZ0zj6Dxyo2PNW-1)
      
 5. Data stored in the server
    The server will store the majority of it's data as tables and records in a data base, but it'll also save the product's images as static archives.
    The follwing diagram represent how the data will be modelated:
-
-   [LINK FOR THE BD DIAGRAMS]
+   - [BD Diagram](https://github.com/GabrielAntunes34/arcaNet-Shop/blob/main/docs/dataBaseDiagram.pdf)
     
 ## Code Comments
 
