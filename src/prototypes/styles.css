@@ -247,3 +247,46 @@ input {
     border-radius: 8px;
     border: none;
 }
+
+@media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      margin-top: 1rem;
+    }
+  
+    .header-title-div {
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+  
+    .carousel-slide {
+      min-width: 90%;
+      margin: 0 5%;
+    }
+  
+    footer {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    header {
+      flex-direction: column;
+    }
+  
+    nav {
+      flex-direction: column;
+    }
+  
+    .nav-link {
+      font-size: 1rem;
+    }
+  
+    .carousel-btn {
+      font-size: 1.5rem;
+    }
+  }
+  
