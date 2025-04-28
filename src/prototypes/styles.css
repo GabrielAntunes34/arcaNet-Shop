@@ -1,16 +1,16 @@
 :root {
     --bck-grd-clr: #040123;    /*Cor do fundo do site*/
     --bck-dtl-clr:  #746D89;   /*Cor de contraste com o fundo para as seções do site*/
-    --bck-nav-ftr: rgb(0, 0, 0);    /*Cor de fundo da nav e do footer*/
-    --brd-clr: #E5D0B1;              /* Border padronized color*/
+    --bck-nav-ftr: #000000;    /*Cor de fundo da nav e do footer*/
+    --brd-clr: #E5D0B1;        /* Border padronized color*/
     --card-clr: #ffffff;
 
-    --txt-clr:  #E5D0B1;             /* Cor padrão do texto*/
-    --txt-inv-clr: rgb(0, 0, 0);     /*Cor complementar da original*/
-    --txt-dtl-clr: #daad5f;         /* Cor de detalhe*/
+    --txt-clr:  #E5D0B1;        /* Cor padrão do texto*/
+    --txt-inv-clr: #000000;     /*Cor complementar da original*/
+    --txt-dtl-clr: #daad5f;     /* Cor de detalhe*/
 
-    --btn-clr: #040123;
-    --btn-txt-clr: #E5D0B1;
+    --btn-clr: #040123;         /*Cor dos botões*/
+    --btn-txt-clr: #E5D0B1;     /*Cor dos textos nos botões*/
 }
 /* ESTILOS GERAIS */
 html {
@@ -103,6 +103,14 @@ main > * {
 
     background-color: var(--btn-clr);
     color: var(--btn-txt-clr);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: auto;
 }
 
 
