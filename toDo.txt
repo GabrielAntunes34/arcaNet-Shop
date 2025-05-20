@@ -1,0 +1,81 @@
+LEGENDAS: 
+ - ? : Coisas que não temos certeza
+ - x--> : Coisas que já estão prontas
+ - () : Detalhe
+
+
+
+FRONT-END
+
+=======================
+*       GLOBAIS       *
+=======================
+
+--> /Pages
+ - HomePage
+--> /Componentes (global):
+    - navBar
+    - Footer
+    - SearchBar ? (por nome? Ou o campo de busca é genérico também?)
+    - Carrousel ? (Há uma biblioteca para isso?)
+    - Button
+
+
+--> /Public
+ - css global (tipografia, cores)
+ - icones 
+
+
+=======================
+*     EM FEATURES     *
+=======================
+
+--> Auth:
+ - Componentes:
+    - loginForm
+    - ResgiterForm
+    
+ - pages:?
+    - loginPage
+    - register
+
+--> Chart:
+ - Componentes:
+    - cartItem
+    - cartList (a tabela)
+    - checkout form (pagamento faz parte da feature carrinho!)
+
+    pages:
+        - chartPage
+        - paymentPage (bloqueado para usuários sem nada no carrinho)
+
+--> Products:
+    - Components:
+        - ProductCard
+        - ProductList
+        - FilterSideBar
+        - ProductDetail
+
+    - Pages:
+        - productListPage
+        - productsDetailPage
+
+--> Admin (bloquado para usuários comuns):
+    - Componentes:
+        - Tabela ? (talvez seja do components global)
+        - Item da tabela ? (talvez seja do components global)
+        - addForm
+        - updateForm (tem como reutilizar o add?)
+
+    - Pages:
+        - manageProductPage
+        - manageCategoryPage
+        - manageUserPage
+        ? (Precisamos de paginas para os forms? Ou há como só recarregar tudo?)
+    
+    - wheelOfFortune:
+        - Componentes:
+            - TaroCard ? (como fazer a carta virar com o clique?)
+            - taroDeck (3 cartas aleatórias viradas para trás)
+            - botão para receber cartas
+            - Caixa de resultados
