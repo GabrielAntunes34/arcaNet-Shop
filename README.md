@@ -70,7 +70,7 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
     
 ## Code Comments
 
-  We intend to use Node as our back-end framework, React as our front-end framework, but the data base is yet to be defined
+  We intend to use Node as our back-end framework, React as our front-end framework, and MongoDB for the data base.
 
 ## Test Plan
 
