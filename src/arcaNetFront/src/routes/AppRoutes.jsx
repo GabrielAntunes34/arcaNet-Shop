@@ -8,7 +8,7 @@ import ProtectedRoutes from './ProtectedRoutes';
 import HomePage from '../pages/HomePage';
 import ProductListPage from '../features/products/ProductListPage';
 import LoginPage from '../features/auth/LoginPage';
-import SignUpPage from '../features/auth/SignupPage';
+import SignUpPage from '../features/auth/SignUpPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import ProductDetailPage from '../features/products/ProductDetailPage';
 import ProfilePage from '../features/auth/ProfilePage';

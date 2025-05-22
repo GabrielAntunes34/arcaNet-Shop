@@ -1,0 +1,105 @@
+
+/*
+=====================================================
+  NAVBAR COMPONENTE TODO
+=====================================================
+*/
+.navbar {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  background-color: #222; 
+  color: #fff; 
+  padding: 10px 25px; 
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #444; 
+}
+
+/*
+======================================================
+  NAVBAR COMPONENTES DA ESQUERDA
+======================================================  
+*/
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo-img {
+  height: 35px;
+}
+
+.navbar-brand-name {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+
+/*
+======================================================
+  NAVBAR COMPONENTES DA DIREITA
+======================================================  
+*/
+.navbar-main-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-main-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.navbar-main-links a:hover {
+  color: #aaa;
+}
+
+
+
+/*
+------------------------------------------------------
+  NAVBAR COMPONENTES DA DIREITA
+------------------------------------------------------ 
+*/
+.navbar-login-button {
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  padding: 8px 18px; 
+  border-radius: 5px;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  border: 1px solid #ccc;
+  white-space: nowrap;  
+  flex-shrink: 0;       
+  display: inline-block;
+  line-height: normal; 
+}
+
+.navbar-login-button:hover {
+  background-color: #ddd; 
+}
+
+.navbar-cart-link {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-cart-link img { 
+  height: 28px; 
+}
+
+.navbar-cart-link:hover {
+  color: #ccc;
+}
