@@ -1,0 +1,44 @@
+.card {
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    background-color: #fff;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .name {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #007bff;
+  }
+  
