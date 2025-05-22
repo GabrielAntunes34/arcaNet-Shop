@@ -1,13 +1,23 @@
+import { BrowserRouter } from 'react-router-dom';
 import './App.css'
+import AppRoutes from './routes/AppRoutes';
 
-function App() {
+// =================================================
+// |  Mockup functions - Place your tests here :)  |
+// =================================================
+import { simulateUserInQuery } from './tests/mockAuth';
+
+simulateUserInQuery();
+
+
+// Instanciates a BrowserRouter and recives applys the navbar and
+// Header for all pages
+const App = () => {
   return (
-    <>
-      <h1>MILESTONE 2!!!!!!!!!!!!!!</h1>
-      <p>And so it begins. 19/05/2025</p>
-      <small><p>10 days remaining</p></small>
-    </>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;

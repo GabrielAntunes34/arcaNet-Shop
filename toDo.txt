@@ -1,11 +1,12 @@
 LEGENDAS: 
- - ? : Coisas que não temos certeza
- - x--> : Coisas que já estão prontas
- - () : Detalhe
+ - ?    : Coisas que não temos certeza
+ - x--> : Modulos que já estão prontas
+ - x-   : Arquivos que já estão prontos
+ - ()   : Detalhe
 
+========================================================================
 
-
-FRONT-END
+FRONT-END:
 
 =======================
 *       GLOBAIS       *
@@ -13,8 +14,12 @@ FRONT-END
 
 --> /Pages
  - HomePage
+ - NotFoundPage (display do erro 404)
+ - ForbiddenPage (display do erro 403)
+
 --> /Componentes (global):
-    - navBar
+    - Layout
+    - NavBar
     - Footer
     - SearchBar ? (por nome? Ou o campo de busca é genérico também?)
     - Carrousel ? (Há uma biblioteca para isso?)
@@ -68,10 +73,9 @@ FRONT-END
         - updateForm (tem como reutilizar o add?)
 
     - Pages:
-        - manageProductPage
-        - manageCategoryPage
-        - manageUserPage
-        ? (Precisamos de paginas para os forms? Ou há como só recarregar tudo?)
+        - adminDashboardPage
+        - adminCreatePage
+        - adminUpdatePage
     
     - wheelOfFortune:
         - Componentes:
