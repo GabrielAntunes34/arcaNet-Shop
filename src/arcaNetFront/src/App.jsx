@@ -14,9 +14,11 @@ simulateUserInQuery();
 // Header for all pages
 const App = () => {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter> 
+    </>
   );
 };
 

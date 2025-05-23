@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ProductCard.module.css';
-import Button from '../Button/Button';
+import Button from '../../../components/Button/Button';
 
 /**
  * Displays a product card for listing items on a page.
