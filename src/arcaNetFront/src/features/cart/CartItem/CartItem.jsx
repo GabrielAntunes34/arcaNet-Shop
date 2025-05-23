@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './CartItem.module.css';
-import Button from '../Button/Button';
+import Button from '../../../components/Button/Button';
 
 /**
  * Displays a single product entry inside the shopping cart.

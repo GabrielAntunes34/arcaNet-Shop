@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 function ProductPage(){
     const [search, setSearch] = useState('');
