@@ -1,22 +1,18 @@
+// src/components/Layout/Layout.jsx (ou onde estiver seu arquivo)
 import { Outlet } from "react-router-dom";
 import NavBar from './NavBar';
 import Footer from './Footer';
-
-// This component Encapsulates every main content from the application
-// Into the a same Layout composed by NavBar and a Footer.
-
-// Outlet will call our Router to resolve which content display
-// Inside main, based on the givven url.
+import './Layout.css'; // Crie este arquivo CSS
 
 const Layout = () => {
     return (
-        <>
+        <div className="layout-container"> {/* Nova div encapsuladora */}
             <NavBar />
-            <main>
+            <main className="layout-main-content"> {/* Classe para o conteúdo principal */}
                 <Outlet />
             </main>
             <Footer />
-        </>
+        </div>
     );
 };
 
