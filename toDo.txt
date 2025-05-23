@@ -18,12 +18,12 @@ FRONT-END:
  - ForbiddenPage (display do erro 403)
 
 --> /Componentes (global):
-    - Layout
+    X- Layout
     - NavBar
     - Footer
-    - SearchBar ? (por nome? Ou o campo de busca é genérico também?)
-    - Carrousel ? (Há uma biblioteca para isso?)
-    - Button
+    X- SearchBar ? (por nome? Ou o campo de busca é genérico também?)
+    X- Carrousel ? (Há uma biblioteca para isso?)
+    X- Button
 
 
 --> /Public
@@ -46,7 +46,7 @@ FRONT-END:
 
 --> Chart:
  - Componentes:
-    - cartItem
+    X- cartItem
     - cartList (a tabela)
     - checkout form (pagamento faz parte da feature carrinho!)
 
@@ -56,7 +56,7 @@ FRONT-END:
 
 --> Products:
     - Components:
-        - ProductCard
+        X- ProductCard
         - ProductList
         - FilterSideBar
         - ProductDetail

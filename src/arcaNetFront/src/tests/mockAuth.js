@@ -9,6 +9,7 @@ const createMockUser = (role) => {
     const mockUser = {
         id: 6,
         name: (role === 'admin') ? 'adm' : 'jorgeTheClient',
+        password: '1234',
         phone: 1499234543,
         adress: 'Pindorama',
         role: (role === 'admin') ? 'admin' : 'client'
