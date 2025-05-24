@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css'
 import AppRoutes from './routes/AppRoutes';
+import { AuthProvider } from './features/auth/AuthContext';
 
 // =================================================
 // |  Mockup functions - Place your tests here :)  |
@@ -15,9 +16,11 @@ simulateUserInQuery();
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter> 
+      <AuthProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter> 
+      </AuthProvider>
     </>
   );
 };

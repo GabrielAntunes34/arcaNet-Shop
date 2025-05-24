@@ -48,6 +48,6 @@ const AuthProvider = ({ children }) => {
 };
 
 // Just defining a hook to facilitate the use of this context
-const useAuth = useContext(authContext);
+const useAuth = () => useContext(authContext);
 
 export { AuthProvider, useAuth};
