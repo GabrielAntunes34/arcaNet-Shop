@@ -26,13 +26,13 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     // Defining a local login function --> Should become our real logic
-    const login = (userData) => {
+    const login = async (email, password) => {
         console.log('logged in!')
         //setUser(...)
     }
 
     // Defining a local logout function
-    const logout = () => {
+    const logout = async () => {
         console.log('logged out');
         //setUser(null);
     }
