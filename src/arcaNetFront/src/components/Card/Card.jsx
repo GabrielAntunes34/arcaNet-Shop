@@ -1,20 +1,30 @@
 // Card.jsx
 import React from 'react';
-import verso from '../../assets/backCard.jpg'; // Imagem do verso da carta
-import card1Img from '../../assets/carta1.jpg';    // Imagem da frente da carta (exemplo)
+import verso from '../../assets/backCard.jpg';
+import card1Img from '../../assets/carta1.jpg';  
+import card2Img from '../../assets/carta2.jpg';
+import card3Img from '../../assets/carta3.jpg';  
+import card4Img from '../../assets/carta4.jpg';
+import card5Img from '../../assets/carta5.jpg';  
+import card6Img from '../../assets/carta6.jpg';
+import card7Img from '../../assets/carta7.jpg';  
+import card8Img from '../../assets/carta8.jpg';
+import card9Img from '../../assets/carta9.jpg';
+
+
 import './Card.css';
 
 
 const frontImageMap = {
     1: card1Img,
-    2: card1Img,
-    3: card1Img,
-    4: card1Img,
-    5: card1Img,
-    6: card1Img,
-    7: card1Img,
-    8: card1Img,
-    9: card1Img,
+    2: card2Img,
+    3: card3Img,
+    4: card4Img,
+    5: card5Img,
+    6: card6Img,
+    7: card7Img,
+    8: card8Img,
+    9: card9Img,
 };
 
 export default function Card({ number, index, flipped, func }) {

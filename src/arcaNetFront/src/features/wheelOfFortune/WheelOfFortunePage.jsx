@@ -9,7 +9,7 @@ const LOCAL_STORAGE_KEY = 'wheelOfFortuneDailyNumbers';
 // Função para gerar números aleatórios
 const generateRandomNumbers = () => {
     return Array.from(
-        { length: NUM_CARDS },
+        { length: 3 },
         () => Math.floor(Math.random() * 9) + 1
     );
 };
@@ -77,12 +77,24 @@ const WheelOfFortunePage = () => {
 
     return (
         <div className="wheel-of-fortune-container">
-            <h1> Wheel of Fortune </h1>
-            <div className='card-container'>
-                <Card number={numbers[0]} index={0} flipped={flippedCards[0]} func={handleCardClick}> </Card>
-                <Card number={numbers[1]} index={1} flipped={flippedCards[1]} func={handleCardClick}> </Card>
-                <Card number={numbers[2]} index={2} flipped={flippedCards[2]} func={handleCardClick}> </Card>
+            <div className='box-container'>
+                <h1> Wheel of Fortune </h1>
+                <div className='card-container'>
+                    <Card number={numbers[0]} index={0} flipped={flippedCards[0]} func={handleCardClick}> </Card>
+                    <Card number={numbers[1]} index={1} flipped={flippedCards[1]} func={handleCardClick}> </Card>
+                    <Card number={numbers[2]} index={2} flipped={flippedCards[2]} func={handleCardClick}> </Card>
+                </div>
+                <div className='result-container'>
+                    <h2>Resultado:</h2>
+                    <div className='result'>
+                        {numbers.map((number, index) => (
+                            <span key={index} className='result-number'>{number}</span>
+                        ))}
+                    </div>
+
+                </div>
             </div>
+            
 
         </div>
     )

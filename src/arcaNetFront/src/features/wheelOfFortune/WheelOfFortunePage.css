@@ -12,6 +12,32 @@
     box-sizing: border-box;
 }
 
+.box-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; 
+    padding: 20px; 
+}
+
+.result-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    max-width: 250px; 
+    max-height: 50px;
+    border-radius: 10%;
+    padding: 20px; 
+    padding-bottom: 40px;
+    border: solid 2px #000000;
+    color: black;
+    background-color: #ffffff;
+}
+
 .card-container {
   display: flex;
   /* Configuração padrão para telas maiores (cartas lado a lado) */
@@ -19,12 +45,13 @@
   flex-wrap: wrap; 
   align-items: center; 
   justify-content: center; 
-  width: 90%; 
-  max-width: 70%; /* Largura máxima do container */
+  width: 100%; 
+  max-width: 100%; /* Largura máxima do container */
   min-height: 460px;
-  padding: 20px; 
-  border: solid 8px #090015;
-  background-color: #e0c8ef;
+  padding: 60px; 
+  border: solid 8px #ffffff;
+  border-radius: 5%;
+  background-color: #030513;
   gap: 25px; 
   box-sizing: border-box;
 }
@@ -32,20 +59,15 @@
 
 @media (max-width: 600px) {
   .card-container {
-    flex-direction: column; /* Muda a direção para empilhar as cartas verticalmente */
-    align-items: center;    /* Centraliza as cartas horizontalmente na coluna */
-    width: 80%;             /* Pode ajustar a largura do container para telas menores */
-    height: auto;           /* A altura se ajusta ao conteúdo empilhado */
-    gap: 20px;              /* Ajusta o espaçamento vertical entre as cartas empilhadas */
+    flex-direction: column; 
+    align-items: center;    
+    width: 80%;             
+    height: auto;          
+    gap: 20px;            
   }
 
-  /* Opcional: Ajustar o tamanho das cartas quando empilhadas para que fiquem um pouco maiores.
-     Esta regra sobrescreverá a largura definida no Card.css APENAS para cartas dentro
-     de .card-container em telas pequenas. */
   .card-container .card-perspective-container {
-    width: clamp(200px, 60vw, 280px); /* Exemplo: Mínimo 200px, ideal 60% da viewport, máximo 280px */
-    /* A aspect-ratio definida no Card.css cuidará da altura proporcionalmente. */
-    margin: 0 0 20px 0; /* Remove margem lateral, adiciona margem inferior se o gap não for suficiente */
-                        /* Ou ajuste o 'gap' no .card-container acima */
+    width: clamp(200px, 60vw, 280px); 
+    margin: 0 0 20px 0;
   }
 }
