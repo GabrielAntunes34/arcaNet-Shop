@@ -1,13 +1,17 @@
 // ProfileDropdown.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Adicione useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
 
 
-const ProfileDropdown = ({ user, onLogout }) => { // Adicionada prop onLogout
+/*
+  user -> prop do user
+  onLogout -> função que é chamada quando o usuário clica em logout
+*/
+const ProfileDropdown = ({ user, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const navigate = useNavigate(); // Hook para navegação
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -24,14 +28,16 @@ const ProfileDropdown = ({ user, onLogout }) => { // Adicionada prop onLogout
 
   return (
     <div className="profile-dropdown-container" ref={dropdownRef}>
-      <button onClick={toggleDropdown} className="profile-button" aria-haspopup="true" aria-expanded={isOpen}>
 
+      {/* Botão de perfil */}
+      <button onClick={toggleDropdown} className="profile-button" aria-haspopup="true" aria-expanded={isOpen}>
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
       </button>
 
+      {/* Dropdown menu */}
+      {/* Se o dropdown estiver aberto, renderiza o menu */}
       {isOpen && (
         <div className="dropdown-menu" role="menu">
-          <div className="dropdown-arrow"></div>
           <ul>
             <li>
               <Link to="/profile" onClick={() => setIsOpen(false)} role="menuitem">
@@ -64,7 +70,7 @@ const ProfileDropdown = ({ user, onLogout }) => { // Adicionada prop onLogout
             {/*===========================================*/}
 
 
-
+            
             <li className="dropdown-separator"></li>
             <li>
               {/* Botão de Logout chama handleLogoutClick */}
