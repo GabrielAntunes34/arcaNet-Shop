@@ -1,20 +1,51 @@
-.wheel-of-fortune-container{
+/* WheelOfFortunePage.css */
+
+.wheel-of-fortune-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; 
     width: 100%;
-    height: 100vh;
-    
+    min-height: 100vh; 
+    padding-top: 40px;
+    padding-bottom: 40px; 
+    box-sizing: border-box;
 }
 
 .card-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  height: 700px;
+  /* Configuração padrão para telas maiores (cartas lado a lado) */
+  flex-direction: row;
+  flex-wrap: wrap; 
+  align-items: center; 
+  justify-content: center; 
+  width: 90%; 
+  max-width: 70%; /* Largura máxima do container */
+  min-height: 460px;
+  padding: 20px; 
   border: solid 8px #090015;
   background-color: #e0c8ef;
-  gap: 50px;
+  gap: 25px; 
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 600px) {
+  .card-container {
+    flex-direction: column; /* Muda a direção para empilhar as cartas verticalmente */
+    align-items: center;    /* Centraliza as cartas horizontalmente na coluna */
+    width: 80%;             /* Pode ajustar a largura do container para telas menores */
+    height: auto;           /* A altura se ajusta ao conteúdo empilhado */
+    gap: 20px;              /* Ajusta o espaçamento vertical entre as cartas empilhadas */
+  }
+
+  /* Opcional: Ajustar o tamanho das cartas quando empilhadas para que fiquem um pouco maiores.
+     Esta regra sobrescreverá a largura definida no Card.css APENAS para cartas dentro
+     de .card-container em telas pequenas. */
+  .card-container .card-perspective-container {
+    width: clamp(200px, 60vw, 280px); /* Exemplo: Mínimo 200px, ideal 60% da viewport, máximo 280px */
+    /* A aspect-ratio definida no Card.css cuidará da altura proporcionalmente. */
+    margin: 0 0 20px 0; /* Remove margem lateral, adiciona margem inferior se o gap não for suficiente */
+                        /* Ou ajuste o 'gap' no .card-container acima */
+  }
 }
