@@ -10,7 +10,7 @@
   align-items: center;
   background-color: #222; 
   color: #fff; 
-  padding: 10px 25px; 
+  padding: 2px 25px; 
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid #444; 
@@ -28,7 +28,7 @@
 }
 
 .navbar-logo-img {
-  height: 35px;
+  height: 50px;
 }
 
 .navbar-brand-name {
