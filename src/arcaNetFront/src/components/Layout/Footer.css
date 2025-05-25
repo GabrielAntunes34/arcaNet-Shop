@@ -1,0 +1,77 @@
+/* Footer.css */
+
+.footer {
+  background-color: #484848; 
+  color: #ecf0f1; 
+  padding: 30px 20px; 
+  margin-top: auto; 
+  font-size: 0.9em;
+  width: 100%; 
+  box-sizing: border-box; 
+  border-top: solid #000000;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1000px; /* Largura máxima para o conteúdo interno */
+  margin: 0 auto; /* Centraliza o .footer-content */
+  gap: 20px; 
+}
+
+.footer-content-links,
+.footer-content-contact {
+  flex: 1; /* Faz com que cada seção tente ocupar o mesmo espaço */
+  min-width: 200px; /* Largura mínima antes de quebrar a linha em telas pequenas */
+  margin-bottom: 20px; /* Espaço abaixo de cada seção, caso elas se empilhem */
+}
+
+.footer-content h3 { /* Estilo para ambos os títulos "Useful Links" e "Contact Us" */
+  color: #ffffff; /* Branco para os títulos */
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  border-bottom: 1px solid #000000; /* Linha azul abaixo do título */
+  padding-bottom: 8px;
+  display: inline-block; /* Para que a borda não ocupe a largura toda */
+}
+
+.footer-content ul {
+  list-style: none; /* Remove marcadores padrão da lista */
+  padding: 0; /* Remove padding padrão da lista */
+  margin: 0; /* Remove margem padrão da lista */
+}
+
+.footer-content ul li {
+  margin-bottom: 8px; /* Espaço entre os itens da lista */
+  color: #bdc3c7; /* Cinza claro para os itens da lista */
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 10px; /* Espaço acima da linha de copyright */
+  border-top: 1px solid #34495e; /* Linha sutil de separação */
+  font-size: 0.85em;
+  color: #bdc3c7; /* Cinza claro para o texto de copyright */
+}
+
+/* Media query para telas menores, se precisar ajustar o layout */
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column; /* Empilha as seções verticalmente */
+    align-items: center; /* Centraliza as seções empilhadas */
+    text-align: center; /* Centraliza o texto dentro das seções */
+  }
+
+  .footer-content-links,
+  .footer-content-contact {
+    min-width: 100%; /* Faz com que ocupem toda a largura disponível */
+  }
+
+  .footer-content h3 {
+    display: block; /* Faz a borda inferior ocupar toda a largura do h3 */
+    text-align: center;
+  }
+}

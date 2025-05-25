@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import SearchBar from '../components/SearchBar/SearchBar';
 
-function ProductPage(){
+export default function ProductPage(){
     const [search, setSearch] = useState('');
 
     return (

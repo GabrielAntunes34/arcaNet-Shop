@@ -3,6 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 // imports for specific components
 import Layout from '../components/Layout/Layout';
 import ProtectedRoutes from './ProtectedRoutes';
+import PlaygroundCarousel from '../tests/CarouselMock';
+//import ProductListPage from '../tests/ProductGridMock';
+import Playground from '../tests/ProductCardMock';
+import ProductPage from '../tests/SearchBarMock';
 
 // Imports for pages
 import HomePage from '../pages/HomePage';
@@ -28,6 +32,10 @@ const AppRoutes = () => {
 				{/* Public routes */}
 				<Route path='' element={<HomePage />} />
 				<Route path='*' element={<NotFoundPage />} />
+
+				<Route path="carousel-test" element={<PlaygroundCarousel />} />
+				<Route path="product-card" element={<Playground />} />
+				<Route path="search-bar" element={<ProductPage />} />
 
 				<Route path='products' element={<ProductListPage />} />
 				<Route path='products/:id' element={<ProductDetailPage />} />

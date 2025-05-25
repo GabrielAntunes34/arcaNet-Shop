@@ -1,0 +1,117 @@
+.profile-dropdown-container {
+  position: relative;
+  display: inline-block;
+  
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-button:hover {
+  outline: 2px solid #aaa;
+}
+
+.profile-button svg { 
+  stroke: #fff;
+}
+
+.profile-button:hover svg {
+  stroke: #aaa;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  width: 220px; 
+  padding-top: 8px;
+  padding-bottom: 8px;
+  overflow: hidden; /* ADICIONADO: Garante que os filhos não "vazem" dos cantos arredondados */
+}
+
+/* A pequena seta no topo do dropdown */
+.dropdown-arrow {
+  content: "";
+  position: absolute;
+  bottom: 100%; 
+  right: 10px; 
+  margin-left: -8px; 
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white; 
+  filter: drop-shadow(0 -1px 0.5px #ddd); 
+}
+
+.dropdown-menu li a,
+.dropdown-menu li .logout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box; /* ADICIONADO: Garante que padding não aumente a largura */
+}
+
+.dropdown-menu li a:hover,
+.dropdown-menu li .logout-button:hover {
+  background-color: #f5f5f5;
+}
+
+
+.dropdown-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a,
+.dropdown-menu li .logout-button {
+  display: flex; /* Para alinhar ícone e texto se usar react-icons */
+  align-items: center;
+  gap: 8px; /* Espaço entre ícone e texto */
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem; /* Tamanho da fonte dos itens */
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+
+.admin-only {
+  font-size: 0.8em;
+  color: #777;
+  margin-left: 4px;
+}
+
+.dropdown-separator {
+  height: 1px;
+  background-color: #eee;
+  margin: 8px 0;
+}
