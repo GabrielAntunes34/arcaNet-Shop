@@ -16,9 +16,12 @@ form a {
     text-align: center;
 }
 
+label {
+    margin-top: 3%;
+}
 
 input {
-    margin: 1% 0% 4% 0%;
+    margin: 1% 0% 1% 0%;
     padding: 2%;
 
     border: solid .5px var(--brd-clr);
@@ -27,7 +30,7 @@ input {
 
 .form-btn {
     align-self: center;
-    margin-bottom: 4%;
+    margin: 4% 0% 4% 0%;
     width: 25%;
     padding: 2%;
 

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import './AuthPages.css';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 // This page implements a Login form component which is interactible and responsible
 // To get the user input and send to the server to login
@@ -40,15 +41,16 @@ const LoginPage = () => {
         <h1>Login</h1>
 
         {/* This p only appears with an error in submition */}
-        {error && <p style={{ color:'red' }}>{error}</p>}
+        <ErrorMessage message={error}/>
 
         <form onSubmit={handleSubmit}>
             <label htmlFor="email">Email:</label>
             <input
                 name="email"
-                type="text" 
+                type="text"
                 value = {email}
                 onChange = {e => setEmail(e.target.value)}
+                required
             />
 
             <label htmlFor="password">Password:</label>
@@ -57,6 +59,7 @@ const LoginPage = () => {
                 type="password" 
                 value={password}
                 onChange = {e => setPassword(e.target.value)}
+                required
             />
 
             {/* Button may inform if we are expecting a new request */}

@@ -25,6 +25,7 @@
   --txt-dtl-clr: #daad5f;     /* Detail color */
 
   --btn-clr: #040123;         /* Button colors */
+  --btn-clr-click: rgb(0, 0, 0);
   --btn-txt-clr: #E5D0B1;     /* Text color for buttons */
 }
 
@@ -76,9 +77,13 @@ a:hover {
 }
 
 button {
+  cursor: pointer;
   background-color: var(--btn-clr);
   color: var(--btn-txt-clr);
   border: none;
+}
+button:hover {
+  background-color: #0d074e;
 }
 
 main {
@@ -96,15 +101,12 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
+}*/
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-*/
+
 
 @media (prefers-color-scheme: light) {
   :root {
