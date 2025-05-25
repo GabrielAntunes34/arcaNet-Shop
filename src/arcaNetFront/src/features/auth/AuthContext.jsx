@@ -37,10 +37,14 @@ const AuthProvider = ({ children }) => {
         //setUser(null);
     }
 
+    const register = async(formData) => {
+        console.log('registered');
+    }
+
     return (
         <>
             {/* isAuth will be false if user === null */}
-            <authContext.Provider value={{ user, login, logout, isAuth: !!user }}>
+            <authContext.Provider value={{ user, login, logout, register, isAuth: !!user }}>
                 {children}
             </authContext.Provider>
         </>

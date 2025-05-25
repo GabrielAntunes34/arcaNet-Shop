@@ -116,7 +116,7 @@ const SignUpPage = () => {
             <label htmlFor="password">Password:</label>
             <input
                 name='password'
-                type="text"
+                type="password"
                 value={formData.password}
                 onChange={handleInputChange}
                 required
@@ -127,7 +127,7 @@ const SignUpPage = () => {
             <label htmlFor="confirmPassword">confirmPassword</label>
             <input
                 name='confirmPassword'
-                type="text"
+                type="password"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
                 required
