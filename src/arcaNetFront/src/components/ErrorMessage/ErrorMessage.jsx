@@ -5,9 +5,12 @@ import './ErrorMessage.css'
 // Message as prop from the logic of a father component
 
 const ErrorMessage = ({message}) => {
+    if((!message) || (message === ''))
+        return;
+
     return (
         <>
-       {message && <i><small className='error-msg'>{message}</small></i>}
+       {<i><small className='error-msg'>{message}</small></i>}
         </>
     );
 };

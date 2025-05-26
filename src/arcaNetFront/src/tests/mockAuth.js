@@ -8,12 +8,12 @@
 // Just simulates the validation and return of a login operation
 const loginMock = async (email, password) => {
     const user = JSON.parse(localStorage.getItem('userRegistered'));
-    console.log(user);
 
     if((user.email === email) && (user.password === password)) {
-        console.log('Passei');
+        localStorage.setItem('isAuth', true);
         return user;
     }
+    localStorage.setItem('isAuth', false);
     return null;
 }
 
@@ -25,11 +25,12 @@ const registerMock = async (formParams) => {
         email: formParams.email,
         password: formParams.password,
         phone: formParams.phone,
-        adress: formParams.address,
+        address: formParams.address,
         role: 'client'
     }
 
     localStorage.setItem('userRegistered', JSON.stringify(mockUser));
+    localStorage.setItem('isAuth', true);
 }
 
 // Saves a pre defined client or admin at localstorage
@@ -45,7 +46,6 @@ const createMockUser = (role) => {
         role: (role === 'admin') ? 'admin' : 'client'
     };
 
-    console.log(mockUser);
     // Saving our user at localstorage
     localStorage.setItem('user', JSON.stringify(mockUser));
 }
@@ -57,7 +57,6 @@ const simulateUserInQuery = () => {
 
     // Verifies if you got a user role in the query parameter "user"
     if(role === 'client' || role === 'admin') {
-        console.log('User mocked!!');
         createMockUser(role);
     }
 }

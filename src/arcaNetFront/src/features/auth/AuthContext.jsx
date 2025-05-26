@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {loginMock, registerMock} from '../../tests/mockAuth';
 
 // Creating a new context to encapsulate information about our user state
@@ -7,8 +7,21 @@ const authContext = createContext();
 // This is a customized component to encapsulate the context's provider and
 // the authentication handlers
 const AuthProvider = ({ children }) => {
-    // Defining a state for logged users
-    const [user, setUser] = useState({});
+    // Defining a state for logged users (This is reloaded at every change of "page")
+    const [user, setUser] = useState(null);
+
+     // Resets user from localStorage at each reload
+    useEffect(() => {
+        const storedUser = localStorage.getItem('userRegistered');
+        if (storedUser)
+            setUser(JSON.parse(storedUser));
+    }, []);
+
+    // Saves user at localStorage when it changes
+    useEffect(() => {
+        if (user)
+        localStorage.setItem('userRegistered', JSON.stringify(user));
+    }, [user]);
 
     // Defining a local login function --> Should become our real logic
     const login = async (email, password) => {
@@ -28,14 +41,12 @@ const AuthProvider = ({ children }) => {
 
     const register = async(formData) => {
         const res = await registerMock(formData);
-        console.log('registro feito');
-        console.log(res);
     }
 
     return (
         <>
             {/* isAuth will be false if user === null */}
-            <authContext.Provider value={{ user, setUser, login, logout, register, isAuth: !!user }}>
+            <authContext.Provider value={{ user, setUser, login, logout, register}}>
                 {children}
             </authContext.Provider>
         </>

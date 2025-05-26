@@ -2,60 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../auth/AuthContext';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import './AuthPages.css';
+import validateData from './authValidation';
 
-/*
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '2rem auto',
-    padding: '1rem',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    fontFamily: 'Arial, sans-serif',
-    backgroundColor: '#fafafa',
-  },
-  label: {
-    display: 'block',
-    marginTop: '1rem',
-    fontWeight: 'bold',
-  },
-  input: {
-    width: '100%',
-    padding: '0.5rem',
-    marginTop: '0.25rem',
-    fontSize: '1rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  },
-  inputDisabled: {
-    backgroundColor: '#eee',
-    color: '#777',
-    cursor: 'not-allowed',
-  },
-  button: {
-    marginTop: '1.5rem',
-    padding: '0.75rem',
-    width: '100%',
-    backgroundColor: '#007bff',
-    border: 'none',
-    color: 'white',
-    fontSize: '1rem',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  messageSuccess: {
-    color: 'green',
-    marginTop: '1rem',
-  },
-  messageError: {
-    color: 'red',
-    marginTop: '1rem',
-  },
-};
-*/
+// This component is accessible to all users, showing it's data and making them able to alter
+// Some of it's fields
 
 const ProfilePage = () => {
-  const { user, setUser } = useAuth(); // Assumindo que o AuthContext expõe setUser para atualizar localmente
+  // Declaring the states of this page
+  const { user, setUser } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     address: '',
@@ -64,8 +18,9 @@ const ProfilePage = () => {
     password: '',
   });
   const [message, setMessage] = useState(null);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState(null);
 
+  // Changhing the formdata as the user changes
   useEffect(() => {
     if (user) {
       setFormData({
@@ -73,7 +28,7 @@ const ProfilePage = () => {
         address: user.address || '',
         phone: user.phone || '',
         email: user.email || '',
-        password: '********', // mostra senha mascarada
+        password: '********', // password shouldn't be diplayed
       });
     }
   }, [user]);
@@ -89,27 +44,28 @@ const ProfilePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage(null);
-    setError(null);
+    setErrors(null);
+
+    // Verifying if all data is curretly set
+    const newErrors = validateData(formData, false)
+    setErrors(newErrors);
 
     try {
-      // Aqui você faria a chamada para o backend para salvar as alterações,
-      // Exemplo:
-      // await api.updateUserProfile({ name, address, phone })
+      // Simulating an user update
+      if(errors === null) {
+        const updatedUser = {
+          ...user,
+          name: formData.name,
+          address: formData.address,
+          phone: formData.phone,
+        };
 
-      // Simulando atualização local e sucesso
-      const updatedUser = {
-        ...user,
-        name: formData.name,
-        address: formData.address,
-        phone: formData.phone,
-      };
-
-      setUser(updatedUser); // atualiza no contexto
-      //localStorage.setItem('user', JSON.stringify(updatedUser)); // mantém localStorage sincronizado
-
-      setMessage('Perfil atualizado com sucesso!');
+        // Updating at userContext, and consequently in the localstorage.
+        setUser(updatedUser);
+        setMessage('Profile successfully updated!');
+      }
     } catch (err) {
-      setError('Falha ao atualizar o perfil. Tente novamente.');
+      console.log('An error occurred');
     }
   };
 
@@ -143,6 +99,7 @@ const ProfilePage = () => {
           value={formData.phone}
           onChange={handleChange}
         />
+        <ErrorMessage message={errors && errors.phone}/>
 
         <label htmlFor="email">Email</label>
         <input
@@ -164,7 +121,6 @@ const ProfilePage = () => {
 
         <button className='form-btn' type="submit" >Salvar alterações</button>
 
-        <ErrorMessage message={error}/>
         {message && <p>{message}</p>}
       </form>
     </>
