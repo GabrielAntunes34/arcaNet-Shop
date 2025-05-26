@@ -2,6 +2,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css'
 import AppRoutes from './routes/AppRoutes';
 import { AuthProvider } from './features/auth/AuthContext';
+import { CartProvider } from './context/CartContext';
+
 
 // =================================================
 // |  Mockup functions - Place your tests here :)  |
@@ -18,9 +20,12 @@ const App = () => {
     <>
       <AuthProvider>
         <BrowserRouter>
-          <AppRoutes />
+          <CartProvider>
+            <AppRoutes />
+          </CartProvider>
         </BrowserRouter> 
       </AuthProvider>
+
     </>
   );
 };
