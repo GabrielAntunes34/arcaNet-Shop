@@ -17,6 +17,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import ProductDetailPage from '../features/products/ProductDetailPage';
 import ProfilePage from '../features/auth/ProfilePage';
 import CartPage from '../features/cart/CartPage';
+import CartItem from '../features/cart/CartItem/CartItem';
 import PaymentPage from '../features/cart/PaymentPage';
 import WheelOfFortunePage from '../features/wheelOfFortune/WheelOfFortunePage';
 import AdminDashboardPage from '../features/admin/AdminDashboardPage';
