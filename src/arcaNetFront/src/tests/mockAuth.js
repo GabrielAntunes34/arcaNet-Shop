@@ -4,11 +4,31 @@
 // ?user=client
 // ?user=admin
 
+// Just simulates the validation and return of a login operation
+const loginMock = async (email, password) => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if((user.email === email) && (user.password === password)) {
+        console.log('Passei');
+        return user;
+    }
+    return null;
+}
+
+const logoutMock = async () => {
+    return null;
+}
+
+const registerMock = () => {
+    return null;
+}
+
 const createMockUser = (role) => {
     // Defining an example of user by role
     const mockUser = {
         id: 6,
         name: (role === 'admin') ? 'adm' : 'jorgeTheClient',
+        email: 'test@gmail.com',
         password: '1234',
         phone: 1499234543,
         adress: 'Pindorama',
@@ -31,4 +51,4 @@ const simulateUserInQuery = () => {
     }
 }
 
-export { createMockUser, simulateUserInQuery };
+export { loginMock, registerMock, logoutMock, createMockUser, simulateUserInQuery };

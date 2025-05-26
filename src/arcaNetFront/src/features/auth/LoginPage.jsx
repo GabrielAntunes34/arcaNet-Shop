@@ -10,6 +10,8 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const LoginPage = () => {
     // Defining states for the login credentials: email:password
+    const { login } = useAuth();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,17 +25,15 @@ const LoginPage = () => {
         setError(null);
         setLoading(true);
 
-        try{
-            // if Logged, it should return the user to the home page
-            await login(email, password);
-            Navigate('/');
-        }
-        catch(err) {
+        // if Logged, it should return the user to the home page
+        const success = await login(email, password);
+        if(success)
+            navigate('/');
+        else {
             setError('Wrong email or password');
         }
-        finally {
-            setLoading(false);
-        }
+        
+        setLoading(false);
     }
 
     return (

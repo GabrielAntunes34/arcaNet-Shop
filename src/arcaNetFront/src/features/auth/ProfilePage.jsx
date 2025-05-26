@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../auth/AuthContext';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import './AuthPages.css';
 
+/*
 const styles = {
   container: {
     maxWidth: '400px',
@@ -49,6 +52,7 @@ const styles = {
     marginTop: '1rem',
   },
 };
+*/
 
 const ProfilePage = () => {
   const { user, setUser } = useAuth(); // Assumindo que o AuthContext expõe setUser para atualizar localmente
@@ -69,7 +73,7 @@ const ProfilePage = () => {
         address: user.address || '',
         phone: user.phone || '',
         email: user.email || '',
-        password: '********', // mostra senha mascarada (não real)
+        password: '********', // mostra senha mascarada
       });
     }
   }, [user]);
@@ -101,7 +105,7 @@ const ProfilePage = () => {
       };
 
       setUser(updatedUser); // atualiza no contexto
-      localStorage.setItem('user', JSON.stringify(updatedUser)); // mantém localStorage sincronizado
+      //localStorage.setItem('user', JSON.stringify(updatedUser)); // mantém localStorage sincronizado
 
       setMessage('Perfil atualizado com sucesso!');
     } catch (err) {
@@ -110,12 +114,11 @@ const ProfilePage = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <>
       <h2>Perfil do Usuário</h2>
       <form onSubmit={handleSubmit}>
-        <label style={styles.label} htmlFor="name">Nome</label>
+        <label htmlFor="name">Nome</label>
         <input
-          style={styles.input}
           type="text"
           id="name"
           name="name"
@@ -124,18 +127,16 @@ const ProfilePage = () => {
           required
         />
 
-        <label style={styles.label} htmlFor="address">Endereço</label>
+        <label htmlFor="address">Endereço</label>
         <textarea
-          style={{ ...styles.input, height: '80px' }}
           id="address"
           name="address"
           value={formData.address}
           onChange={handleChange}
         />
 
-        <label style={styles.label} htmlFor="phone">Telefone</label>
+        <label htmlFor="phone">Telefone</label>
         <input
-          style={styles.input}
           type="text"
           id="phone"
           name="phone"
@@ -143,9 +144,8 @@ const ProfilePage = () => {
           onChange={handleChange}
         />
 
-        <label style={styles.label} htmlFor="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
-          style={{ ...styles.input, ...styles.inputDisabled }}
           type="email"
           id="email"
           name="email"
@@ -153,9 +153,8 @@ const ProfilePage = () => {
           disabled
         />
 
-        <label style={styles.label} htmlFor="password">Senha</label>
+        <label htmlFor="password">Senha</label>
         <input
-          style={{ ...styles.input, ...styles.inputDisabled }}
           type="password"
           id="password"
           name="password"
@@ -163,12 +162,12 @@ const ProfilePage = () => {
           disabled
         />
 
-        <button type="submit" style={styles.button}>Salvar alterações</button>
+        <button className='form-btn' type="submit" >Salvar alterações</button>
 
-        {message && <p style={styles.messageSuccess}>{message}</p>}
-        {error && <p style={styles.messageError}>{error}</p>}
+        <ErrorMessage message={error}/>
+        {message && <p>{message}</p>}
       </form>
-    </div>
+    </>
   );
 };
 
