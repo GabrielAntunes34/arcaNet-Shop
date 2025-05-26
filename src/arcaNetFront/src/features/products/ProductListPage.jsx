@@ -9,7 +9,6 @@ const allProducts = [
   { id: 1, name: "Death Tarot", price: 35.0, category: "death", photo: "url1" },
   { id: 2, name: "Moon Tarot", price: 40.0, category: "moon", photo: "url2" },
   { id: 3, name: "Fullmoon Tarot", price: 50.0, category: "fullmoon", photo: "url3" },
-  // ...more products
 ];
 
 // Available categories for filtering
@@ -83,9 +82,10 @@ const ProductListPage = () => {
         <ProductGrid>
           {filteredProducts.map(p => (
             <ProductCard
-              key={p.id}
+              id={p.id}
               image={p.photo}
               title={p.name}
+              description={p.description}
               price={p.price}
               onAddToCart={() => alert(`Added ${p.name} to cart`)} // Make sure p.name is defined
             />
