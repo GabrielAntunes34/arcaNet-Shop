@@ -82,9 +82,10 @@
   max-width: 100%; /* Largura máxima do container */
   min-height: 460px;
   padding: 60px; 
-  border: solid 3px #4a3f5e;
+  border: solid 3px #BFA181;
   border-radius: 20px;
-  background-color: rgba(20, 15, 30, 0.85);
+  /*background-color: rgba(20, 15, 30, 0.85);*/
+  background-color: #0A1828;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); 
   gap: 25px; 
   box-sizing: border-box;

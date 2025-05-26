@@ -1,23 +1,23 @@
 /* Footer.css */
 
 .footer {
-  background-color: #484848; 
-  color: #ecf0f1; 
-  padding: 30px 20px; 
-  margin-top: auto; 
+  background-color: #484848;
+  color: #ecf0f1;
+  padding: 30px 20px;
+  margin-top: auto;
   font-size: 0.9em;
-  width: 100%; 
-  box-sizing: border-box; 
+  width: 100%;
+  box-sizing: border-box;
   border-top: solid #000000;
 }
 
 .footer-content {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between; /* Espaço entre as seções */
   max-width: 1000px; /* Largura máxima para o conteúdo interno */
   margin: 0 auto; /* Centraliza o .footer-content */
-  gap: 20px; 
+  gap: 20px;
 }
 
 .footer-content-links,
@@ -32,7 +32,7 @@
   margin-top: 0;
   margin-bottom: 15px;
   font-size: 1.2em;
-  border-bottom: 1px solid #000000; /* Linha azul abaixo do título */
+  border-bottom: 1px solid #000000; /* Linha preta abaixo do título */
   padding-bottom: 8px;
   display: inline-block; /* Para que a borda não ocupe a largura toda */
 }
@@ -41,12 +41,59 @@
   list-style: none; /* Remove marcadores padrão da lista */
   padding: 0; /* Remove padding padrão da lista */
   margin: 0; /* Remove margem padrão da lista */
+  text-align: center;
+  width: 40%;
+  margin: 0 auto; /* Centraliza a lista dentro da seção */
 }
 
-.footer-content ul li {
-  margin-bottom: 8px; /* Espaço entre os itens da lista */
-  color: #bdc3c7; /* Cinza claro para os itens da lista */
+/* Estilos para os links sociais com ícones */
+.social-link-item {
+  display: flex; /* Alinha o ícone e o texto na mesma linha */
+  align-items: center; /* Centraliza verticalmente o ícone e o texto */
+  margin-bottom: 10px; /* Ajuste o espaçamento conforme necessário */
 }
+
+.contact-item {
+  display: flex; /* Alinha o ícone e o texto na mesma linha */
+  align-items: center; /* Centraliza verticalmente o ícone e o texto */
+  margin-bottom: 10px; /* Ajuste o espaçamento conforme necessário */
+}
+
+.contact-item p {
+  margin: 0; /* Remove margem padrão do parágrafo */
+  color: #bdc3c7; /* Cor do texto do item de contato */
+}
+
+.social-link-item a {
+  color: #bdc3c7; /* Mantém a cor do texto do link */
+  text-decoration: none; /* Remove sublinhado padrão do link */
+  transition: color 0.3s ease; /* Suaviza a transição da cor ao passar o mouse */
+}
+
+.social-link-item a:hover {
+  color: #ffffff; /* Cor do texto ao passar o mouse (opcional) */
+}
+
+.social-icon {
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+  font-size: 1.2em; /* Tamanho do ícone (ajuste conforme necessário) */
+  color: #bdc3c7; /* Cor do ícone, pode ser diferente se desejar */
+  transition: color 0.3s ease; /* Suaviza a transição da cor ao passar o mouse */
+}
+
+.contact-icon {
+  margin-right: 8px; /* Espaço entre o ícone e o texto */
+  font-size: 1.2em; /* Tamanho do ícone (ajuste conforme necessário) */
+  color: #bdc3c7; /* Cor do ícone, pode ser diferente se desejar */
+  transition: color 0.3s ease; /* Suaviza a transição da cor ao passar o mouse */
+}
+
+
+
+.social-link-item:hover .social-icon {
+  color: #ffffff; /* Cor do ícone ao passar o mouse sobre o item (opcional) */
+}
+
 
 .footer-bottom {
   text-align: center;
@@ -73,5 +120,9 @@
   .footer-content h3 {
     display: block; /* Faz a borda inferior ocupar toda a largura do h3 */
     text-align: center;
+  }
+
+  .social-link-item {
+    justify-content: center; /* Centraliza o ícone e o texto quando empilhado e centralizado */
   }
 }
