@@ -1,4 +1,4 @@
-import ProductCard from '../components/ProductCard/ProductCard';
+import ProductCard from '../features/products/ProductCard/ProductCard.jsx';
 
 const Playground = () => {
   const produto = {

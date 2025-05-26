@@ -41,4 +41,10 @@
     font-weight: 500;
     color: #007bff;
   }
+
+  .cardLink {
+    text-decoration: none;
+    color: inherit; /* Para herdar a cor do texto do card */
+    display: block; /* Para fazer o link ocupar o bloco do card */
+  }
   

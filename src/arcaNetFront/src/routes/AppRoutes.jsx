@@ -3,6 +3,10 @@ import { Routes, Route } from 'react-router-dom';
 // imports for specific components
 import Layout from '../components/Layout/Layout';
 import ProtectedRoutes from './ProtectedRoutes';
+import PlaygroundCarousel from '../tests/CarouselMock';
+//import ProductListPage from '../tests/ProductGridMock';
+import Playground from '../tests/ProductCardMock';
+import ProductPage from '../tests/SearchBarMock';
 
 // Imports for pages
 import HomePage from '../pages/HomePage';
@@ -13,6 +17,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import ProductDetailPage from '../features/products/ProductDetailPage';
 import ProfilePage from '../features/auth/ProfilePage';
 import CartPage from '../features/cart/CartPage';
+import CartItem from '../features/cart/CartItem/CartItem';
 import PaymentPage from '../features/cart/PaymentPage';
 import WheelOfFortunePage from '../features/wheelOfFortune/WheelOfFortunePage';
 import AdminDashboardPage from '../features/admin/AdminDashboardPage';
@@ -28,6 +33,10 @@ const AppRoutes = () => {
 				{/* Public routes */}
 				<Route path='' element={<HomePage />} />
 				<Route path='*' element={<NotFoundPage />} />
+
+				<Route path="carousel-test" element={<PlaygroundCarousel />} />
+				<Route path="product-card" element={<Playground />} />
+				<Route path="search-bar" element={<ProductPage />} />
 
 				<Route path='products' element={<ProductListPage />} />
 				<Route path='products/:id' element={<ProductDetailPage />} />

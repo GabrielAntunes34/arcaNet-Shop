@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css'
 import AppRoutes from './routes/AppRoutes';
+import { CartProvider } from './context/CartContext';
 
 // =================================================
 // |  Mockup functions - Place your tests here :)  |
@@ -15,7 +16,7 @@ simulateUserInQuery();
 const App = () => {
   return (
     <>
-     <BrowserRouter>
+      <BrowserRouter>
         <AppRoutes />
       </BrowserRouter> 
     </>

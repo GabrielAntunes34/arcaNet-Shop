@@ -1,5 +1,4 @@
-import ProductGrid from '../components/ProductGrid/ProductGrid';
-import ProductCard from '../components/ProductCard/ProductCard';
+import ProductGrid from '../features/products/ProductGrid/ProductGrid.jsx';
 
 const produtos = [
   { id: 1, title: "Camiseta JS", price: 49.9, image: "/assets/js.jpg" },

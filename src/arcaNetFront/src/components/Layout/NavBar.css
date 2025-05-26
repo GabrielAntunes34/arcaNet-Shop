@@ -10,7 +10,7 @@
   align-items: center;
   background-color: #222; 
   color: #fff; 
-  padding: 10px 25px; 
+  padding: 2px 25px; 
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid #444; 
@@ -28,7 +28,7 @@
 }
 
 .navbar-logo-img {
-  height: 35px;
+  height: 50px;
 }
 
 .navbar-brand-name {
@@ -36,6 +36,11 @@
   text-decoration: none;
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.navbar-brand-name:hover {
+  color: #aaa;
+  transition: color 0.3s ease;
 }
 
 
@@ -69,25 +74,6 @@
   NAVBAR COMPONENTES DA DIREITA
 ------------------------------------------------------ 
 */
-.navbar-login-button {
-  background-color: #f0f0f0;
-  color: #333;
-  text-decoration: none;
-  padding: 8px 18px; 
-  border-radius: 5px;
-  font-size: 0.95em;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
-  border: 1px solid #ccc;
-  white-space: nowrap;  
-  flex-shrink: 0;       
-  display: inline-block;
-  line-height: normal; 
-}
-
-.navbar-login-button:hover {
-  background-color: #ddd; 
-}
 
 .navbar-cart-link {
   color: #fff;
@@ -96,10 +82,20 @@
   align-items: center;
 }
 
-.navbar-cart-link img { 
-  height: 28px; 
+.navbar-cart-link:hover {
+  color: #aaa;
 }
 
-.navbar-cart-link:hover {
-  color: #ccc;
+.navbar-login-button-custom {
+  background-color: #FFF;
+  color: #000;
+  border-color: #000; 
+  padding: 6px 12px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-login-button-custom:hover {
+  background-color: #aaa;
+  border-color: #000;
 }
