@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import {loginMock, logoutMock, registerMock} from '../../tests/mockAuth';
+import {loginMock, registerMock} from '../../tests/mockAuth';
 
 // Creating a new context to encapsulate information about our user state
 const authContext = createContext();
@@ -23,11 +23,13 @@ const AuthProvider = ({ children }) => {
     // Defining a local logout function
     const logout = async () => {
         console.log('logged out');
-        //setUser(null);
+        setUser(null);
     }
 
     const register = async(formData) => {
-        console.log('registered');
+        const res = await registerMock(formData);
+        console.log('registro feito');
+        console.log(res);
     }
 
     return (

@@ -7,6 +7,8 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 // To get the user input and send to the server to create a new User in the database
 
 const SignUpPage = () => {  
+    const { register } = useAuth();
+
     const [formData, setFormData] = useState({
         email: '',
         address: '',
@@ -16,7 +18,7 @@ const SignUpPage = () => {
         confirmPassword: ''
     });
     const [loading, setLoading] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState(null);
 
     // Indentifies the altered field and changes it into our state
     const handleInputChange = (e) => {
@@ -57,11 +59,16 @@ const SignUpPage = () => {
         e.preventDefault();
         validateData();
 
-        setLoading(true);
-        if(!errors)
-            console.log('You can signup!')
-            // Should I put the fetch over here?
+        console.log("No handler");
+        console.log(errors);
 
+        setLoading(true);
+        if(!errors) {
+            console.log('Validado!');
+            register(formData);
+        }
+
+        setErrors(null);
         setLoading(false);
     }
 
@@ -89,7 +96,7 @@ const SignUpPage = () => {
                 onChange={handleInputChange}
                 required
             />
-            <ErrorMessage message={errors.email}/>
+            <ErrorMessage message={errors && errors.email}/>
 
             <label htmlFor="phone">Phone:</label>
             <input
@@ -100,7 +107,7 @@ const SignUpPage = () => {
                 onChange={handleInputChange}
                 required
             />
-            <ErrorMessage message={errors.phone}/>
+            <ErrorMessage message={errors && errors.phone}/>
 
 
             <label htmlFor="address">Adress:</label>
@@ -116,23 +123,23 @@ const SignUpPage = () => {
             <label htmlFor="password">Password:</label>
             <input
                 name='password'
-                type="password"
+                type="text"
                 value={formData.password}
                 onChange={handleInputChange}
                 required
             />
-            <ErrorMessage message={errors.password}/>
+            <ErrorMessage message={errors && errors.password}/>
 
 
             <label htmlFor="confirmPassword">confirmPassword</label>
             <input
                 name='confirmPassword'
-                type="password"
+                type="text"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
                 required
             />
-            <ErrorMessage message={errors.confirmPassword}/>
+            <ErrorMessage message={errors && errors.confirmPassword}/>
 
 
             <button className='form-btn' type='submit'>
