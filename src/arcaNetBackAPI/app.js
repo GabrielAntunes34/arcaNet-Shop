@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const errorMiddleware = require('./middlewares/errorMiddleware');
 
 //================================
 // SETTING UP THE SERVER
 //================================
 
 // Importing API routes
+const categoryRouter = require('./routes/categoryRouter');
 
 // Enviroment configs
 require('dotenv').config();
@@ -50,11 +52,16 @@ app.use((req, res, next) => {
 // ROUTES
 //================================
 
+app.use('/category', categoryRouter);
+
+// errorMiddleware in the case of wrong responses
+app.use(errorMiddleware);
 
 // Default response for non-specifies routes
 app.use((req, res) => {
     res.status(404).json({ 
         message:'Requested resource inexistent', 
-        details:`No path sucth as ${req.url}` 
+        details:`No path sucth as ${req.url}`,
+        data: null
     });
 })

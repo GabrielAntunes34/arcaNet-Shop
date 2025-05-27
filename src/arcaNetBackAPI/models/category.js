@@ -8,8 +8,9 @@ const { Schema } = mongoose;
 
 const categorySchema = new Schema({
     name: {
-        type: string,
+        type: String,
         required: true,
+        unique: true,
         trim: true     
     }
 }, {timestamps: true})
