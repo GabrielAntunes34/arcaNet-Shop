@@ -7,7 +7,7 @@
 
 // Just simulates the validation and return of a login operation
 const loginMock = async (email, password) => {
-    const user = JSON.parse(localStorage.getItem('userRegistered'));
+    const user = JSON.parse(localStorage.getItem('user'));
 
     if((user.email === email) && (user.password === password)) {
         localStorage.setItem('isAuth', true);
@@ -29,7 +29,7 @@ const registerMock = async (formParams) => {
         role: 'client'
     }
 
-    localStorage.setItem('userRegistered', JSON.stringify(mockUser));
+    localStorage.setItem('user', JSON.stringify(mockUser));
     localStorage.setItem('isAuth', true);
 }
 

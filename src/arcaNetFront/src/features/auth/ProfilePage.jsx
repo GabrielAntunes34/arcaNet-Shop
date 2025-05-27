@@ -52,7 +52,7 @@ const ProfilePage = () => {
 
     try {
       // Simulating an user update
-      if(errors === null) {
+      if(Object.keys(newErrors).length === 0) {
         const updatedUser = {
           ...user,
           name: formData.name,

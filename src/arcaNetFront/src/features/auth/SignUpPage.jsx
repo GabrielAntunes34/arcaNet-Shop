@@ -43,7 +43,10 @@ const SignUpPage = () => {
 
         try{
         setLoading(true);
-        if(errors === null) {
+
+        // We need to use newErrors because setErros is async, but dosen't return a
+        // promise. Therefore, we can't trust it :(
+        if(Object.keys(newErrors).length === 0) {
             register(formData);
         }
 
@@ -105,7 +108,7 @@ const SignUpPage = () => {
             <label htmlFor="password">Password:</label>
             <input
                 name='password'
-                type="text"
+                type="password"
                 value={formData.password}
                 onChange={handleInputChange}
                 required
@@ -116,7 +119,7 @@ const SignUpPage = () => {
             <label htmlFor="confirmPassword">confirmPassword</label>
             <input
                 name='confirmPassword'
-                type="text"
+                type="password"
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
                 required
