@@ -23,6 +23,7 @@ const productSchema = new Schema({
         type: Number,
         required: true,
         min: 0,
+        /*
         validate: {
             // Validating if the number is written as decimal
             validator: function(v) {
@@ -30,6 +31,7 @@ const productSchema = new Schema({
             },
             message: props => `${props.value} May only have untill 2 float digits`
         }
+        */
     },
     stock: {
         type: Number,

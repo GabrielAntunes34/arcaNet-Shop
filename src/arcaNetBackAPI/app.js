@@ -8,6 +8,7 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 
 // Importing API routes
 const categoryRouter = require('./routes/categoryRouter');
+const productRouter = require('./routes/productRouter');
 
 // Enviroment configs
 require('dotenv').config();
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 // ROUTES
 //================================
 
+app.use('/product', productRouter);
 app.use('/category', categoryRouter);
 
 // errorMiddleware in the case of wrong responses

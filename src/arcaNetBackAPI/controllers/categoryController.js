@@ -13,7 +13,7 @@ const read_category = async (req, res, next) => {
     }
 };
 
-// Return a specific category register from data base by this id
+// Return a specific category register from data base by its id
 const read_category_id = async (req, res, next) => {
     const id = req.params.id;
 
@@ -50,7 +50,7 @@ const create_category = async (req, res, next) => {
     }
 };
 
-// Updates an existing categody expreesed at the url's path with the new data
+// Updates an existing category expreesed at the url's path with the new data
 // at the requisition's body
 const update_category = async (req, res, next) => {
     const id = req.params.id;
