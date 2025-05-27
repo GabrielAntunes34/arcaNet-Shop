@@ -24,7 +24,7 @@ As an online store, this system is required to be developed as a Web Application
 
 2. Functional requirements:
     - Product records include: name, id, photo, description, price, stock, quantity sold, highlighted, category.
-    - The store will only sell products, which are Tarot cards and Mystic objects.
+    - The store will only sell products, which are Tarot cards, fullfield with mistycism and mistery.
     - Products are selected, their quantity chosen, and are included in a cart. Products are purchased using a credit card number (the system accepts any number). The amount of product sold is subtracted from the quantity in stock and added to the amount sold. Carts are emptied only when payment is made or by customers. If a product’s quantity reach 0, it’ll be marked as sold out in the interface, and won’t be able to be bought.
     - **Product Management:** Administrators can create/update/read/delete (CRUD) new products and services. For example, they can change the stock quantity.
     - **Administrators Management:** Only administrators can create another User as an administrator.
