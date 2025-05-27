@@ -9,11 +9,8 @@
 const loginMock = async (email, password) => {
     const user = JSON.parse(localStorage.getItem('user'));
 
-    if((user.email === email) && (user.password === password)) {
-        localStorage.setItem('isAuth', true);
+    if((user === null) || (user.email === email && user.password === password))
         return user;
-    }
-    localStorage.setItem('isAuth', false);
     return null;
 }
 
@@ -30,7 +27,6 @@ const registerMock = async (formParams) => {
     }
 
     localStorage.setItem('user', JSON.stringify(mockUser));
-    localStorage.setItem('isAuth', true);
 }
 
 // Saves a pre defined client or admin at localstorage

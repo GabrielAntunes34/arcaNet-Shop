@@ -18,7 +18,6 @@ const ProfileDropdown = ({ user, onLogout }) => {
   };
 
   const handleLogoutClick = () => {
-    localStorage.removeItem('user');
     setIsOpen(false); 
     if (onLogout) {
       onLogout();

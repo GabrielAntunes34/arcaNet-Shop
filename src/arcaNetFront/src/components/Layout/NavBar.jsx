@@ -4,29 +4,15 @@ import './NavBar.css';
 import logo from '../../assets/arcanet.png';
 import ProfileDropdown from './ProfileDropdown';
 import Button from '../Button/Button.jsx';
+import { useAuth } from '../../features/auth/AuthContext.jsx';
 
 const NavBar = () => {
-    const [user, setUser] = useState(null);
+    const {user, logout} = useAuth();
 
-    // Efeito para carregar o usuário do localStorage na montagem do componente
-    useEffect(() => {
-        try {
-            const storedUser = localStorage.getItem('user');
-            if (storedUser) {
-                setUser(JSON.parse(storedUser));
-            } else {
-                setUser(null);
-            }
-        } catch (error) {
-            console.error("Erro ao carregar usuário do localStorage:", error);
-            localStorage.removeItem('user');
-            setUser(null);
-        }
-    }, []);
 
     // Função para ser chamada pelo ProfileDropdown após o logout
     const handleLogoutInNavBar = () => {
-        setUser(null);
+        logout();
     };
 
     return (

@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
      // Resets user from localStorage at each reload
     useEffect(() => {
-        const storedUser = localStorage.getItem('userRegistered');
+        const storedUser = localStorage.getItem('user');
         if (storedUser)
             setUser(JSON.parse(storedUser));
     }, []);
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     // Saves user at localStorage when it changes
     useEffect(() => {
         if (user)
-        localStorage.setItem('userRegistered', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(user));
     }, [user]);
 
     // Defining a local login function --> Should become our real logic
@@ -35,7 +35,6 @@ const AuthProvider = ({ children }) => {
 
     // Defining a local logout function
     const logout = async () => {
-        console.log('logged out');
         setUser(null);
     }
 
