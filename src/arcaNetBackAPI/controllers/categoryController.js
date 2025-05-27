@@ -65,7 +65,7 @@ const update_category = async (req, res, next) => {
             return next(errMess);
         }
 
-        res.status(200).json({ message:'Success', data:null, details:'' });
+        res.status(200).json({ message:'Success', data:updatedCat, details:'' });
     }
     catch(err) {
         const errMess = new ErrorMessage('Category', id, 400, err.message);
