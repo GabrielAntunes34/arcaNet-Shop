@@ -1,7 +1,7 @@
 const Product = require('../models/product');
 const ErrorMessage = require('../util/ErrorMessage');
 
-// Returns all categories from data base
+// Returns all products from data base
 const read_product = async (req, res, next) => {
     try {
         const allProds = await Product.find().sort({ createdAt: -1 });
@@ -13,7 +13,7 @@ const read_product = async (req, res, next) => {
     }
 };
 
-// Return a specific product register from data base by its id
+// Return a specific product register from data base by it's id
 const read_product_id = async (req, res, next) => {
     const id = req.params.id;
 

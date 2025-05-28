@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 // This is inder a test... Still don't know if we're gonna use it
 
-const discountCuponSchema = new Schema({
+const cuponSchema = new Schema({
     code: {
         type: String,
         required: true,
@@ -11,15 +11,12 @@ const discountCuponSchema = new Schema({
     },
     discount: {
         type: Number,
-        required: True,
-    },
-    validUntil: {
-        type: Date,
         required: true,
+        unique: true
     },
     usage: {
         type: Number,
-        required: True,
+        required: true,
         default: 0,
     },
     useBy: [{
@@ -28,4 +25,4 @@ const discountCuponSchema = new Schema({
     }]
 }, {timestamps: true});
 
-module.exports = mongoose.model('discountCupon', discountCuponSchema);
+module.exports = mongoose.model('Cupon', cuponSchema);

@@ -13,7 +13,7 @@ const read_category = async (req, res, next) => {
     }
 };
 
-// Return a specific category register from data base by its id
+// Return a specific category register from data base by it's id
 const read_category_id = async (req, res, next) => {
     const id = req.params.id;
 
