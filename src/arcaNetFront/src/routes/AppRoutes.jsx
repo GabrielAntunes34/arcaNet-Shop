@@ -20,9 +20,13 @@ import CartPage from '../features/cart/CartPage';
 import CartItem from '../features/cart/CartItem/CartItem';
 import PaymentPage from '../features/cart/PaymentPage';
 import WheelOfFortunePage from '../features/wheelOfFortune/WheelOfFortunePage';
-import AdminDashboardPage from '../features/admin/AdminDashboardPage';
-import AdminCreatePage from '../features/admin/AdminCreatePage';
-import AdminUpdatePage from '../features/admin/AdminUpdatePage';
+
+// Admin pages
+import ManageCategoriesPage from '../features/admin/categories/ManageCategoriesPage';
+import AddCategoryPage from '../features/admin/categories/AddCategoryPage';
+import ManageProductsPage from '../features/admin/products/ManageProductsPage';
+import AddProductPage from '../features/admin/products/AddProductPage';
+import ManageUsersPage from '../features/admin/users/ManageUsersPage';
 
 // Keeps the list of routes of our application
 const AppRoutes = () => {
@@ -56,9 +60,14 @@ const AppRoutes = () => {
 
 				{/* Routes protected for administrators */}
 				<Route path='admin/' element={<ProtectedRoutes allowedUsers={['admin']} />}>
-					<Route path='dashboard/:entity' element={<AdminDashboardPage />} />
-					<Route path='create/:entity' element={<AdminCreatePage />} />
-					<Route path='update/:entity/:id' element={<AdminUpdatePage />} />
+					<Route path='categories' element={<ManageCategoriesPage />} />
+					<Route path='categories/add' element={<AddCategoryPage />} />
+
+					<Route path='products' element={<ManageProductsPage />} />
+					<Route path='products/add' element={<AddProductPage />} />
+
+					<Route path='users' element={<ManageUsersPage />} />
+
 				</Route>
 
 			</Route>
