@@ -1,108 +1,129 @@
-/* WheelOfFortunePage.css */
+/* WheelOfFortunePage.css - Apenas alterações de COR para o tema Mystical & Elegant */
 
 .wheel-of-fortune-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; 
-    width: 100%;
-    min-height: 100vh; 
-    padding-top: 40px;
-    padding-bottom: 40px; 
-    box-sizing: border-box;
+    display: flex; /* Sua lógica */
+    flex-direction: column; /* Sua lógica */
+    align-items: center; /* Sua lógica */
+    justify-content: flex-start;  /* Sua lógica */
+    width: 100%; /* Sua lógica */
+    min-height: 100vh;  /* Sua lógica */
+    padding-top: 40px; /* Sua lógica */
+    padding-bottom: 40px;  /* Sua lógica */
+    box-sizing: border-box; /* Sua lógica */
+    /* O background será herdado do body (var(--color-background-page)) */
 }
 
 .box-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px; 
-    padding: 20px; 
+    display: flex; /* Sua lógica */
+    flex-direction: column; /* Sua lógica */
+    align-items: center; /* Sua lógica */
+    width: 100%; /* Sua lógica */
+    max-width: 1200px;  /* Sua lógica */
+    padding: 100px;  /* Sua lógica */
+    /* border original: 1px solid #BFA181; */
+    border: 1px solid var(--color-border-card); /* Borda temática sutil (lavanda pálido) */
+    /* Se quiser a borda mais forte como no card-container, use var(--color-border-accent-strong) */
+    border-radius: 10px; /* Sua lógica */
+    /* background-color original: #FFFFFF; */
+    background-color: var(--color-background-content-box); /* Fundo branco temático */
 }
 
 .box-container h1{
-    font-size: clamp(1.5em, 4vw, 2.5em);
-    color: #c5b1e3;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: clamp(1.5em, 4vw, 2.5em); /* Sua lógica */
+    /* color original: #5C3A77; (Já é a cor do tema para títulos) */
+    color: var(--color-text-headings);
+    margin-top: 0; /* Sua lógica */
+    margin-bottom: 20px; /* Sua lógica */
+    font-weight: 600; /* Sua lógica */
+    text-transform: uppercase; /* Sua lógica */
+    letter-spacing: 1px; /* Sua lógica */
+    font-family: 'Playfair Display', serif; /* Sua lógica (alinhada com --font-family-headings) */
 }
 
 .result-container {
-  /*background-color: #2a2535;*/
-  background-color: rgba(20, 15, 30, 1);
-  color: #e0d8f0; /* Uma cor clara para o texto (lavanda claro/off-white) */
-  padding: 25px 30px;
-  border-radius: 12px;
-  margin-top: -30px;
-  width: 80%;
-  max-width: 480px; 
-  text-align: center;
-  border: 2px solid #4a3f5e;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); 
-  /* Adiciona uma transição suave se o conteúdo (mensagem) aparecer/desaparecer */
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: 1; /* Começa visível (será útil se você esconder/mostrar o container todo) */
-  transform: translateY(0);
+  /* background-color original: rgba(20, 15, 30, 1); */
+  background-color: var(--color-background-mystic-dark); /* Fundo escuro temático */
+  /* color original: #e0d8f0; (Um lavanda claro) */
+  color: var(--color-text-on-footer); /* Texto claro temático para fundos escuros */
+  padding: 25px 30px; /* Sua lógica */
+  border-radius: 12px; /* Sua lógica */
+  margin-top: -30px; /* Sua lógica */
+  width: 80%; /* Sua lógica */
+  max-width: 480px;  /* Sua lógica */
+  text-align: center; /* Sua lógica */
+  /* border original: 2px solid #4a3f5e; (Um roxo acinzentado escuro) */
+  border: 2px solid var(--color-accent-primary-hover); /* Borda temática (ameixa mais escuro) */
+  /* box-shadow original: 0 5px 20px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 5px 20px rgba(var(--color-shadow-soft-rgb), 0.3); /* Sombra temática */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Sua lógica */
+  opacity: 1; /* Sua lógica */
+  transform: translateY(0); /* Sua lógica */
 }
 
-/* Estilo para o título "Resultado:" */
 .result-container h2 {
-  font-size: clamp(1em, 3vw, 1.4em);
-  color: #c5b1e3;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-size: clamp(1em, 3vw, 1.4em); /* Sua lógica */
+  /* color original: #c5b1e3; (Um lilás claro) */
+  color: var(--color-accent-tertiary); /* Usando o lavanda pálido como cor de texto sobre o fundo escuro */
+  /* Alternativa: var(--color-text-on-footer); se quiser igual ao texto principal do container */
+  margin-top: 0; /* Sua lógica */
+  margin-bottom: 15px; /* Sua lógica */
+  font-weight: 600; /* Sua lógica */
+  text-transform: uppercase; /* Sua lógica */
+  letter-spacing: 1px; /* Sua lógica */
 }
 
-/* Estilo para a mensagem do jogo (Parabéns! / Mais sorte...) */
 .result-container .result h3 {
-  font-size: clamp(1.1em, 3vw, 1.3em);
-  font-weight: 500;
-  color: #ffffff;
-  margin: 0;
-  padding: 10px 0;
-  min-height: 28px;
-  line-height: 1.5;
+  font-size: clamp(1.1em, 3vw, 1.3em); /* Sua lógica */
+  font-weight: 500; /* Sua lógica */
+  /* color original: #ffffff; */
+  color: var(--color-text-on-footer-strong); /* Texto branco temático para destaque */
+  margin: 0; /* Sua lógica */
+  padding: 10px 0; /* Sua lógica */
+  min-height: 28px; /* Sua lógica */
+  line-height: 1.5; /* Sua lógica */
 }
 
 .card-container {
-  display: flex;
-  /* Configuração padrão para telas maiores (cartas lado a lado) */
-  flex-direction: row;
-  flex-wrap: wrap; 
-  align-items: center; 
-  justify-content: center; 
-  width: 100%; 
-  max-width: 100%; /* Largura máxima do container */
-  min-height: 460px;
-  padding: 60px; 
-  border: solid 3px #BFA181;
-  border-radius: 20px;
-  /*background-color: rgba(20, 15, 30, 0.85);*/
-  background-color: #0A1828;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); 
-  gap: 25px; 
-  box-sizing: border-box;
+  display: flex; /* Sua lógica */
+  flex-direction: row; /* Sua lógica */
+  flex-wrap: wrap;  /* Sua lógica */
+  align-items: center;  /* Sua lógica */
+  justify-content: center;  /* Sua lógica */
+  width: 100%;  /* Sua lógica */
+  max-width: 100%; /* Sua lógica */
+  min-height: 460px; /* Sua lógica */
+  padding: 60px;  /* Sua lógica */
+  /* border original: solid 3px #BFA181; */
+  border: solid 3px var(--color-border-accent-strong); /* Borda de destaque temática (ameixa) */
+  /* Alternativa: border: solid 3px var(--color-text-success); (para um tom dourado/terroso) */
+  border-radius: 20px; /* Sua lógica */
+  /* background-color original: #0A1828; (Um azul muito escuro) */
+  background-color: var(--color-background-mystic-dark); /* Fundo escuro temático consistente com .result-container */
+  /* box-shadow original: 0 20px 40px rgba(0, 0, 0, 0.5); */
+  box-shadow: 0 20px 40px rgba(var(--color-shadow-soft-rgb), 0.5); /* Sombra temática */
+  gap: 25px;  /* Sua lógica */
+  box-sizing: border-box; /* Sua lógica */
 }
 
-
+/* Media query (Sua lógica de layout permanece AQUI) */
 @media (max-width: 600px) {
   .card-container {
-    flex-direction: column; 
-    align-items: center;    
-    width: 80%;             
-    height: auto;          
-    gap: 20px;            
+    flex-direction: column;  /* Sua lógica */
+    align-items: center;     /* Sua lógica */
+    width: 80%;              /* Sua lógica */
+    height: auto;            /* Sua lógica */
+    gap: 20px;               /* Sua lógica */
   }
 
-  .card-container .card-perspective-container {
-    width: clamp(200px, 60vw, 280px); 
-    margin: 0 0 20px 0;
+  .card-container .card-perspective-container { /* Este seletor não tem estilos no CSS fornecido, mas mantenho a estrutura do @media */
+    width: clamp(200px, 60vw, 280px);  /* Sua lógica */
+    margin: 0 0 20px 0; /* Sua lógica */
   }
+}
+
+/* Estilos para o estado de carregamento, se houver um parágrafo dentro de .wheel-of-fortune-container */
+.wheel-of-fortune-container > p { /* Para "Carregando cartas..." */
+  color: var(--color-text-default); /* Cor de texto padrão */
+  font-size: 1.2em; /* Ajuste conforme seu design */
+  text-align: center;
 }

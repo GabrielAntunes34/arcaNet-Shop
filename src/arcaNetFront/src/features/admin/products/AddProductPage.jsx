@@ -186,7 +186,7 @@ const AddProductPage = () => {
                 </div>
 
                 <div className={styles.formActions}>
-                    <Button type="button" onClick={() => navigate('/admin/products')} variant="secondary">
+                    <Button type="button" onClick={() => navigate('/admin/products')} variant="classic">
                         Cancel
                     </Button>
                     <Button type="submit" variant="primary">

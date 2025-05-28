@@ -1,37 +1,85 @@
 :root {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+  /* ===== Cores de Fundo ===== */
+  --color-background-page: #FDFCFB;         /* Creme/branco muito claro (Fundo principal da página) */
+  --color-background-section-subtle: #FAF7F2; /* Creme leve (Seções com leve destaque, sidebars) */
+  --color-background-content-box: #FFFFFF;   /* Branco (Cards, inputs, interior de modais) */
+  --color-background-overlay-dark: rgba(0, 0, 0, 0.5); /* Overlay escuro genérico */
+  --color-background-dark: rgb(29, 28, 28); /* Overlay escuro genérico */
+  --color-background-disabled: #E9ECEF;    /* Fundo para elementos desabilitados */
+
+  /* ===== Cores de Texto ===== */
+  --color-text-default: #5A5A5A;           /* Cinza escuro suave (Corpo de texto principal) */
+  --color-text-faded: #a1a1a1;           /* Cinza escuro suave (Corpo de texto principal) */
+  --color-text-headings: #5C3A77;          /* Ameixa/Amethysta Profundo (Títulos H1, H2, H3, labels importantes) */
+  --color-text-subtle: #7f8c8d;            /* Cinza claro (Placeholders, informações secundárias) */
+  --color-text-input: #495057;             /* Cinza escuro (Texto digitado em inputs) */
+  --color-text-on-accent: #FFFFFF;         /* Branco (Texto sobre fundos com cor de destaque, como botões) */
+  --color-text-link: var(--color-accent-secondary); /* Cor para links (usa acento secundário) */
+  --color-text-link-hover: var(--color-accent-primary); /* Cor para links no hover (usa acento primário) */
+  --color-text-success: #B8860B;           /* Dourado Escuro/Ocre (Mensagens de sucesso, destaques especiais) */
+  --color-text-price: var(--color-accent-secondary); /* Cor para preços (pode ser igual a links ou um tom dourado) */
+  --color-text-bold: #292929;          /* Ameixa/Amethysta Profundo (Texto em negrito, títulos secundários) */
+
+  /* ===== Cores de Destaque (Accents) ===== */
+  --color-accent-primary: #6A0DAD;         /* Ameixa/Amethysta (Ação principal, botões) */
+  --color-accent-primary-hover: #5C0099;    /* Ameixa mais escuro (Hover para ações primárias) */
+  --color-accent-secondary: #AF7AC5;       /* Lilás/Ameixa Claro (Links, bordas de foco, elementos interativos) */
+  --color-accent-tertiary: #E6E0F8;        /* Lavanda Pálido (Bordas sutis, divisórias, trilhas de range sliders) */
+
+  /* ===== Cores de Borda ===== */
+  --color-border-default: #E0D8CC;         /* Bege/creme suave (Bordas gerais sutis) */
+  --color-border-input: #D8BFD8;           /* Lilás claro (Bordas de campos de input) */
+  --color-border-divider: var(--color-accent-tertiary); /* Para divisórias de seção, hr */
+  --color-border-card: var(--color-accent-tertiary);    /* Borda para cards, se houver */
+
+  /* ===== Cores de Sombra e Foco (podem incluir opacidade) ===== */
+  --color-shadow-soft-rgb: 0, 0, 0;           /* Componentes RGB para sombras suaves (usar com alfa) */
+  --color-shadow-accent-hint-rgb: 92, 58, 119; /* Componentes RGB para sombras com tom de ameixa */
+  --color-focus-glow-rgb: 175, 122, 197;      /* Componentes RGB para brilho de foco */
+  --box-shadow-focus: 0 0 0 3px rgba(var(--color-focus-glow-rgb), 0.25); /* Sombra de caixa para estados de foco */
+  --border-color-focus: var(--color-accent-secondary); /* Cor da borda para estados de foco */
+
+
+  --color-accent-danger: #B75D69; /* Rosa/Vinho suave para "perigo" */
+  --color-accent-danger-hover: #A14C5E; /* Mais escuro para hover */
+  --color-text-on-danger: #FFFFFF;
+  --color-text-money: #27ae60;
+  --color-icons: #FFFFFF;
+  --color-classic: #3f4040;
+  --color-login-btn: #565757;
+  --color-classic-hover: #2c2d2d;
+
+  --color-background-footer: #4A315A; /* Um ameixa escuro e dessaturado para o fundo do footer */
+  /* Alternativa: --color-background-footer: #3D2C2A; (Um carvão/marrom escuro) */
+  /* Alternativa: --color-background-footer: var(--color-text-headings); (Se quiser usar o ameixa principal) */
+
+  --color-text-on-footer: #E0E0F8;    /* Texto lavanda muito claro para contraste no footer escuro */
+  /* Alternativa: --color-text-on-footer: var(--color-accent-tertiary); */
+  
+  --color-text-on-footer-strong: #FFFFFF; /* Para títulos ou links hover no footer */
+
+  --color-border-footer-divider: rgba(var(--color-shadow-accent-hint-rgb), 0.2); /* Divisória sutil com tom de ameixa */
+  --color-border-footer-heading: var(--color-accent-secondary); /* Lilás/Ameixa claro para borda de título no footer */
+
+
+  --color-background-mystic-dark: rgb(20, 15, 30); /* Um roxo/azul muito escuro, baseado no seu .result-container */
+  --color-border-accent-strong: var(--color-accent-primary);
+
+
+
+  --qtd-carrossel: 4;
+
+  /* ===== Fontes ===== */
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Example font stack */
   line-height: 1.5;
   font-weight: 400;
   font-size: 18px;
   text-align: justify;
+  --font-family-headings: 'Playfair Display', serif;
 
-
-  color: var(--txt-clr);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  --bck-grd-clr: #040123;    /* Main background color */
-  --bck-dtl-clr:  #746D89;   /* contrast color for the background divs */
-  --bck-nav-ftr: #000000;    /* Nav and footer background color */
-  --brd-clr: #E5D0B1;        /* Border padronized color */
-  --card-clr: #ffffff;
-
-  --txt-clr:  #E5D0B1;        /* Main color for the text*/
-  --txt-inv-clr: #000000;     /* Complementary color for the text*/
-  --txt-dtl-clr: #daad5f;     /* Detail color */
-
-  --btn-clr: #040123;         /* Button colors */
-  --btn-clr-click: rgb(0, 0, 0);
-  --btn-txt-clr: #E5D0B1;     /* Text color for buttons */
-  
-  min-height: 100%;
   display: flex;
   flex-direction: column;
-
+  min-height: 100%;
 }
 
 a {
@@ -39,6 +87,7 @@ a {
   color: var(--txt-dtl-clr);
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }

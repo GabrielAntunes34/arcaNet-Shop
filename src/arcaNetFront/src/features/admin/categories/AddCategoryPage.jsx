@@ -62,7 +62,7 @@ const AddCategoryPage = () => {
                     </select>
                 </div>
                 <div className={styles.formActions}>
-                    <Button type="button" onClick={() => navigate('/admin/categories')} variant="secondary">
+                    <Button type="button" onClick={() => navigate('/admin/categories')} variant="classic">
                         Cancel
                     </Button>
                     <Button type="submit" variant="primary">

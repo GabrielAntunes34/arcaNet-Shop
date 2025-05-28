@@ -63,7 +63,7 @@ const CartPage = () => {
             <div className='cart-items'>
                 {cartItems.map((item) => (
                     <CartItem
-                        image={item.image || '#'}
+                        image={item.photo || '#'}
                         title={item.name}
                         price={item.price}
                         quantity={item.quantity}
@@ -81,7 +81,7 @@ const CartPage = () => {
 
                 <div className="cart-actions">
                     <div className='payment-button'>
-                        <Button onClick={handleGoToPayment}> Go to Payment </Button>
+                        <Button variant='primary' onClick={handleGoToPayment}> Go to Payment </Button>
                     </div>
                 
                     {cartItems.length > 0 && (

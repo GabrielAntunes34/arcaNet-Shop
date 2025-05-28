@@ -9,21 +9,30 @@
   
   /* Variantes */
   .primary {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--color-accent-primary);
+    color: var(--color-text-on-accent);
   }
   
   .primary:hover {
-    background-color: #0056b3;
+    background-color: var(--color-accent-primary-hover);
   }
   
   .secondary {
-    background-color: #6c757d;
-    color: white;
+    background-color: var(--color-accent-secondary);
+    color: var(--color-text-on-accent);
   }
   
   .secondary:hover {
     background-color: #565e64;
+  }
+
+  .classic {
+    background-color: var(--color-classic);
+    color: white;
+  }
+
+  .classic:hover {
+    background-color: var(--color-classic-hover);
   }
   
   .danger {
