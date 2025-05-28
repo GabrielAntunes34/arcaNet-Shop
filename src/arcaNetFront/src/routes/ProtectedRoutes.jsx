@@ -4,7 +4,7 @@ import {Navigate, Outlet} from 'react-router-dom';
 // the pages in the front-end
 
 const ProtectedRoutes = ({ allowedUsers }) => {
-    // Pulling our mockup user from localstorage
+    // Pulling our mockup user from localstorage --> should be changed in the future
     const user = JSON.parse(localStorage.getItem('user'));
 
     // Case for unlogged clients
