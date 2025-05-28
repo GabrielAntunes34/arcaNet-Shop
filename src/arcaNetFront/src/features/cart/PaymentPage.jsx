@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PaymentPage.css'; // Seu arquivo CSS
 import { useCart } from '../../context/useCart'; // Ajuste o caminho se necessário
+import Button from '../../components/Button/Button.jsx'; // Ajuste o caminho se necessário
 
 const PaymentForm = () => {
   const { cartItems } = useCart(); // Obtém os itens do seu contexto
@@ -178,9 +179,9 @@ const PaymentForm = () => {
             </div>
 
             <div className="form-footer">
-              <button type="submit" className="finish-button">
+              <Button type="submit" className="finish-button">
                 Finish
-              </button>
+              </Button>
             </div>
           </form>
         </div>
@@ -191,19 +192,19 @@ const PaymentForm = () => {
             {cartItems.map(item => (
               <div className="summary-item" key={item.id}>
                 <span>{item.name} (x{item.quantity})</span>
-                <span>R$ {(item.price * item.quantity).toFixed(2)}</span>
+                <span>$ {(item.price * item.quantity).toFixed(2)}</span>
               </div>
             ))}
             {cartItems.length === 0 && (
-              <p>Seu resumo está vazio.</p>
+              <p>Your summary is empty.</p>
             )}
           </div>
           <div className="summary-total">
-            <span>Total a Pagar</span>
-            <span>R$ {precoTotal.toFixed(2)}</span>
+            <span>Total to Pay</span>
+            <span>$ {precoTotal.toFixed(2)}</span>
           </div>
           <p className="secure-payment-info">
-            Seu pagamento é 100% seguro.
+            Your payment is 100% secure.
           </p>
         </div>
       </div>

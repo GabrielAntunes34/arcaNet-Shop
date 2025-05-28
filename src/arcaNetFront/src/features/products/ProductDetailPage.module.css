@@ -1,144 +1,298 @@
-.productDetailPage {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    display: flex;
-    gap: 40px;
-    background-color: #fff;
-    border-radius: 8px;
+/* ProductDetailPage.module.css */
+
+/* --- Estados de Mensagem (Loading, Not Found, Unavailable) --- */
+.messageContainer,
+.loadingContainer { /* Adicionando uma classe para o container de loading também */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: var(--color-background-content-box);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.08);
+  border: 1px solid var(--color-border-card);
 }
 
-.imageColumn {
-    flex: 1;
+.message,
+.unavailableMessage {
+  font-size: 1.2rem;
+  color: var(--color-text-default);
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
 
-.productImage {
-    width: 100%;
-    max-width: 400px; /* Limita o tamanho da imagem */
-    height: auto;
-    object-fit: contain;
-    border-radius: 6px;
-    border: 1px solid #eee;
-}
-
-.detailsColumn {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.detailsColumn h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.8rem;
-}
-
-.price {
-    font-weight: bold;
-    font-size: 1.5rem; /* 24px */
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.categoryTags {
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.categoryTag {
-    padding: 4px 12px;
-    background-color: #555; /* Cor mais escura para tags */
-    color: white;
-    border-radius: 15px; /* Mais arredondado */
-    font-size: 0.8rem;   /* 12px */
-}
-.noActiveCategoryTag {
-    font-size: 0.8rem;
-    color: #777;
-    font-style: italic;
-}
-
-
-.description {
-    margin-top: 0; /* Já tem margem das tags */
-    margin-bottom: 20px;
-    line-height: 1.6;
-    color: #444;
-}
-
-.quantityLabel {
-    display: block;
-    margin-bottom: 8px;
+.loadingContainer .message { /* Para "Loading..." */
+    font-size: 1.5rem;
+    color: var(--color-text-headings);
     font-weight: 500;
 }
 
-.quantitySelect {
-    padding: 8px 10px;
-    font-size: 1rem; /* 16px */
-    width: 100px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
+.messageContainer h2 { /* Nome do produto no estado indisponível */
+  color: var(--color-text-headings);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
 }
 
-.addToCartButton {
-    /* O Button.jsx já deve ter estilos base, aqui só ajustes se necessário */
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1rem;
-}
-
-.message, .unavailableMessage {
-    padding: 20px;
-    text-align: center;
-    font-size: 1.1rem;
+.unavailableProductImage {
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  opacity: 0.7; /* Imagem um pouco esmaecida */
+  border: 1px solid var(--color-border-divider);
 }
 
 .unavailableMessage {
-    color: #d9534f; /* Vermelho para indisponível */
-    font-weight: bold;
-    border: 1px solid #d9534f;
-    background-color: #fdd;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 15px;
+  color: var(--color-accent-danger); /* Mensagem de indisponível com cor de destaque de perigo */
+  font-weight: 500;
+}
+
+.backLink {
+  margin-top: 20px;
+  text-decoration: none;
+}
+.backLink > button { /* Ajusta o botão dentro do link */
+    padding: 10px 25px;
+}
+
+
+/* --- Layout Principal da Página do Produto --- */
+.productDetailPage {
+  display: flex;
+  gap: 40px; /* Espaço entre coluna da imagem e coluna de detalhes */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: var(--color-background-content-box);
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(var(--color-shadow-accent-hint-rgb), 0.1);
+  border: 1px solid var(--color-border-card);
+}
+
+.imageColumn {
+  flex: 1 1 45%; /* Permite crescer e encolher, base de 45% */
+  max-width: 500px; /* Largura máxima para a imagem não ficar gigante */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.productImage {
+  width: 100%;
+  max-width: 450px; /* Limita o tamanho da imagem dentro da coluna */
+  height: auto;
+  object-fit: contain; /* Para ver a imagem inteira, 'cover' se preferir preencher */
+  border-radius: 10px;
+  border: 1px solid var(--color-border-divider);
+  box-shadow: 0 4px 12px rgba(var(--color-shadow-soft-rgb), 0.08);
+}
+
+.detailsColumn {
+  flex: 1 1 55%; /* Ocupa o restante do espaço */
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Espaço entre os elementos de detalhe */
+  text-align: left;
+}
+
+.detailsColumn h2 { /* Nome do Produto */
+  color: var(--color-text-headings);
+  font-size: 2.2rem; /* Título do produto proeminente */
+  font-weight: 600;
+  margin: 0 0 5px 0; /* Pequena margem inferior */
+  line-height: 1.3;
+}
+
+.price {
+  font-size: 1.8rem; /* Preço destacado */
+  color: var(--color-text-price); /* Cor de preço temática (lilás/ameixa claro) */
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.categoryTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px; /* Espaço entre o label "Categories:" e as tags, e entre as tags */
+  margin-bottom: 10px;
+}
+
+.categoryTags > span:first-child { /* Label "Categories:" */
+  font-size: 0.9rem;
+  color: var(--color-text-subtle);
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.categoryTag {
+  background-color: var(--color-accent-tertiary);
+  color: var(--color-accent-primary);
+  padding: 4px 10px;
+  border-radius: 15px; /* Tags bem arredondadas */
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.description {
+  color: var(--color-text-default);
+  line-height: 1.7; /* Boa legibilidade para descrição */
+  font-size: 1rem;
+  margin-bottom: 15px;
+  white-space: pre-wrap; /* Para respeitar quebras de linha da descrição */
 }
 
 .stockInfo {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-input); /* Um cinza escuro para informação de estoque */
+  margin-bottom: 10px;
 }
 
-/* Para o ProductListPage.module.css, se ainda não tiver: */
-.categoryLabel { /* Exemplo */
-    display: block;
-    margin-bottom: 5px;
-}
-.noFilters { /* Exemplo */
-    font-style: italic;
-    color: #777;
-    font-size: 0.9rem;
+.outOfStock {
+  color: var(--color-accent-danger) !important; /* Usa a cor de perigo, com !important para garantir */
+  font-weight: 600;
 }
 
-.messageContainer {
-    text-align: center;
-    padding: 40px 20px;
+.quantityLabel {
+  font-size: 0.95rem;
+  color: var(--color-text-default);
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
 }
-.unavailableProductImage {
-    max-width: 200px; /* Imagem menor para produto indisponível */
-    height: auto;
-    margin-bottom: 20px;
-    opacity: 0.7;
+
+.quantitySelect {
+  padding: 10px 35px 10px 12px; /* Padding para acomodar a seta */
+  font-size: 1rem;
+  font-family: var(--font-family-body);
+  color: var(--color-text-input);
+  background-color: var(--color-background-content-box);
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235C3A77" viewBox="0 0 16 16"><path d="M8 11.293l-4.646-4.647a.5.5 0 0 1 .708-.708L8 9.879l3.938-3.938a.5.5 0 1 1 .708.708L8 11.293z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 11px 11px;
+  cursor: pointer;
+  max-width: 100px; /* Largura máxima para o seletor de quantidade */
+  margin-bottom: 20px;
 }
-.backLink {
-    display: inline-block;
-    margin-top: 20px;
-    text-decoration: none;
+
+.quantitySelect:focus {
+  outline: none;
+  border-color: var(--border-color-focus);
+  box-shadow: var(--box-shadow-focus);
 }
-.stockInfo.outOfStock {
-    color: #d9534f; /* Vermelho para out of stock */
-    font-weight: bold;
+
+.quantitySelect:disabled {
+  background-color: var(--color-background-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Estilos para o botão desabilitado (variant="disabled")
+   serão aplicados pelo componente Button, mas você pode adicionar overrides aqui se necessário:
+.addToCartButton:disabled {
+  background-color: var(--color-text-subtle) !important;
+  cursor: not-allowed;
+} */
+
+
+/* --- Responsividade --- */
+@media (max-width: 992px) { /* Tablets e telas menores */
+  .productDetailPage {
+    flex-direction: column; /* Empilha imagem e detalhes */
+    gap: 30px;
+    padding: 25px;
+    margin: 30px auto;
+  }
+
+  .imageColumn {
+    max-width: 100%; /* Coluna da imagem ocupa a largura total */
+    align-items: center; /* Centraliza a imagem */
+  }
+
+  .productImage {
+    max-width: 400px; /* Imagem pode ser um pouco menor no modo empilhado */
+  }
+
+  .detailsColumn {
+    flex-basis: auto; /* Reset flex-basis */
+    align-items: center; /* Centraliza o conteúdo dos detalhes */
+    text-align: center; /* Centraliza texto */
+    gap: 15px;
+  }
+
+  .detailsColumn h2 {
+    font-size: 2rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  .categoryTags {
+    justify-content: center; /* Centraliza as tags */
+  }
+
+  .description {
+    font-size: 0.95rem;
+    text-align: justify; /* Ou left, para melhor leitura de blocos de texto */
+    max-width: 600px; /* Limita largura da descrição para leitura */
+  }
+
+  .quantitySelect {
+    margin: 0 auto 20px auto; /* Centraliza o select */
+  }
+
+  .addToCartButton {
+    margin: 0 auto; /* Centraliza o botão */
+  }
+}
+
+
+@media (max-width: 480px) { /* Celulares */
+  .productDetailPage {
+    padding: 20px 15px;
+    margin: 20px auto;
+    gap: 20px;
+  }
+
+  .detailsColumn h2 {
+    font-size: 1.8rem;
+  }
+  .price {
+    font-size: 1.5rem;
+  }
+  .description {
+    font-size: 0.9rem;
+  }
+  .stockInfo, .quantityLabel {
+    font-size: 0.9rem;
+  }
+  .addToCartButton {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  .messageContainer {
+    padding: 30px 15px;
+    margin: 20px 10px;
+  }
+  .messageContainer h2 {
+    font-size: 1.5rem;
+  }
+  .message, .unavailableMessage {
+    font-size: 1.1rem;
+  }
 }

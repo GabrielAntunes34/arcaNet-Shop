@@ -1,18 +1,22 @@
 .item {
-  margin: 10px;
   display: flex;
-  align-items: center;
-  gap: 1.5rem; 
+  align-items: flex-start; /* Alinha imagem e detalhes pelo topo */
+  gap: 20px; /* Espaço entre imagem e detalhes */
   padding: 20px;
-  border-radius: 0.75rem;
-  background-color: #f7f7f7;
-  color: #333;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px; /* Espaço entre itens do carrinho */
+  background-color: var(--color-background-content-box);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-divider);
+  box-shadow: 0 2px 8px rgba(var(--color-shadow-soft-rgb), 0.06);
 }
 
 .image {
-    max-width: 120px;
-    max-height: 120px; 
+  width: 90px; /* Tamanho da imagem */
+  height: 90px;
+  object-fit: cover; /* Cobre a área, pode cortar */
+  border-radius: 6px;
+  border: 1px solid var(--color-border-card);
+  flex-shrink: 0; /* Impede que a imagem encolha */
 }
 
 .details {
@@ -24,49 +28,157 @@
 }
 
 .name {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #222;
+  font-family: var(--font-family-headings);
+  font-size: 1.15rem; /* Nome do produto um pouco maior */
+  color: var(--color-text-bold);
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.price {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #666;
+.price,
+.total {
+  font-size: 0.9rem;
+  color: var(--color-text-default);
+  margin: 3px 0;
+}
+
+.price span, /* Para destacar o valor */
+.total span {
+  font-weight: 500;
+  color: var(--color-text-input); /* Ou var(--color-text-price) se quiser a cor de destaque */
 }
 
 .total {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #555;
+  font-weight: 600; /* Subtotal em negrito */
+  color: var(--color-text-default); /* Subtotal com cor de título */
+  margin-top: 8px;
 }
 
 .controls {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem; 
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espaço entre os botões e a quantidade */
+  margin-top: 15px;
+}
+
+/* Estilos para os botões de quantidade e remover.
+   Seu componente Button já pode ter variantes, mas aqui damos um estilo específico
+   para o contexto do CartItem se ele aceitar uma className. */
+
+.quantityButton,
+.deleteButton { /* Estilo base para botões no controle */
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  border: 1px solid transparent; /* Para manter o layout ao adicionar borda no hover/focus */
+  line-height: 1; /* Para alinhar melhor o texto/ícone do botão */
+}
+
+.quantityButton {
+  background-color: var(--color-accent-tertiary); /* Lavanda pálido */
+  color: var(--color-accent-primary); /* Ameixa */
+  min-width: 30px; /* Garante que os botões +/- tenham um tamanho mínimo */
+  text-align: center;
+}
+
+.quantityButton:hover {
+  background-color: var(--color-accent-secondary); /* Lilás/Ameixa claro */
+  color: var(--color-text-on-accent);
+  border-color: var(--color-accent-secondary);
 }
 
 .quantity {
-    font-weight: 500;
-    min-width: 30px;
-    text-align: center;
-    color: #333;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-text-input);
+  padding: 0 5px; /* Pequeno padding lateral para não colar nos botões */
+  min-width: 25px; /* Largura mínima para o número */
+  text-align: center;
 }
 
-.controls button.primary:hover {
-    background-color: #0228ff;
-    border-color: #bbb;
+.deleteButton {
+  background-color: transparent;
+  color: var(--color-accent-danger);
+  border: 1px solid var(--color-accent-danger);
+  margin-left: auto; /* Empurra o botão de deletar para a direita */
 }
 
-.controls button.danger {
-    border-color: #e74c3c;
-    color: #e74c3c;
+.deleteButton:hover {
+  background-color: var(--color-accent-danger);
+  color: var(--color-text-on-danger);
+  border-color: var(--color-accent-danger-hover);
 }
 
-.controls button.danger:hover {
-    background-color: #9e1000;
-    border-color: #c0392b;
+
+/* --- Responsividade --- */
+@media (max-width: 767px) {
+  .item {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .image {
+    width: 75px;
+    height: 75px;
+  }
+
+  .name {
+    font-size: 1.05rem;
+  }
+
+  .price,
+  .total {
+    font-size: 0.85rem;
+  }
+
+  .controls {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .quantityButton,
+  .deleteButton {
+    padding: 5px 8px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    flex-direction: column; /* Empilha imagem e detalhes */
+    align-items: center; /* Centraliza itens quando empilhado */
+    text-align: center; /* Centraliza texto nos detalhes */
+  }
+
+  .image {
+    margin-bottom: 15px; /* Espaço abaixo da imagem quando empilhado */
+    width: 100px; /* Imagem pode ser um pouco maior quando centralizada */
+    height: 100px;
+  }
+
+  .details {
+    align-items: center; /* Centraliza o conteúdo dos detalhes */
+    width: 100%; /* Detalhes ocupam toda a largura */
+  }
+
+  .name {
+    font-size: 1.1rem; /* Pode até aumentar um pouco o nome do produto */
+  }
+
+  .controls {
+    justify-content: center; /* Centraliza os controles */
+    flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    width: 100%;
+  }
+
+  .deleteButton {
+    margin-left: 0; /* Remove o margin-left auto */
+    margin-top: 10px; /* Adiciona margem superior se quebrar linha */
+    width: calc(100% - 88px); /* Exemplo de largura para o botão deletar, considerando os outros botões. Ajuste! */
+    min-width: 120px; /* Largura mínima para o botão deletar */
+  }
 }

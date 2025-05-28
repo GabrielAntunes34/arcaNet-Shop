@@ -41,9 +41,9 @@ const CartItem = ({
 
         {/* Quantity controls */}
         <div className={styles.controls}>
-          <Button onClick={onDecrease} variant="primary"> - </Button>
+          <Button onClick={onDecrease} variant="classic"> - </Button>
           <span className={styles.quantity}>{quantity}</span>
-          <Button onClick={onIncrease} variant="primary"> + </Button>
+          <Button onClick={onIncrease} variant="classic"> + </Button>
           <Button onClick={onRemove} variant="danger"> Delete </Button>
         </div>
       </div>

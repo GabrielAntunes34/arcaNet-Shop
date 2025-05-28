@@ -60,8 +60,8 @@ const ProductTabCard = ({
                     />
                     Highlight
                 </label>
-                <Button onClick={() => onAddCategoryToProduct(id)} size="small" variant="secondary">Add Category</Button>
-                <Button onClick={() => onAddSupply(id)} size="small" variant="secondary">Add Supply</Button>
+                <Button onClick={() => onAddCategoryToProduct(id)} size="small" variant="classic">Add Category</Button>
+                <Button onClick={() => onAddSupply(id)} size="small" variant="classic">Add Supply</Button>
                 <Button onClick={() => onDelete(id)} variant="danger" size="small">Delete Item</Button>
             </div>
         </div>

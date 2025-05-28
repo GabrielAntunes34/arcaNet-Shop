@@ -1,14 +1,27 @@
+/* SearchBar.module.css (ou onde .searchInput está definido) */
+
 .searchInput {
-    width: 100%;
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    outline: none;
-    transition: border-color 0.2s ease-in-out;
-  }
-  
-  .searchInput:focus {
-    border-color: #007bff;
-  }
-  
+  width: 100%;
+  padding: 8px 0px 0px 0px;
+  font-size: 1rem;
+  font-family: var(--font-family-body);
+  color: var(--color-text-input);
+  background-color: var(--color-background-content-box);
+  border: 1px solid var(--color-border-input);
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(var(--color-shadow-soft-rgb), 0.04);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-sizing: border-box; /* Garante que padding e border sejam incluídos na altura/largura total */
+  height: 20px; 
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 1;
+}
+
+.searchInput:focus {
+  border-color: var(--border-color-focus);
+  box-shadow: var(--box-shadow-focus);
+}

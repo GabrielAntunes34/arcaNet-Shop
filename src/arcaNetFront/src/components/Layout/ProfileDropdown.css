@@ -1,117 +1,127 @@
+/* ProfileDropdown.css - Cores ajustadas para o tema Mystical & Elegant */
+
 .profile-dropdown-container {
   position: relative;
   display: inline-block;
-  
 }
 
 .profile-button {
   background: none;
+  background-color: transparent;
   border: none;
   cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 5px; /* Sua lógica */
+  border-radius: 50%; /* Sua lógica */
+  display: flex; /* Sua lógica */
+  align-items: center; /* Sua lógica */
+  justify-content: center; /* Sua lógica */
+  outline: none; /* Adicionado para remover outline padrão no foco, se o hover já faz algo similar */
 }
 
-.profile-button:hover {
-  outline: 2px solid #aaa;
+.profile-button:hover,
+.profile-button:focus-visible { /* Adicionado :focus-visible para acessibilidade */
+  /* Outline original: 2px solid #aaa */
+  /* outline: 2px solid var(--color-background-content-box); */
+  background-color: transparent;
+  box-shadow: var(--box-shadow-focus);
+  outline: none; 
 }
 
-.profile-button svg { 
-  stroke: #fff;
+.profile-button svg {
+  /* Stroke original: #fff */
+  /* A navbar agora tem fundo claro, então o ícone precisa ser escuro */
+  stroke: var(--color-background-content-box); /* Cor de texto padrão para o ícone */
+  transition: stroke 0.2s ease; /* Adicionando transição suave */
+  outline-color: transparent;
+
 }
 
 .profile-button:hover svg {
-  stroke: #aaa;
+  /* Stroke original no hover: #aaa */
+  stroke: var(--color-accent-secondary); /* Cor de destaque primário no hover */
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  width: 220px; 
-  padding-top: 8px;
-  padding-bottom: 8px;
-  overflow: hidden; /* ADICIONADO: Garante que os filhos não "vazem" dos cantos arredondados */
+  position: absolute; /* Sua lógica */
+  top: calc(100% + 12px); /* Sua lógica */
+  right: 0; /* Sua lógica */
+  /* Fundo original: white */
+  background-color: var(--color-background-content-box); /* Fundo temático */
+  /* Borda original: 1px solid #ddd */
+  border: 1px solid var(--color-border-card); /* Borda temática (pode ser --color-border-divider também) */
+  border-radius: 8px; /* Sua lógica */
+  /* Sombra original: 0 4px 12px rgba(0, 0, 0, 0.15) */
+  box-shadow: 0 6px 20px rgba(var(--color-shadow-accent-hint-rgb), 0.1); /* Sombra temática mais pronunciada */
+  z-index: 1000; /* Sua lógica */
+  width: 220px; /* Sua lógica */
+  padding-top: 8px; /* Sua lógica */
+  padding-bottom: 8px; /* Sua lógica */
+  overflow: hidden; /* Sua lógica */
 }
 
 /* A pequena seta no topo do dropdown */
 .dropdown-arrow {
-  content: "";
-  position: absolute;
-  bottom: 100%; 
-  right: 10px; 
-  margin-left: -8px; 
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid white; 
-  filter: drop-shadow(0 -1px 0.5px #ddd); 
+  content: ""; /* Sua lógica */
+  position: absolute; /* Sua lógica */
+  bottom: 100%; /* Sua lógica */
+  right: 10px; /* Sua lógica */
+  margin-left: -8px; /* Sua lógica */
+  width: 0; /* Sua lógica */
+  height: 0; /* Sua lógica */
+  border-left: 8px solid transparent; /* Sua lógica */
+  border-right: 8px solid transparent; /* Sua lógica */
+  /* Cor da borda da seta original: white */
+  border-bottom: 8px solid var(--color-background-content-box); /* Cor de fundo do menu */
+  /* Cor do filtro da seta original: #ddd */
+  filter: drop-shadow(0 -1px 0.5px var(--color-border-card)); /* Cor da borda do menu para a sombra da seta */
 }
 
+.dropdown-menu ul {
+  list-style: none; /* Sua lógica */
+  padding: 0; /* Sua lógica */
+  margin: 0; /* Sua lógica */
+}
+
+/* Combinando as regras duplicadas para os itens do menu */
 .dropdown-menu li a,
 .dropdown-menu li .logout-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #333;
-  font-size: 1rem;
-  white-space: nowrap;
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-  box-sizing: border-box; /* ADICIONADO: Garante que padding não aumente a largura */
+  display: flex; /* Sua lógica */
+  align-items: center; /* Sua lógica */
+  gap: 8px; /* Sua lógica */
+  padding: 10px 15px; /* Sua lógica */
+  text-decoration: none; /* Sua lógica */
+  /* Cor original: #333 */
+  color: var(--color-text-default); /* Cor de texto padrão temática */
+  font-size: 1rem; /* Sua lógica */
+  font-family: var(--font-family-body); /* Adicionando fonte temática */
+  white-space: nowrap; /* Sua lógica */
+  cursor: pointer; /* Sua lógica */
+  background: none; /* Sua lógica */
+  border: none; /* Sua lógica */
+  width: 100%; /* Sua lógica */
+  text-align: left; /* Sua lógica */
+  box-sizing: border-box; /* Sua lógica */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Adicionando transição de cor de texto */
 }
 
 .dropdown-menu li a:hover,
 .dropdown-menu li .logout-button:hover {
-  background-color: #f5f5f5;
+  /* Fundo original no hover: #f5f5f5 */
+  background-color: var(--color-accent-tertiary); /* Lavanda pálido para hover */
+  color: var(--color-accent-primary); /* Cor de texto ameixa no hover para dar mais destaque */
 }
 
-
-.dropdown-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.dropdown-menu li a,
-.dropdown-menu li .logout-button {
-  display: flex; /* Para alinhar ícone e texto se usar react-icons */
-  align-items: center;
-  gap: 8px; /* Espaço entre ícone e texto */
-  padding: 10px 15px;
-  text-decoration: none;
-  color: #333;
-  font-size: 1rem; /* Tamanho da fonte dos itens */
-  white-space: nowrap;
-  cursor: pointer;
-  background: none;
-  border: none;
-  width: 100%;
-  text-align: left;
-}
-
+/* Estilo para o texto "Admin Only" ou similar */
 .admin-only {
-  font-size: 0.8em;
-  color: #777;
-  margin-left: 4px;
+  font-size: 0.8em; /* Sua lógica */
+  /* Cor original: #777 */
+  color: var(--color-text-subtle); /* Cor de texto sutil temática */
+  margin-left: 4px; /* Sua lógica */
 }
 
 .dropdown-separator {
-  height: 1px;
-  background-color: #eee;
-  margin: 8px 0;
+  height: 1px; /* Sua lógica */
+  /* Cor de fundo original: #eee */
+  background-color: var(--color-border-divider); /* Divisória temática */
+  margin: 8px 0; /* Sua lógica */
 }

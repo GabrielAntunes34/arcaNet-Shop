@@ -52,7 +52,7 @@ const ProductDetailPage = () => {
                 .filter(Boolean);
 
             setDisplayedCategories(productActiveCategories);
-            setIsAvailable((!productData.categories || productData.categories.length === 0) || productActiveCategories.length > 0);
+            setIsAvailable(true);
         } else {
             setProduct(null);
             setIsAvailable(false);
@@ -112,7 +112,7 @@ const ProductDetailPage = () => {
                     ))}
                 </select>
                 <Button onClick={handleAddToCart} disabled={product.stock === 0}
-                    variant={product.stock > 0 ? "primary" : "disabled"} className={styles.addToCartButton}>
+                    variant={product.stock > 0 ? "primary" : "disabled"}>
                     {product.stock === 0 ? "Out of Stock" : "Add to cart"}
                 </Button>
             </div>
