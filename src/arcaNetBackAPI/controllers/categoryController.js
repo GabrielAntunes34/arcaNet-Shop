@@ -1,4 +1,6 @@
+const mongoose = require('mongoose');
 const Category = require('../models/category');
+const Product = require('../models/product');
 const ErrorMessage = require('../util/ErrorMessage');
 
 // Returns all categories from data base
@@ -74,9 +76,10 @@ const update_category = async (req, res, next) => {
 };
 
 // Deletes from database the category expressed by it's id at the request
+// This also removes all it's references from the product's that have them
 const delete_category = async (req, res, next) => {
     const id = req.params.id;
-
+    
     try{
         const deletedCat = await Category.findOneAndDelete({_id: id});
 
@@ -85,6 +88,19 @@ const delete_category = async (req, res, next) => {
             const errMess = new ErrorMessage('Category', id, 404);
             return next(errMess);
         }
+
+        // Removing all references of this category in Products
+        // with a bulk update (for better performance)
+        await Product.updateMany(
+            {categories: id},
+            { $pull: {categories: id}}
+        );
+
+        const prods = await Product.find({ categories:id })
+        await Product.updateMany(
+        { categories: id },
+        { $pull: { categories: id } },
+        );
 
         res.json({ message:'Success', data:null, details:'' });
     }

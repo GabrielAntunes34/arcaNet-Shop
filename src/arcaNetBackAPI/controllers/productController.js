@@ -3,8 +3,17 @@ const ErrorMessage = require('../util/ErrorMessage');
 
 // Returns all products from data base
 const read_product = async (req, res, next) => {
+    const { withCategories } = req.query; // if has ?with-categores=true
+
     try {
-        const allProds = await Product.find().sort({ createdAt: -1 });
+        let allProdsQuery = Product.find().sort({ createdAt: -1});
+
+        // Appending it's category data, if necessary
+        if(withCategories)
+            allProdsQuery = allProdsQuery.populate('categories');
+
+        // Awaiting and returning all products
+        const allProds = await allProdsQuery;
         res.json({ message:'Success', data:allProds, details:'' });
     }
     catch(err) {
@@ -15,10 +24,16 @@ const read_product = async (req, res, next) => {
 
 // Return a specific product register from data base by it's id
 const read_product_id = async (req, res, next) => {
+    const { withCategories } = req.query; // if has ?with-categores=true
     const id = req.params.id;
 
     try {
-        const prod = await Product.findOne({_id: id});
+        let prodQuery = Product.findOne({_id: id});
+
+        // Verifying if we need to append product's categories
+        if(withCategories)
+            prodQuery = prodQuery.populate('categories');
+        prod = await prodQuery;
 
         // Verifying if there is such a register
         if(!prod) {
