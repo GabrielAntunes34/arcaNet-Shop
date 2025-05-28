@@ -1,78 +1,58 @@
-import React, { createContext, useState } from 'react';
+// src/context/CartContext.jsx (ou .js, ajuste o nome do arquivo conforme o seu)
+import React, { createContext, useState, useContext } from 'react'; // useContext é usado no useCart
 
-
-const mockCartItems = [
-    {
-        id: 'prod_test_001',
-        name: 'Produto de Teste 1',
-        price: 25.50,
-        quantity: 2,
-        image: 'https://p2.trrsf.com/image/fget/cf/1200/900/middle/images.terra.com/2022/05/14/1578708983-shutterstock1361240465.jpg'
-    },
-    {
-        id: 'prod_test_002',
-        name: 'Super Item de Teste 2',
-        price: 79.99,
-        quantity: 1,
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxXuU4O0RxEWuKDVx34Si9rp9l5wbywUw5tQ&s'
-    }
-];
-
-
-
-// exportando o contexto para que o useCart possa acessá-lo
+// 1. CRIAR O CONTEXTO
+// ESTA LINHA É CRUCIAL E O 'CartContext' PRECISA SER EXPORTADO
 export const CartContext = createContext();
 
-
-
+// Seu CartProvider (que você já tem e parece correto em sua lógica interna)
 export const CartProvider = ({ children }) => {
+    const [cartItems, setCartItems] = useState([]); // Começar com carrinho vazio é mais comum
 
-    // É o array que irá armazenar os itens do carrinho
-    const [cartItems, setCartItems] = useState([mockCartItems[0], mockCartItems[1]]); // Inicializa o carrinho como um array vazio  
-    
-    
-    
-    // Função para adicionar item ao carrinho
-    const addToCart = (product) => {
+    const addToCart = (product, quantityToAdd) => {
         setCartItems(prevItems => {
-          const existingItem = prevItems.find(item => item.id === product.id);
-          if (existingItem) {
-            // Se existir, atualiza a quantidade (exemplo)
-            return prevItems.map(item =>
-              item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-            );
-          }   
-          // Se não existir, adiciona com quantidade 1
-          return [...prevItems, { ...product, quantity: 1 }];
+            const existingItem = prevItems.find(item => item.id === product.id);
+            if (existingItem) {
+                return prevItems.map(item =>
+                    item.id === product.id ? { ...item, quantity: item.quantity + quantityToAdd } : item
+                );
+            }
+            return [...prevItems, { ...product, quantity: quantityToAdd }];
         });
-    };  
+        console.log(`${quantityToAdd} x "${product.name}" added/updated in cart.`);
+    };
 
-
-    // Função para remover item do carrinho
-    const removeFromCart = (productId) => {
+    const removeFromCart = (productId) => { // Adicionei as suas outras funções aqui
         setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
-    };  
+    };
 
-
-    // Função para atualizar quantidade de um item
     const updateQuantity = (productId, quantity) => {
         setCartItems(prevItems =>
             prevItems.map(item =>
                 item.id === productId ? { ...item, quantity: quantity } : item
-            ).filter(item => item.quantity > 0) // Remove se a quantidade for 0
+            ).filter(item => item.quantity > 0)
         );
-    };  
+    };
 
-
-    // Função para limpar o carrinho
     const clearCart = () => {
         setCartItems([]);
-    };  
-
+    };
 
     return (
-      <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
-        {children}
-      </CartContext.Provider>
+        // Use o CartContext.Provider que foi criado e exportado acima
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}>
+            {children}
+        </CartContext.Provider>
     );
+};
+
+// SEU HOOK PERSONALIZADO useCart (pode ficar neste arquivo ou em um separado)
+// Se estiver em um arquivo separado, ele importaria CartContext deste arquivo.
+// Se estiver neste arquivo, ele já tem acesso direto a CartContext.
+export const useCart = () => {
+    const context = useContext(CartContext);
+    if (context === undefined) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+    return context;
 };

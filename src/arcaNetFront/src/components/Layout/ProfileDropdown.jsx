@@ -50,17 +50,17 @@ const ProfileDropdown = ({ user, onLogout }) => {
             {user.role === 'admin' && (
               <>
                 <li>
-                  <Link to="/manage-products" onClick={() => setIsOpen(false)} role="menuitem">
+                  <Link to="/admin/products" onClick={() => setIsOpen(false)} role="menuitem">
                     Manage products 
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-users" onClick={() => setIsOpen(false)} role="menuitem">
+                  <Link to="/admin/users" onClick={() => setIsOpen(false)} role="menuitem">
                     Manage users 
                   </Link>
                 </li>
                 <li>
-                  <Link to="/manage-categories" onClick={() => setIsOpen(false)} role="menuitem">
+                  <Link to="/admin/categories" onClick={() => setIsOpen(false)} role="menuitem">
                     Manage categories
                   </Link>
                 </li>

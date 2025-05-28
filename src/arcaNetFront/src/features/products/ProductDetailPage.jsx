@@ -1,78 +1,123 @@
-import React, { useState, useEffect } from 'react'; 
-import { useParams } from 'react-router-dom';
-
-const allProducts = [
-    { id: 1, name: "Death Tarot", price: 35.0, category: "death", photo: "https://via.placeholder.com/400x600.png?text=Death+Tarot", description: "Embark on a journey through the veiled realms of reality and perception with the Nocturne of Truth and Illusions tarot deck. This collection of 78 intricately designed cards serves as a mirror to the soul, reflecting both the clarity of truth and the allure of illusion. Each card invites introspection, guiding you through the shadows and light of your inner world." },
-    { id: 2, name: "Moon Tarot", price: 40.0, category: "moon", photo: "https://via.placeholder.com/400x600.png?text=Moon+Tarot", description: "Discover the mysteries of the night with the Moon Tarot. These cards delve into the subconscious, dreams, and the hidden aspects of life, offering guidance through intuition and a deeper understanding of the unseen." },
-    { id: 3, name: "Fullmoon Tarot", price: 50.0, category: "fullmoon", photo: "https://via.placeholder.com/400x600.png?text=Fullmoon+Tarot", description: "The Fullmoon Tarot illuminates your path with the bright energy of the full moon. It's a deck focused on clarity, culmination, and the revelation of truths, perfect for when you seek to bring light to uncertainty." },
-    // Adicione mais produtos conforme necessário para teste
-];
+// src/features/products/ProductDetailPage.jsx
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom'; // Importe Link se precisar de navegação
+import { CartContext } from '../../context/CartContext'; // Ajuste o caminho se necessário
+import styles from './ProductDetailPage.module.css'; // Certifique-se que este arquivo CSS existe
+import Button from '../../components/Button/Button'; // Supondo que você use seu componente Button
+import { defaultInitialProducts, defaultInitialCategories } from '../mockData.jsx'; 
 
 const ProductDetailPage = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+    const { id: productIdFromUrl } = useParams();
+    const [product, setProduct] = useState(null);
+    const [allSystemCategories, setAllSystemCategories] = useState(() => {
+        try {
+            const stored = localStorage.getItem('adminCategories');
+            const parsed = stored ? JSON.parse(stored) : null;
+            return (parsed && parsed.length > 0) ? parsed : defaultInitialCategories;
+        } catch (e) {
+            console.error("Error reading categories (ProductDetailPage):", e);
+            return defaultInitialCategories;
+        }
+    });
 
-  useEffect(() => {
-    const foundProduct = allProducts.find(p => p.id === parseInt(id));
-    setProduct(foundProduct);
-  }, [id]);
+    const [displayedCategories, setDisplayedCategories] = useState([]);
+    const [isAvailable, setIsAvailable] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useContext(CartContext);
 
-  if (!product) {
-    return <p>Loading product details...</p>;
-  }
+    useEffect(() => {
+        setIsLoading(true);
+        let productData = null;
+        try {
+            const storedProducts = localStorage.getItem('adminProducts');
+            const products = (storedProducts && JSON.parse(storedProducts).length > 0) 
+                ? JSON.parse(storedProducts) 
+                : defaultInitialProducts;
+            productData = products.find(p => p.id === productIdFromUrl);
+        } catch (error) {
+            console.error("Error loading product from localStorage:", error);
+            productData = defaultInitialProducts.find(p => p.id === productIdFromUrl); // Fallback to default mock
+        }
 
-  const handleAddToCart = () => {
-    alert(`${quantity} x "${product.name}" added to cart!`);
-    // Aqui você deve chamar o contexto/cart ou serviço para adicionar ao carrinho
-  };
+        if (productData) {
+            setProduct(productData);
+            const activeSystemCategoriesMap = new Map(
+                allSystemCategories
+                    .filter(cat => cat.status === 'Active')
+                    .map(cat => [cat.id, cat])
+            );
+            const productActiveCategories = (productData.categories || [])
+                .map(prodCat => activeSystemCategoriesMap.get(prodCat.id))
+                .filter(Boolean);
 
-  return (
-    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '20px', display: 'flex', gap: '40px' }}>
-      <div style={{ flex: 1 }}>
-        <img src={product.photo} alt={product.name} style={{ width: '100%', objectFit: 'contain' }} />
-      </div>
-      <div style={{ flex: 1 }}>
-        <h2>{product.name}</h2>
-        <p style={{ fontWeight: 'bold', fontSize: '24px' }}>${product.price.toFixed(2)}</p>
-        <span style={{ padding: '4px 10px', backgroundColor: '#333', color: 'white', borderRadius: '12px', fontSize: '12px' }}>
-          {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-        </span>
-        <p style={{ marginTop: '20px' }}>{product.description}</p>
+            setDisplayedCategories(productActiveCategories);
+            setIsAvailable((!productData.categories || productData.categories.length === 0) || productActiveCategories.length > 0);
+        } else {
+            setProduct(null);
+            setIsAvailable(false);
+        }
+        setIsLoading(false);
+    }, [productIdFromUrl, allSystemCategories]);
 
-        <label htmlFor="quantity" style={{ display: 'block', marginTop: '20px', marginBottom: '8px' }}>
-          Quantity
-        </label>
-        <select
-          id="quantity"
-          value={quantity}
-          onChange={e => setQuantity(parseInt(e.target.value))}
-          style={{ padding: '8px', fontSize: '16px', width: '100px' }}
-        >
-          {[1, 2, 3, 4, 5].map(q => (
-            <option key={q} value={q}>{q}</option>
-          ))}
-        </select>
+    const handleAddToCart = () => {
+        if (product && quantity > 0 && isAvailable && product.stock > 0) {
+            addToCart(product, quantity);
+        }
+    };
 
-        <button
-          onClick={handleAddToCart}
-          style={{
-            marginTop: '20px',
-            backgroundColor: '#000',
-            color: '#fff',
-            border: 'none',
-            padding: '12px 20px',
-            width: '100%',
-            cursor: 'pointer',
-            borderRadius: '6px',
-            fontSize: '16px',
-          }}
-        >
-          Add to cart
-        </button>
-      </div>
-    </div>
-  );
+    if (isLoading) return <p className={styles.message}>Loading...</p>;
+    if (!product) return (
+        <div className={styles.messageContainer}>
+            <p className={styles.message}>Product not found.</p>
+            <Link to="/products" className={styles.backLink}><Button variant="secondary">Back</Button></Link>
+        </div>
+    );
+    if (!isAvailable) return (
+        <div className={styles.messageContainer}>
+            <h2>{product.name}</h2>
+            <img src={product.photo || 'https://via.placeholder.com/200x300.png?text=No+Image'} alt={product.name} className={styles.unavailableProductImage} />
+            <p className={styles.unavailableMessage}>Product unavailable.</p>
+            <Link to="/products" className={styles.backLink}><Button variant="secondary">Back</Button></Link>
+        </div>
+    );
+    
+    return (
+        <div className={styles.productDetailPage}>
+            <div className={styles.imageColumn}>
+                <img src={product.photo || 'https://via.placeholder.com/400x600.png?text=No+Image'} alt={product.name} className={styles.productImage} />
+            </div>
+            <div className={styles.detailsColumn}>
+                <h2>{product.name}</h2>
+                <p className={styles.price}>${product.price.toFixed(2)}</p>
+                <div className={styles.categoryTags}>
+                    {displayedCategories.length > 0 && <span>Categories: </span>}
+                    {displayedCategories.map(cat => (
+                        <span key={cat.id} className={styles.categoryTag}>{cat.name}</span>
+                    ))}
+                </div>
+                <p className={styles.description}>{product.description}</p>
+                {product.stock > 0 ? (
+                    <p className={styles.stockInfo}>{product.stock} in stock</p>
+                ) : (
+                    <p className={`${styles.stockInfo} ${styles.outOfStock}`}>Out of stock!</p>
+                )}
+                <label htmlFor="quantity" className={styles.quantityLabel}>Quantity</label>
+                <select
+                    id="quantity" value={quantity}
+                    onChange={e => setQuantity(Math.max(1, Math.min(parseInt(e.target.value), product.stock)))} // Garante entre 1 e estoque
+                    className={styles.quantitySelect} disabled={product.stock === 0}>
+                    {Array.from({ length: Math.min(product.stock || 0, 10) }, (_, i) => i + 1).map(q => (
+                        <option key={q} value={q}>{q}</option>
+                    ))}
+                </select>
+                <Button onClick={handleAddToCart} disabled={product.stock === 0}
+                    variant={product.stock > 0 ? "primary" : "disabled"} className={styles.addToCartButton}>
+                    {product.stock === 0 ? "Out of Stock" : "Add to cart"}
+                </Button>
+            </div>
+        </div>
+    );
 };
 
 export default ProductDetailPage;
