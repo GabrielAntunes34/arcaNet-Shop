@@ -1,0 +1,108 @@
+.productTabCard {
+    display: flex;
+    align-items: flex-start; /* Alinha itens no topo */
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.productImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+}
+
+.productInfo {
+    flex-grow: 1;
+}
+
+.productName {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.categories {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.categoryTag {
+    display: inline-block;
+    background-color: #e7e7e7;
+    color: #555;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px; /* Para quebra de linha */
+    font-size: 0.8rem;
+    position: relative; /* Para o botão de remover */
+}
+
+.removeCatButton {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 1.1em; /* Tamanho do 'x' */
+    line-height: 1;
+    padding: 0 0 0 4px;
+    margin-left: 2px;
+    opacity: 0.7;
+}
+
+.removeCatButton:hover {
+    color: #d9534f; /* Danger color */
+    opacity: 1;
+}
+
+.noCategory {
+    font-style: italic;
+    color: #777;
+}
+
+.stock {
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.productActions {
+    display: flex;
+    flex-direction: column; /* Empilha os botões e o checkbox */
+    align-items: flex-start; /* Alinha à esquerda na coluna */
+    gap: 8px; /* Espaço entre os elementos de ação */
+    min-width: 150px; /* Para dar espaço aos botões */
+    margin-left: 15px;
+}
+
+.highlightLabel {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+}
+
+.highlightLabel input[type="checkbox"] {
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+/* Estilos para os botões (assumindo que seu Button.jsx lida com 'variant' e 'size') */
+.productActions button {
+    width: 100%; /* Para os botões ocuparem a largura da coluna de ações */
+}
+
+.inactiveCategoryTag {
+    text-decoration: line-through;
+    opacity: 0.7;
+}

@@ -1,0 +1,75 @@
+.manageCategoriesPage {
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.header h1 {
+    margin: 0 0 5px 0;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.header p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.controls > :first-child { /* Target SearchBar */
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.categoryList table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.categoryList th,
+.categoryList td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.categoryList th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+}
+
+.categoryList td button {
+    margin-right: 5px; /* Espaçamento entre botões de ação */
+}
+
+.statusSelect {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Adapte as classes do seu Button.jsx se necessário para size='small' ou variantes */
+/* Exemplo se seu Button não tiver 'size' prop e você quiser um botão delete menor: */
+.categoryList td button[class*="danger"] { /* Se a variante danger já existir no seu Button.module.css */
+    padding: 5px 10px; /* Ajuste o padding para botões menores */
+    font-size: 0.85rem;
+}

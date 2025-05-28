@@ -1,0 +1,85 @@
+.adminFormPage {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px; /* Aumentei o padding geral da página */
+    background-color: #f9f9f9; /* Fundo levemente diferente para a página do formulário */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.input,
+.select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.input:focus,
+.select:focus {
+    border-color: #007bff; /* Ajuste para a cor primária do seu tema */
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Ajuste para a cor primária do seu tema */
+}
+
+.formActions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.checkboxGroup {
+    display: flex;
+    flex-direction: column; /* Ou 'row' com 'flex-wrap: wrap;' para layout horizontal */
+    gap: 8px; /* Espaço entre os checkboxes */
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    max-height: 150px; /* Para permitir scroll se houver muitas categorias */
+    overflow-y: auto;
+}
+
+.checkboxLabel {
+    display: flex; /* Para alinhar o input com o texto */
+    align-items: center;
+    cursor: pointer;
+    font-weight: normal; /* Labels de checkbox geralmente não são bold */
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.checkboxLabel input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto; /* Para não ocupar 100% da largura */
+}

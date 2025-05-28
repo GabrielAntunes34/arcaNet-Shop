@@ -17,7 +17,9 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <AppRoutes />
+        <CartProvider>
+          <AppRoutes />
+        </CartProvider>
       </BrowserRouter> 
     </>
   );
