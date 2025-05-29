@@ -70,11 +70,47 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
     
 ## Code Comments
 
-  We intend to use Node as our back-end framework, React as our front-end framework, and MongoDB for the data base.
+### Front-end
+
+* #### Authentication
+
+To test the authentication interface, some mock functions were developed to simulare login, register and logout. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
+
+[Links for mocks here]
+
+* #### Products
+
+* #### WheelOfFortune
+
+* #### Cart
+
+* #### Routes
+
+* #### Admin interface
+
+### Back-end
 
 ## Test Plan
 
-  We intend to use tools like Postman for the back-end functionalities.
+### Front-end
+
+* #### Authentication
+
+To test the authentication interface, some mock functions were developed to simulare login, register and logout. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
+
+[Links for mocks here]
+
+* #### Products
+
+* #### WheelOfFortune
+
+* #### Cart
+
+* #### Routes
+
+* #### Admin interface
+
+
   
 ## Test Results
 
