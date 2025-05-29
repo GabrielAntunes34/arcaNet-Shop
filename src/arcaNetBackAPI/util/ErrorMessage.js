@@ -10,6 +10,12 @@ class ErrorMessage extends Error {
 
         // Choosing a message based on the http status
         switch(httpStatusCode) {
+            case 401:
+                this.message = `Unauthorized`;
+                break;
+            case 403:
+                this.message = `Forbidden`;
+                break;
             case 404:
                 this.message = `Error: ${entityName} with id: ${entityId} not found`;
                 break;

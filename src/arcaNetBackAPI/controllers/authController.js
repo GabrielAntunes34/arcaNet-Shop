@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../util/jwtUtils');
-const ErrorMessage = require('../util/ErrorMessage');
+
+require('dotenv').config();
 
 // This controller implements functions to resolver login and
 // register operations
@@ -21,7 +22,7 @@ const login = async (req, res) => {
     
     try {
         // Verifying if user already exists
-        const user = await User.find({email});
+        const user = await User.findOne({email});
         if(!user) {
             throw Error('Invalid credentials');
         }
@@ -34,7 +35,8 @@ const login = async (req, res) => {
 
         // If data match, we generate and return a new token and prepare user to be sent
         const token = generateToken(user._id, user.role);
-        const { password, resUser } = user.toObject();
+        const resUser = user.toObject();
+        delete resUser.password;
 
         // Putting everything in a cookie and sending
         res.cookie('authToken', token, COOKIE_OPTIONS);
@@ -43,14 +45,13 @@ const login = async (req, res) => {
     catch(err) {
         if(err.message === 'Invalid credentials')
             return res.status(404).json({message:err.message, data:null, details:''});
-        res.status(500).json({message:'Server error at Auth', data: null, details:''});
+        res.status(500).json({message:'Server error at Auth', data: null, details:err.message});
     }
 };
 
 // Creates a new client user at the data base. Front-end should redirect it to 
 // login later.
 const register = async (req, res) => {
-router.post('/register', async (req, res) => {
     const {
         name,
         email,
@@ -61,15 +62,20 @@ router.post('/register', async (req, res) => {
 
   try {
     const existingUser = await User.findOne({ email });
-    if (existingUser) 
+    if (existingUser) {
         return res.status(400).json({
             message: 'User already exists',
             data: null,
             details: ''
         });
+    }
 
-    // Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hashing password before saving
+    const saltGen = parseInt(process.env.PASS_SALT, 10);
+    const salt = await bcrypt.genSalt(saltGen);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    console.log(hashedPassword);
+
 
     // Instanciating a new user with the given data
     const newUser = new User({
@@ -82,16 +88,24 @@ router.post('/register', async (req, res) => {
     });
     await newUser.save();
 
-
     res.status(201).json({ message: 'User registered', data: null, details:null });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', data:null, details:err });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error', data:null, details:err.message });
   }
-});
 };
 
+const logout = (req, res) => {
+    // Checking it client's logged, then deleting it's cookie and returning
+    if(req.cookies['authToken']) {
+        res.clearCookie('authToken');
+        res.status(204).json({message:'Success', data:null, details:''});
+    }
+
+    res.status(400).json({message:'No auth state to be deleted', data:null, details:''});
+}
 
 module.exports = {
     login,
-    register
+    register,
+    logout
 }

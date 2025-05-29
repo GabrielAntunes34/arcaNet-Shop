@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
 //================================
@@ -11,6 +12,7 @@ const categoryRouter = require('./routes/categoryRouter');
 const productRouter = require('./routes/productRouter');
 const cuponRouter = require('./routes/cuponRouter');
 const userRouter = require('./routes/userRouter');
+const authRouter = require('./routes/authRoutes');
 
 // Enviroment configs
 require('dotenv').config();
@@ -39,6 +41,9 @@ app.use(express.urlencoded({ extended:true }));
 // Adds JSON for HTTP body data
 app.use(express.json());
 
+// Parser to simplfy cookie handling
+app.use(cookieParser());
+
 // Simple logger at the terminal for debug
 app.use((req, res, next) => {
     console.log('--- NEW REQ ---');
@@ -55,6 +60,10 @@ app.use((req, res, next) => {
 // ROUTES
 //================================
 
+// Business routes
+app.use('/auth', authRouter);
+
+// Admin CRUD routes
 app.use('/product', productRouter);
 app.use('/user', userRouter);
 app.use('/cupon', cuponRouter);
