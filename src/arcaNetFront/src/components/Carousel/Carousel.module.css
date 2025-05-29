@@ -25,7 +25,7 @@
 }
 
 .slide {
-  min-width: calc(100% / var(--qtd-carrossel)); /* Para 3 itens */
+  min-width: calc(100% / var(--qtd-carrossel)); 
   flex-basis: calc(100% / var(--qtd-carrossel));
   flex-shrink: 0;
   box-sizing: border-box;
