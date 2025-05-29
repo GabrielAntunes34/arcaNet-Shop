@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from './AuthContext';
 import './AuthPages.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Button from '../../components/Button/Button';
 
 // This page implements a Login form component which is interactible and responsible
 // To get the user input and send to the server to login
@@ -63,9 +64,9 @@ const LoginPage = () => {
             />
 
             {/* Button may inform if we are expecting a new request */}
-            <button className='form-btn' type="submit" disabled={loading}>
+            <Button className='form-btn' type="submit" disabled={loading}>
                 { loading ? 'Verifying...' : 'Submit' }
-            </button>
+            </Button>
             
               <Link to='/signup'>Do not have an account? Sign Up!</Link>
 

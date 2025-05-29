@@ -36,13 +36,13 @@ const ProductTabCard = ({
                                 <span key={currentCategoryInfo.id} className={`${styles.categoryTag} ${currentCategoryInfo.status !== 'Active' ? styles.inactiveCategoryTag : ''}`}>
                                     {currentCategoryInfo.name} 
                                     {currentCategoryInfo.status !== 'Active' && " (Inactive)"} {/* Opcional: indicar se inativa */}
-                                    <button
+                                    <Button
                                         onClick={() => onRemoveCategoryFromProduct(id, currentCategoryInfo.id)}
                                         className={styles.removeCatButton}
                                         title="Remove category"
                                     >
                                         &times;
-                                    </button>
+                                    </Button>
                                 </span>
                             );
                         }
