@@ -3,7 +3,7 @@ const ErrorMessage = require('../util/ErrorMessage');
 
 // Returns all products from data base
 const read_product = async (req, res, next) => {
-    const { withCategories } = req.query; // if has ?with-categores=true
+    const { withCategories } = req.query; // if has ?withCategories=true
 
     try {
         let allProdsQuery = Product.find().sort({ createdAt: -1});
@@ -24,7 +24,7 @@ const read_product = async (req, res, next) => {
 
 // Return a specific product register from data base by it's id
 const read_product_id = async (req, res, next) => {
-    const { withCategories } = req.query; // if has ?with-categores=true
+    const { withCategories } = req.query; // if has ?withCategories=true
     const id = req.params.id;
 
     try {
