@@ -22,6 +22,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
 
 
+    // Ensures that navigates will load the place from top to bottom
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

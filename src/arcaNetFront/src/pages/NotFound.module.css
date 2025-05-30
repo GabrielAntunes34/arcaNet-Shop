@@ -1,0 +1,9 @@
+span {
+    color: #5C3A77;
+}
+
+span:hover {
+    color: #9a7108;
+    transition: color 0.3s ease;
+
+}

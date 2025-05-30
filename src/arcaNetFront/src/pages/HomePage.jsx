@@ -4,10 +4,11 @@ import { defaultInitialProducts } from '../tests/mockData.jsx';
 import Carousel from '../components/Carousel/Carousel.jsx';
 import ProductCard from '../features/products/ProductCard/ProductCard.jsx';
 import { CartContext } from '../context/CartContext.jsx';
-import styles from './HomePage.module.css'; // Importe o CSS Module
+import styles from './HomePage.module.css';
 
 const HomePage = () => {
-    const [highlighted_products, setHighlightedProducts] = useState([]); // Inicialize como array vazio
+    // Inicializing the state with an empty array
+    const [highlighted_products, setHighlightedProducts] = useState([]);
 
     useEffect(() => {
         let products = [];
@@ -43,18 +44,19 @@ const HomePage = () => {
                 <Carousel items={
                   highlighted_products.map(product => (
                     <ProductCard
-                      key={product.id} // Adicionar key para listas
+                      key={product.id} // Adding key for lists
                       id={product.id}
                       image={product.photo}
                       title={product.name}
-                      description={product.description} // O ProductCard já trata a descrição longa
+                      description={product.description} // Product cart threats long descriptions
                       price={product.price}
                       onAddToCart={() => handleProductAddToCart(product)}
                     />
                   ))
                 } />
               ) : (
-                <p className={styles.noProductsMessage}>No highlighted products available at the moment.</p> // Mensagem se não houver produtos
+                // Special messages if there are no products
+                <p className={styles.noProductsMessage}>No highlighted products available at the moment.</p>
               )}
             </section>
       </div>
