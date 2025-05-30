@@ -25,7 +25,7 @@
 }
 
 .slide {
-  min-width: calc(100% / var(--qtd-carrossel)); /* Para 3 itens */
+  min-width: calc(100% / var(--qtd-carrossel)); 
   flex-basis: calc(100% / var(--qtd-carrossel));
   flex-shrink: 0;
   box-sizing: border-box;
@@ -67,8 +67,8 @@
   background-color: var(--color-text-subtle); /* Fundo cinza para desabilitado */
 }
 
-.carousel > button:first-of-type { margin-left: 10px; margin-right: 5px; }
-.carousel > button:last-of-type { margin-right: 10px; margin-left: 5px; }
+.carousel > Button:first-of-type { margin-left: 10px; margin-right: 5px; }
+.carousel > Button:last-of-type { margin-right: 10px; margin-left: 5px; }
 
 /* --- Responsividade --- */
 
@@ -93,11 +93,11 @@
     font-size: 26px;
   }
 
-  .carousel > button:first-of-type {
+  .carousel > Button:first-of-type {
     margin-left: 10px;
     margin-right: 5px;
   }
-  .carousel > button:last-of-type {
+  .carousel > Button:last-of-type {
     margin-right: 10px;
     margin-left: 5px;
   }
@@ -121,11 +121,11 @@
     font-size: 24px;
   }
     
-  .carousel > button:first-of-type {
+  .carousel > Button:first-of-type {
     margin-left: 8px;
     margin-right: 4px;
   }
-  .carousel > button:last-of-type {
+  .carousel > Button:last-of-type {
     margin-right: 8px;
     margin-left: 4px;
   }
@@ -152,11 +152,11 @@
     display: none;
     */
   }
-  .carousel > button:first-of-type {
+  .carousel > Button:first-of-type {
     margin-left: 5px;
     margin-right: 2px;
   }
-  .carousel > button:last-of-type {
+  .carousel > Button:last-of-type {
     margin-right: 5px;
     margin-left: 2px;
   }
