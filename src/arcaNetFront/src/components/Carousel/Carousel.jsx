@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import React, { useState, useRef, useEffect } from 'react';
 import styles from './Carousel.module.css';
 import Button from '../Button/Button';
 
@@ -7,27 +6,8 @@ const Carousel = ({ items }) => {
   const [current, setCurrent] = useState(0);
   const [itemsPerSlide, setItemsPerSlide] = useState(4);
   const carouselRef = useRef(null);
-  const [current, setCurrent] = useState(0);
-  const [itemsPerSlide, setItemsPerSlide] = useState(4);
-  const carouselRef = useRef(null);
   const touchStartX = useRef(null);
   const touchEndX = useRef(null);
-
-  useEffect(() => {
-    const getItemsPerSlide = () => {
-      if (carouselRef.current) {
-        const style = getComputedStyle(carouselRef.current);
-        const value = style.getPropertyValue('--qtd-carrossel');
-        const number = parseInt(value, 10);
-        if (!isNaN(number)) setItemsPerSlide(number);
-      }
-    };
-
-    getItemsPerSlide();
-
-    window.addEventListener('resize', getItemsPerSlide);
-    return () => window.removeEventListener('resize', getItemsPerSlide);
-  }, []);
 
   useEffect(() => {
     const getItemsPerSlide = () => {
@@ -58,16 +38,13 @@ const Carousel = ({ items }) => {
   }
 
   const totalPages = Math.ceil(items.length / itemsPerSlide);
-  const totalPages = Math.ceil(items.length / itemsPerSlide);
 
   const prevSlide = () => {
-    if (totalPages <= 1) return;
     if (totalPages <= 1) return;
     setCurrent(prev => (prev === 0 ? totalPages - 1 : prev - 1));
   };
 
   const nextSlide = () => {
-    if (totalPages <= 1) return;
     if (totalPages <= 1) return;
     setCurrent(prev => (prev === totalPages - 1 ? 0 : prev + 1));
   };
@@ -91,13 +68,10 @@ const Carousel = ({ items }) => {
 
     const deltaX = touchStartX.current - touchEndX.current;
     const minSwipeDistance = 50;
-    const minSwipeDistance = 50;
 
     if (deltaX > minSwipeDistance) {
       nextSlide();
-      nextSlide();
     } else if (deltaX < -minSwipeDistance) {
-      prevSlide();
       prevSlide();
     }
 
@@ -110,7 +84,6 @@ const Carousel = ({ items }) => {
   return (
     <div
       ref={carouselRef}
-      ref={carouselRef}
       className={styles.carousel}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -120,7 +93,6 @@ const Carousel = ({ items }) => {
         onClick={prevSlide}
         className={styles.navButton}
         aria-label="Previous slide"
-        disabled={!canScroll}
         disabled={!canScroll}
       >
         ‹
@@ -144,7 +116,6 @@ const Carousel = ({ items }) => {
         className={styles.navButton}
         aria-label="Next slide"
         disabled={!canScroll}
-        disabled={!canScroll}
       >
         ›
       </Button>
@@ -153,4 +124,3 @@ const Carousel = ({ items }) => {
 };
 
 export default Carousel;
-
