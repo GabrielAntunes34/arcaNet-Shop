@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useContext } from 'react';
-import { defaultInitialProducts } from '../features/mockData.jsx';
+import { defaultInitialProducts } from '../tests/mockData.jsx';
 import Carousel from '../components/Carousel/Carousel.jsx';
 import ProductCard from '../features/products/ProductCard/ProductCard.jsx';
 import { CartContext } from '../context/CartContext.jsx';

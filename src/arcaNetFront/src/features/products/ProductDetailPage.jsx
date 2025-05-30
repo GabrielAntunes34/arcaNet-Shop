@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'; // Importe Link se precisar 
 import { CartContext } from '../../context/CartContext'; // Ajuste o caminho se necessário
 import styles from './ProductDetailPage.module.css'; // Certifique-se que este arquivo CSS existe
 import Button from '../../components/Button/Button'; // Supondo que você use seu componente Button
-import { defaultInitialProducts, defaultInitialCategories } from '../mockData.jsx'; 
+import { defaultInitialProducts, defaultInitialCategories } from '../../tests/mockData'; 
 
 const ProductDetailPage = () => {
     const { id: productIdFromUrl } = useParams();

@@ -11,7 +11,7 @@ import { CartContext } from '../../context/CartContext'; // Ajuste o caminho se 
 // Dados de fallback caso o localStorage esteja vazio ou corrompido
 // É importante que estes fallbacks sejam arrays vazios ou uma representação mínima,
 // pois os dados principais virão do localStorage, que é gerenciado pela área de Admin.
-import { defaultInitialProducts, defaultInitialCategories } from '../mockData.jsx'; 
+import { defaultInitialProducts, defaultInitialCategories } from '../../tests/mockData.jsx'; 
 
 const ProductListPage = () => {
   const [allSystemProducts, setAllSystemProducts] = useState(() => {

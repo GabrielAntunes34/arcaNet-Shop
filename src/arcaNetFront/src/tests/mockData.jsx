@@ -115,21 +115,21 @@ export const defaultInitialUsers = [
         name: 'Alice Wonderland',
         email: 'alice@example.com',
         role: 'customer',
-        avatar: 'https://via.placeholder.com/40/777/fff?text=AW' // Placeholder com iniciais
+        avatar: 'https://media.istockphoto.com/id/1437816897/pt/foto/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring-or.jpg?s=612x612&w=0&k=20&c=OsiL-G3rU8NzppNGl3Yh9exwYzoSfCrRb9gxawy1VR4=' // Placeholder com iniciais
     },
     {
         id: 'u2',
         name: 'Bob The Builder',
         email: 'bob@example.com',
         role: 'customer',
-        avatar: 'https://via.placeholder.com/40/777/fff?text=BB'
+        avatar: 'https://i.ytimg.com/vi/8kFfHnre85o/maxresdefault.jpg'
     },
     {
         id: 'u3',
         name: 'Charlie Admin',
         email: 'charlie@admin.com',
         role: 'admin',
-        avatar: 'https://via.placeholder.com/40/3498db/fff?text=CA' // Cor diferente para admin
+        avatar: 'https://i0.wp.com/www.splento.com/blog/wp-content/uploads/2020/02/8-1-1.jpg?resize=1200%2C1200&ssl=1' // Cor diferente para admin
     },
     // Adicione um usuário admin padrão se não existir, conforme seu README
     {
@@ -137,7 +137,7 @@ export const defaultInitialUsers = [
         name: 'Admin Default',
         email: 'admin@admin.com', // E-mail padrão do admin
         role: 'admin',
-        avatar: 'https://via.placeholder.com/40/e74c3c/fff?text=AD',
+        avatar: 'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D',
         // Se o seu sistema espera uma senha para o admin,
         // lembre-se que não guardamos senhas em texto plano no frontend/localStorage.
         // A lógica de login verificaria a senha. Para mock, só o role importa aqui.

@@ -114,7 +114,7 @@ const Carousel = ({ items }) => {
           className={styles.sliderTrack}
           // 'current' é o índice da página. Cada página ocupa 100% da largura da janela.
           // O CSS se encarrega de fazer 3 itens caberem nessa "página".
-          style={{ transform: `translateX(-${current * 100}%)` }}
+          style={{ transform: `translateX(-${current * 40}%)` }}
         >
           {items.map((item, index) => (
             <div key={index} className={styles.slide}>

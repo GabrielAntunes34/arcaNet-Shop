@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import './AuthPages.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
@@ -18,6 +19,11 @@ const LoginPage = () => {
     // Defining states to auxiliate the UX
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     // Form submition handler
     const handleSubmit = async (e) => {

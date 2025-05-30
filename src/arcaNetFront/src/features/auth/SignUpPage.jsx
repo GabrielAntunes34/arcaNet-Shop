@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
 import validateData from './authValidation';
 import './AuthPages.css';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
@@ -8,6 +9,7 @@ import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 // To get the user input and send to the server to create a new User in the database
 
 const SignUpPage = () => {  
+    const navigate = useNavigate();
     const { register } = useAuth();
 
     const [formData, setFormData] = useState({
@@ -48,11 +50,16 @@ const SignUpPage = () => {
         // promise. Therefore, we can't trust it :(
         if(Object.keys(newErrors).length === 0) {
             register(formData);
+
+            // Reseting loading state and forwarding to login page
+            setLoading(false);
+            navigate('/login');
         }
 
         setLoading(false);
         }
         catch(err) {
+            console.log(err);
             console.log('An error has occurred');
         }
     }
