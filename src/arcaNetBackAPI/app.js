@@ -57,7 +57,7 @@ app.use((req, res, next) => {
 });
 
 //================================
-// ROUTES
+// ROUTES                         
 //================================
 
 // Business routes
@@ -79,4 +79,4 @@ app.use((req, res) => {
         details:`No path sucth as ${req.url}`,
         data: null
     });
-})
+});

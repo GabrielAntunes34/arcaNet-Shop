@@ -6,16 +6,19 @@ const {authenticate, authorize} = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
+// Special route to be used in the user's own profile page
+// This means that clients will only access it if they're
+// authenticated and have their own id
+router.get('/me', authenticate, controller.read_own_user);
+router.put('/me', authenticate, controller.update_own_user);
+router.delete('/me', authenticate, controller.delete_own_user);
+
 // CRUD routes for Admin
 router.get('/', authenticate, authorize('admin'), controller.read_user);
 router.get('/:id', authenticate, authorize('admin'), controller.read_user_id);
-router.post('/', authenticate, authorize('admin'), controller.create_user);
+router.post('/', controller.create_user);
 router.put('/:id', authenticate, authorize('admin'), controller.update_user);
 router.delete('/:id', authenticate, authorize('admin'), controller.delete_user);
 
-// Special route to be used in the user's own profile page
-// This means that clients only will access it if they're
-// authenticated and have their own id
-//router.get('/me', controller.get_own_user);
 
 module.exports = router;
