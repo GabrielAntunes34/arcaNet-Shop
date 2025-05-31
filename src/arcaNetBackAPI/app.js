@@ -10,9 +10,10 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 // Importing API routes
 const categoryRouter = require('./routes/categoryRouter');
 const productRouter = require('./routes/productRouter');
+const paymentRouter = require('./routes/paymentRouter');
 const cuponRouter = require('./routes/cuponRouter');
 const userRouter = require('./routes/userRouter');
-const authRouter = require('./routes/authRoutes');
+const authRouter = require('./routes/authRouter');
 
 // Enviroment configs
 require('dotenv').config();
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
 
 // Business routes
 app.use('/auth', authRouter);
+app.use('/payment', paymentRouter);
 
 // Admin CRUD routes
 app.use('/product', productRouter);
