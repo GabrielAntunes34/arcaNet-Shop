@@ -1,4 +1,4 @@
-# API MANUAL
+# API GUIDE
 
 ## Description
 
