@@ -14,7 +14,7 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     Product: {
         id: ObjectId    // (but it'll become a string in return)
         name: string,
-        description: string,
+        description: String,
         photo: String,
         price: Number (float),
         stock: Number (int),
@@ -29,7 +29,7 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     ```js
     Category: {
         id: ObjectId    // (but it'll become a string in return)
-        name: string
+        name: String
     };
     ```
 
@@ -38,12 +38,12 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     ```js
     User: {
         id: ObjectId    // (but it'll become a string in return)
-        name: string,
-        email: string,
-        address: string,
-        phone: string,
-        role: string,       // (client or admin)
-        password: string
+        name: String,
+        email: String,
+        address: String,
+        phone: String,
+        role: String,       // (client or admin)
+        password: String
     };
     ```
 
@@ -97,7 +97,7 @@ Remembering that JWT will be automatically set in the client's browser after log
 |--------|------|--------------|---------------|-----------|
 | POST   | / | [ {id, quantityToAdd}] | Nothing | Yes |
 
-This route will release the payment of an authenticated user who's buying some products, decrementing the quantity from stock and incrementind in sold attributes. It must recieve an list with a pair < productId : quantityToId > for each purchased product. This reduced info will make it easier and relatively more lightweight.
+This route will release the payment of an authenticated user who's buying some products, decrementing the quantity from stock and incrementind in sold attributes. It must recieve an list with a pair ```< productId : quantityToId >``` for each purchased product. This reduced info will make it easier and relatively more lightweight.
 
 ### Fortune (Cupon):
 
@@ -109,7 +109,7 @@ This route will release the payment of an authenticated user who's buying some p
 This are the routes to play Wheel Of Fortune game. The first one choose three random numbers from 1 to 9 and if the three of them are equal, we update the user's cupon to a valid one with the number's discount times 5. The second, checks if the user dosen't already have a cupon token and, if his cupon is valid, generates it's token to applay in the total value of a purchase.
 
 The game (and this code) has some rules:
-- Every user has only one cupon.
+- Every user has **only one** cupon.
 - Once created the cupon isn't erased unless the user's account is deleted. Therefore, the cupon is only altered at each play.
 - valid Cupons and tokens will only last one day.
 
@@ -159,6 +159,8 @@ The Delete operation in Category will also take all it's references from the pro
 that had them. The product, however, may exist without any category.
 
 ## Could be implemented in the future:
+
+* The backend dosen't recieve our return image files for products
 
 * Cupon has CRUD operations and routes defined, but it's not integrated with Fortune routes and isn't used in the code yet (There isn't pages for it at the front end yet)
 
