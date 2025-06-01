@@ -9,8 +9,9 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 
 // Importing API routes
 const categoryRouter = require('./routes/categoryRouter');
-const productRouter = require('./routes/productRouter');
+const fortuneRouter = require('./routes/fortuneRouter');
 const paymentRouter = require('./routes/paymentRouter');
+const productRouter = require('./routes/productRouter');
 const cuponRouter = require('./routes/cuponRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
@@ -64,6 +65,7 @@ app.use((req, res, next) => {
 // Business routes
 app.use('/auth', authRouter);
 app.use('/payment', paymentRouter);
+app.use('/fortune', fortuneRouter);
 
 // Admin CRUD routes
 app.use('/product', productRouter);

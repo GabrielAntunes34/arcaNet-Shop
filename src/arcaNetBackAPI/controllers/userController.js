@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Cupon = require('../models/cupon');
 const ErrorMessage = require('../util/ErrorMessage');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
@@ -117,11 +118,14 @@ const delete_user = async (req, res, next) => {
     try{
         const deletedUser = await User.findOneAndDelete({_id: id});
 
-        // Verifying if the given user
+        // Verifying if the given user exists
         if(!deletedUser) {
             const errMess = new ErrorMessage('User', id, 404);
             return next(errMess);
         }
+
+        // Deleting the cupon that references him (if he has one)
+        const userCupon = await Cupon.findOneAndDelete({userId: id});
 
         res.json({ message:'Success', data:null, details:'' });
     }
