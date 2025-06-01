@@ -11,16 +11,13 @@ const canPlayFortune = async (req, res, next) => {
     try {
         // Verifying if the user never played before
         const cupon = await Cupon.findOne({userId: userId});
-        console.log(cupon);
         if(!cupon)
             return next();
 
         // Verifying if the previous cupon expired
         const now = new Date();
-        if(cupon.expiresAt < now) {
-            console.log('Herreee')
+        if(cupon.expiresAt < now)
             return next();
-        }
 
         // Calculating the remaining time for the next paly
         const waitTimeMs = cupon.expiresAt - now;

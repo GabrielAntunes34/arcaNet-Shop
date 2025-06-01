@@ -18,8 +18,6 @@ const getRandomCards = () => {
     const cards = Array(3).fill().map(() => {
         return values[Math.floor(Math.random() * values.length)];
     });
-    
-    return [2, 2, 2];
 
     return cards;
 }
@@ -37,8 +35,7 @@ const draw_fortune = async (req, res, next) => {
         discountValue = cards[0] * 5;
 
     try {
-        //const currDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-        const currDate = new Date(Date.now() + 60 * 1000);
+        const currDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
         // Finding to alter or create a new cupon
         const updatedCupon = await Cupon.findOneAndUpdate(
@@ -53,14 +50,11 @@ const draw_fortune = async (req, res, next) => {
             {upsert:true, new: true}
         );
 
-        console.log(updatedCupon);
-
         // Returning the cards that need to be shown in the interface
         res.json({message: 'Success', data: cards, details: null});
     }
     catch(err) {
         const errMess = new ErrorMessage('Cupon', -1, 500, err.message);
-        console.log('Para onde?');
         return next(errMess);
     }
 };
@@ -78,8 +72,11 @@ const claim_cupon = async (req, res, next) => {
 
         // Checking it the cupon is valid
         if(!cupon.valid) {
-            const errMess = new ErrorMessage('Cupon', userId, 404);
-            return next(errMess);    
+            return res.status(403).json({
+                message: 'You didn\'t won a cupon this time. Try again later',
+                data: null,
+                details: ''
+            }) 
         }
 
         // Instanciating a cookie to activate the discount

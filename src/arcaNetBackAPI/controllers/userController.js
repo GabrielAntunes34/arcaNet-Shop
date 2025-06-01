@@ -28,8 +28,6 @@ const read_user_id = async (req, res, next) => {
     try {
         const user = await User.findOne({_id: id}, { password:0 });
 
-        console.log(user);
-
         // Verifying if there is such a register
         if(!user) {
             const errMess = new ErrorMessage('User', id, 404);
@@ -62,8 +60,6 @@ const create_user = async (req, res, next) => {
         const salt = await bcrypt.genSalt(saltGen);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        console.log(hashedPassword);
-
         // Constructing and saving the new user
         const newUser = new User({
             name,
@@ -73,8 +69,6 @@ const create_user = async (req, res, next) => {
             role,
             password: hashedPassword
         });
-
-        console.log(newUser.password);
 
         await newUser.save();
         res.status(201).json({ message:'Success', data:null, details:'' });
