@@ -72,54 +72,123 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
 
 ### Front-end
 
+#### Project structure
+
+Since React has been chosen to make all the project’s interfaces, and it’s a component based library, we’ve decided to create a structure that modularizes each component into groups of the main features. Therefore, we might maintain all the features’ logic encapsulated into the same places. Besides, some global folders for shared components and functions were added to improve the communication and define more general interfaces of the page.
+
+#### Project's folder structure
+
+src/
+├── assets/                   
+├── components/             
+├── features/               
+│   ├── auth/               
+│   ├── cart/               
+│   ├── products/           
+│   ├── admin/              
+│   └── fortuneGame/                       
+├── pages/                 
+├── routes/               
+├── services/                       
+├── App.jsx
+└── main.jsx
+
+#### Folder's details
+
+- **assets:** Static files such as images, icons and global .CSS
+- **Components:** Most elementary and generic components used throughout the pages as well as the navbar and footer specifications, which are used over all the project's pages.
+- **Features:** Main folder for the project. With all of it's subdirectories containing the modular components, pages, hooks and contexts (if necessary) for the givven feature
+- **pages:** Global pages that combine different features (such as the home page).
+- **routes:** Contains the React routers for eacht page, implementing the logic of an SPA.
+- **services:** Pure JavaScript files that define functions to interact with tha Back-end API 
+
+#### Inner interaction inside features
+
+Every feature has it's own page, which may or not need to use specific states. If so, and the interaction is complex enough (mixing interactive with API calls), this logic is developed inside the personalized context of that feature, which is then encapsulated by a hook to be passed over all components and pages of that feature that need them.
+
+#### Modules implementations' highlights:
+
 * #### Authentication
 
-To test the authentication interface, some mock functions were developed to simulare login, register and logout. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
-
-[Links for mocks here]
+    The authentication module has three main components: login page, signup page (each one containing forms to retrieve user data) and a profile page where the user may change some of it’s profile data. For all the forms a centralized validation function was developed applying rules to ensure that the fields are corresponding to the expected format (passwords for example must have at least 6 digits, one character capitalized, one number and one symbol). To handle user data and authentication, a context defining an user state and hook was developed and used to involve all applications components, and it’ll place the final functions to interact with the API authentication routes.
 
 * #### Products
+   We developed a grid for the products and the product card to reuse it in pages like home page and product list page, and a carousel to display, which gave some problems when going to a mobile display because it wasn't showing all the products that it should have.
 
 * #### WheelOfFortune
+ 
+    The wheel of fortune "animation" is disigned on the "Card" component, the flip logic is made on the css, where it changes from one perspective to the other. 
 
 * #### Cart
+  
+    The cart uses a context over all the routes, so it can carry the products added so far. For now, the cart items do not get stored anywhere, so when the page is reloaded it resets the items on the cart. Future work involve storing the products on the local storage and/or on the database, so users doesnt lose their added products when the page is reloaded. 
 
 * #### Routes
 
+    The Routes folder encapsulates everything necessary to rotate the SPA’S components into displayable “pages”. It also define an special component to involve routes that should only be accessible for an admin (and it’ll use the user’s role information to authenticate him in the future).
+
 * #### Admin interface
+     It was really troublesome, because almost all pages needed to comunicate with this session, when adding a category or product a lot of problems happened, like no products in the product list page even though there were product in the manage products page, and when adding a new product only this product existed in the site, and he totally break the filters of price and categories, it was a lot of trouble, so with mockData we started every page with the same Data, and after that they all put into localStorage and then read it whenever changes happen using the hooks of useState and useEffect etc..
 
 ### Back-end
 
-## Test Plan
+## Test Plan/Results
 
 ### Front-end
 
 * #### Authentication
 
-To test the authentication interface, some mock functions were developed to simulare login, register and logout. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
+    To test the authentication interface, some mock functions were developed to simulare login, register and logout placing and fetching users at localstorage. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
 
-[Links for mocks here]
+    - [Mock auth functions](/src/arcaNetFront/src/tests/mockAuth.js)
 
 * #### Products
-
+  
+ See if it is being resposive, if it is being highlighted and redirecting to the respective product detail page, everything turned out ok.
+    - [Mock auth functions](/src/arcaNetFront/src/tests/productCardMock.jsx)
+ 
 * #### WheelOfFortune
+
+    Wheel of fortunes uses the localstorage credentials of the user to generate the random numbers, for now, to see different numbers being generated you need to login with another user or clean the localstorage of your web browser, so it can be generated new numbers. Future work involves upgrading the logic of the numbers generated by linking it to the user on the database, not new credentials generated on the localstorage of the web browser.
 
 * #### Cart
 
+    By now, testing the cart functionality is based on adding and removing items from it. It can be done as usual, some functionalities may be developed by the integration of the backend, but for now the core is developed to work with the integration of front and back end.
+
 * #### Routes
 
+    To test the router, a series of components for the so called page were developed with a”Mock - component name” data inside. Therefore, we started to match the defined URL’s and verify if they responded with the components. Some errors in the linking of them occurred, but they were easily resolved. Besides, the protected routes were also tested with a Mock code that checked the URL query to instantiate an user with the specified role into the local storage, which was then fetched by the ProtectedRoutes component. This last test worked really well, and we didn’t face problems with the routing among “authenticated” users.
+
+    - [Mock auth functions](/src/arcaNetFront/src/tests/mockAuth.js)
+
 * #### Admin interface
+     Verified if all button working correctly, CRUD operations on categories and products(a little bit with users because it needs a lot the backend), if the changes being made in the management section were really acting through the entire site.
 
+  - [Mock data developed](/src/arcaNetFront/src/tests/mockData.jsx)
 
-  
-## Test Results
-
-  No tests have been made yet...
+### Back-end
 
 ## How To Build
+    
+    To run this project locally, follow the steps below:
+    If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
+    
+    sudo apt update
+    sudo apt install nodejs npm
 
-## Problems
+    after that you can download our github repository as a zip extract it
+    in terminal go to arcanet-shop-main/src/arcaNetFront
+    when in this directory use
+    
+    npm i
+    
+    to install the packages and dependencies, and use
 
-## Additional comments
+    npm run dev 
+    
+    to start the server and project itself 
+    open the url http://localhost:5173/
+    and thats it.
+
 
 Project still under construction :)

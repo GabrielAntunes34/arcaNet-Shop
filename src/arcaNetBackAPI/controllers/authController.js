@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const { generateToken } = require('../util/jwtUtils');
+const { generateAuthToken } = require('../util/jwtUtils');
 
 require('dotenv').config();
 
@@ -34,7 +34,7 @@ const login = async (req, res) => {
         }
 
         // If data match, we generate and return a new token and prepare user to be sent
-        const token = generateToken(user._id, user.role);
+        const token = generateAuthToken(user._id, user.role);
         const resUser = user.toObject();
         delete resUser.password;
 
@@ -74,7 +74,6 @@ const register = async (req, res) => {
     const saltGen = parseInt(process.env.PASS_SALT, 10);
     const salt = await bcrypt.genSalt(saltGen);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(hashedPassword);
 
 
     // Instanciating a new user with the given data

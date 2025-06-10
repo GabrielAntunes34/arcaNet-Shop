@@ -9,10 +9,12 @@ const errorMiddleware = require('./middlewares/errorMiddleware');
 
 // Importing API routes
 const categoryRouter = require('./routes/categoryRouter');
+const fortuneRouter = require('./routes/fortuneRouter');
+const paymentRouter = require('./routes/paymentRouter');
 const productRouter = require('./routes/productRouter');
 const cuponRouter = require('./routes/cuponRouter');
 const userRouter = require('./routes/userRouter');
-const authRouter = require('./routes/authRoutes');
+const authRouter = require('./routes/authRouter');
 
 // Enviroment configs
 require('dotenv').config();
@@ -57,11 +59,13 @@ app.use((req, res, next) => {
 });
 
 //================================
-// ROUTES
+// ROUTES                         
 //================================
 
 // Business routes
 app.use('/auth', authRouter);
+app.use('/payment', paymentRouter);
+app.use('/fortune', fortuneRouter);
 
 // Admin CRUD routes
 app.use('/product', productRouter);
@@ -79,4 +83,4 @@ app.use((req, res) => {
         details:`No path sucth as ${req.url}`,
         data: null
     });
-})
+});

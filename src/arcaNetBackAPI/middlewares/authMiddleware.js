@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { verifyToken } = require('../util/jwtUtils');
 const ErrorMessage = require('../util/ErrorMessage');
 require('dotenv').config();
 
@@ -7,15 +8,13 @@ require('dotenv').config();
 const authenticate = (req, res, next) => {
     const token = req.cookies.authToken;
 
-    console.log(req.cookies);
-
     // Verifying if user has a token
     if(!req.cookies.authToken)
         return res.status(401).json({message:'Unauthorized', data:null, details:''});
 
     // Validating cookie and, then, proceeding to the next handler
     try {
-        const decodedData = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] });
+        const decodedData = verifyToken(token, process.env.JWT_SECRET);
         req.user = decodedData      
         next();
     }
