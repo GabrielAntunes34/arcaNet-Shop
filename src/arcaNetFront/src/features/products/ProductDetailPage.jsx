@@ -1,9 +1,9 @@
 // src/features/products/ProductDetailPage.jsx
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom'; // Importe Link se precisar de navegação
-import { CartContext } from '../../context/CartContext'; // Ajuste o caminho se necessário
-import styles from './ProductDetailPage.module.css'; // Certifique-se que este arquivo CSS existe
-import Button from '../../components/Button/Button'; // Supondo que você use seu componente Button
+import { useParams, Link } from 'react-router-dom'; 
+import { CartContext } from '../../context/CartContext'; 
+import styles from './ProductDetailPage.module.css'; 
+import Button from '../../components/Button/Button'; 
 import { defaultInitialProducts, defaultInitialCategories } from '../../tests/mockData'; 
 
 const ProductDetailPage = () => {

@@ -23,7 +23,7 @@ const registerMock = async (formParams) => {
         password: formParams.password,
         phone: formParams.phone,
         address: formParams.address,
-        role: 'client'
+        role: 'admin'
     }
 
     localStorage.setItem('user', JSON.stringify(mockUser));
