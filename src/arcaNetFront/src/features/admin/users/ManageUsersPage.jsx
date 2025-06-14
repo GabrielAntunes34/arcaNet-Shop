@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../../components/SearchBar/SearchBar'; 
 import Button from '../../../components/Button/Button';         
 import styles from './ManageUsersPage.module.css';           
-import { defaultInitialUsers } from '../../mockData.jsx'; 
+import { defaultInitialUsers } from '../../../tests/mockData'; 
 
 const ManageUsersPage = () => {
     const [users, setUsers] = useState(() => {
@@ -86,7 +86,7 @@ const ManageUsersPage = () => {
                             filteredUsers.map(user => (
                                 <tr key={user.id}>
                                     <td className={styles.avatarColumn}>
-                                        <img src={user.avatar || 'https://via.placeholder.com/40?text=N/A'} alt={`${user.name}'s avatar`} className={styles.avatarImage} />
+                                        <img src={user.avatar} className={styles.avatarImage} />
                                     </td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -95,7 +95,6 @@ const ManageUsersPage = () => {
                                             value={user.role}
                                             onChange={(e) => handleRoleChange(user.id, e.target.value)}
                                             className={styles.roleSelect}
-                                            // disabled={user.email === 'admin@admin.com'} // Exemplo: não deixar mudar role do admin principal
                                         >
                                             <option value="customer">Customer</option>
                                             <option value="admin">Admin</option>

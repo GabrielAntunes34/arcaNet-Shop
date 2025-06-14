@@ -1,7 +1,7 @@
 import Carousel from '../components/Carousel/Carousel';
 
 const PlaygroundCarousel = () => {
-  // Simulação de produtos como imagens
+  // Simulating products with images
   const imagens = [
     <img src="/assets/camiseta.jpg" alt="Camiseta" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />,
     <img src="/assets/tenis.jpg" alt="Tênis" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />,
@@ -27,7 +27,7 @@ export default PlaygroundCarousel;
 | `maxWidth + auto`    | Centraliza o carrossel na página           |
 | `objectFit: 'cover'` | Garante que a imagem preencha corretamente |
 
-✅ Como testar:
+Como testar:
 
 Se quiser acessar isso pelo navegador, só adicione essa rota temporária no seu AppRoutes.jsx:
 

@@ -15,7 +15,7 @@ const productSchema = new Schema({
         required: true,
         trim: true
     },
-    photo: {
+    image: {
         type: String,      // Must be an URL
         required: true
     },
@@ -23,15 +23,6 @@ const productSchema = new Schema({
         type: Number,
         required: true,
         min: 0,
-        /*
-        validate: {
-            // Validating if the number is written as decimal
-            validator: function(v) {
-                return /^d+(\.\d{1,2})?$/.test(v.toString());
-            },
-            message: props => `${props.value} May only have untill 2 float digits`
-        }
-        */
     },
     stock: {
         type: Number,

@@ -5,8 +5,7 @@ import SearchBar from '../../../components/SearchBar/SearchBar';
 import Button from '../../../components/Button/Button';
 import ProductTabCard from './ProductTabCard'; 
 import styles from './ManageProductsPage.module.css'; 
-
-import { defaultInitialProducts, defaultInitialCategories } from '../../mockData.jsx'; 
+import { defaultInitialProducts, defaultInitialCategories } from '../../../tests/mockData'; 
 
 
 const ManageProductsPage = () => {

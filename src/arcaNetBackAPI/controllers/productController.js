@@ -1,5 +1,8 @@
 const Product = require('../models/product');
 const ErrorMessage = require('../util/ErrorMessage');
+const multer = require('multer');
+const path = require('path');
+
 
 // Returns all products from data base
 const read_product = async (req, res, next) => {
@@ -52,10 +55,21 @@ const read_product_id = async (req, res, next) => {
 
 // Creates a new product at the database from the data passed at the requisition's body
 const create_product = async (req, res, next) => {
-    const prodData = req.body;
-
+    const {name, description, price, stock, sold, highlighted, categories} = req.body;
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    
+    
     try {
-        const newProd = new Product(prodData);
+        const newProd = new Product({
+            name: name,
+            description: description,
+            image: imageUrl,
+            price: price,
+            stock: stock,
+            sold: sold,
+            highlighted: highlighted,
+            categories: categories
+        });
         await newProd.save();
         res.status(201).json({ message:'Success', data:null, details:'' });
     }

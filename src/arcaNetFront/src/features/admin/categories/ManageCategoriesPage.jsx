@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../../components/SearchBar/SearchBar'; // Ajuste o caminho se necessário
 import Button from '../../../components/Button/Button';       // Ajuste o caminho se necessário
 import styles from './ManageCategoriesPage.module.css';     // Vamos criar este CSS Module
-import { defaultInitialProducts, defaultInitialCategories } from '../../mockData.jsx'; 
+import { defaultInitialProducts, defaultInitialCategories } from '../../../tests/mockData'; 
 
 const ManageCategoriesPage = () => {
     const [categories, setCategories] = useState(

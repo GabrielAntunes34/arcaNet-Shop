@@ -45,6 +45,13 @@ const post_payment = async (req, res, next) => {
             // Calculating the new quantities for the product
             const newStock = prod.stock - item.quantityToAdd;
             const newSold = prod.sold + item.quantityToAdd;
+
+            // Payment won't finish if user somehow tried to buy 
+            // more than a product has in store's stock.
+            if(newStock < 0) {
+                const errMess = ErrorMessage('Payment', -1, 401);
+                return next(errMess);
+            }
   
             // Ading the quantity to sold, while removing it from stock
             const test = await Product.findOneAndUpdate(
