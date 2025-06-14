@@ -163,8 +163,6 @@ that had them. The product, however, may exist without any category.
 
 ## Could be implemented in the future:
 
-* The backend dosen't recieve our return image files for products
-
 * Cupon has CRUD operations and routes defined, but it's not integrated with Fortune routes and isn't used in the code yet (There isn't pages for it at the front end yet)
 
 * Payment dosen't use cupons yet. It could check if the user has a valid cupon (verify valid attibute, date and token's vality) to return the final discounted price
