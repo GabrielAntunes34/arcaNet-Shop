@@ -1,4 +1,4 @@
-# API MANUAL
+# API GUIDE
 
 ## Description
 
@@ -13,9 +13,9 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     ```js
     Product: {
         id: ObjectId    // (but it'll become a string in return)
-        name: string,
-        description: string,
-        photo: String,
+        name: String,
+        description: String,
+        image: String,  // ImageUrl at GET
         price: Number (float),
         stock: Number (int),
         sold: Number (int),
@@ -29,7 +29,7 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     ```js
     Category: {
         id: ObjectId    // (but it'll become a string in return)
-        name: string
+        name: String
     };
     ```
 
@@ -38,12 +38,12 @@ The database was made in MongoDb and the Backend code with Node.js and Express
     ```js
     User: {
         id: ObjectId    // (but it'll become a string in return)
-        name: string,
-        email: string,
-        address: string,
-        phone: string,
-        role: string,       // (client or admin)
-        password: string
+        name: String,
+        email: String,
+        address: String,
+        phone: String,
+        role: String,       // (client or admin)
+        password: String
     };
     ```
 
@@ -110,6 +110,9 @@ GET /product?withCategories=true
 GET /product/:id?withCategories=true
 ```
 
+It's important to clarify how images are passed through this routes. When we create a new product with POST, we send the request with a form-data and set "content-type" as "multipart/form-data. The API has a middleware that recognizes it, saving the image at a public "uploads/" folder, and putting the complete path to this folder at the Database's register. Therefore, whenever we retrieve a product, it'll have this path, that we can put in an Image's html tag's src field to call the image.
+
+
 ### Category:
 
 | Method | Path | Data at body | data returned | Need auth |
@@ -122,3 +125,4 @@ GET /product/:id?withCategories=true
 
 The Delete operation in Category will also take all it's references from the products
 that had them. The product, however, may exist without any category.
+
