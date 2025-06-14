@@ -1,7 +1,12 @@
 const User = require('../models/user');
+const Cupon = require('../models/cupon');
 const ErrorMessage = require('../util/ErrorMessage');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
+
+//================================
+// CRUD CONTROLLERS
+//================================
 
 // Returns all users from data base
 const read_user = async (req, res, next) => {
@@ -22,8 +27,6 @@ const read_user_id = async (req, res, next) => {
 
     try {
         const user = await User.findOne({_id: id}, { password:0 });
-
-        console.log(user);
 
         // Verifying if there is such a register
         if(!user) {
@@ -57,8 +60,6 @@ const create_user = async (req, res, next) => {
         const salt = await bcrypt.genSalt(saltGen);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        console.log(hashedPassword);
-
         // Constructing and saving the new user
         const newUser = new User({
             name,
@@ -68,8 +69,6 @@ const create_user = async (req, res, next) => {
             role,
             password: hashedPassword
         });
-
-        console.log(newUser.password);
 
         await newUser.save();
         res.status(201).json({ message:'Success', data:null, details:'' });
@@ -113,11 +112,14 @@ const delete_user = async (req, res, next) => {
     try{
         const deletedUser = await User.findOneAndDelete({_id: id});
 
-        // Verifying if the given user
+        // Verifying if the given user exists
         if(!deletedUser) {
             const errMess = new ErrorMessage('User', id, 404);
             return next(errMess);
         }
+
+        // Deleting the cupon that references him (if he has one)
+        const userCupon = await Cupon.findOneAndDelete({userId: id});
 
         res.json({ message:'Success', data:null, details:'' });
     }
@@ -127,10 +129,95 @@ const delete_user = async (req, res, next) => {
     }
 };
 
+
+//================================
+// PROFILE PAGE ACTIONS
+//================================
+
+// Gets the current logged user by the id on it's token
+// This is the route for the client access it's own profile
+const read_own_user = async (req, res, next) => {
+    // Retrieving from the token (authMiddleware is guaranteeing this syntax)
+    const id = req.user.userId;
+  
+    try {
+        const myUser = await User.findOne({ _id: id }, { password:0 });
+
+        // Checking if the user exists
+        if(!myUser) {
+            const errMess = new ErrorMessage('User', id, 404);
+            return next(errMess);
+        }
+
+        res.status(200).json({ message:'Success', data: myUser, details:'' });
+    }
+    catch(err) {
+        const errMess = new ErrorMessage('User', id, 500);
+        next(errMess);
+    }
+};
+
+// Gets the current logged user by the id on it's token
+// This is the route for the client access it's own profile
+const update_own_user = async (req, res, next) => {
+    const id = req.user.userId;
+    const {name, address, phone} = req.body;
+    
+    try {
+        // the client user can only update it's name, address
+        // or phone number
+        const updatedUser = await User.findOneAndUpdate(
+            {_id: id},
+            {name, address, phone},
+            {new: true, runValidators: true});
+
+        // Verifying if the given user exists
+        if(!updatedUser) {
+            const errMess = new ErrorMessage('User', id, 404);
+            return next(errMess);
+        }
+
+        // Deleting password and sending the new data at the response
+        resUser = updatedUser.toObject();
+        delete resUser.password;
+        res.status(200).json({ message:'Success', data:updatedUser, details:'' });
+    }
+    catch(err) {
+        const errMess = new ErrorMessage('User', id, 500);
+        next(errMess);
+    }
+}
+
+
+// Delets the current logged user by the id on it's token
+// This is the route for the client delete his own account
+const delete_own_user = async (req, res, next) => {
+    const id = req.user.userId;
+
+    try {
+        const deletedUser = await User.findOneAndDelete({ _id:id });
+
+        // Verifying if the searched user exists
+        if(!deletedUser) {
+            const errMess = new ErrorMessage('User', id, 404);
+            next(errMess);
+        }
+
+        res.status(200).json({message:'Success', data:null, details:''});
+    }
+    catch(err) {
+        const errMess = new ErrorMessage('User', id, 500, err.message);
+        next(errMess);
+    }
+};
+
 module.exports = {
     read_user,
     read_user_id,
     create_user,
     update_user,
-    delete_user
+    delete_user,
+    read_own_user,
+    update_own_user,
+    delete_own_user
 };
