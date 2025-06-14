@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -42,6 +43,9 @@ app.use(express.urlencoded({ extended:true }));
 
 // Adds JSON for HTTP body data
 app.use(express.json());
+
+// Serves static archives from "uploads" folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Parser to simplfy cookie handling
 app.use(cookieParser());
