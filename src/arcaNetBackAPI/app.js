@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/errorMiddleware');
+const cors = require('cors');
 
 //================================
 // SETTING UP THE SERVER
@@ -26,8 +27,12 @@ DB_URI = process.env.DB_URI;
 // Putting the server to listen
 const app = express();
 mongoose.connect(DB_URI)
-    .then(console.log('DB successfully connected'))
-    .then(app.listen(PORT))
+    .then(() => {
+        console.log('DB successfully connected');
+        app.listen(PORT, () => {
+            console.log(`API already listening at port ${PORT}`);
+        });
+    })
     .catch(err => { 
         console.log('!-- ERROR --!');
         console.log('Couldn\'t connect do data base.');
@@ -61,6 +66,11 @@ app.use((req, res, next) => {
     // Calling the next middleware
     next();
 });
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 //================================
 // ROUTES                         

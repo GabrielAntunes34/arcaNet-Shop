@@ -80,7 +80,8 @@ const {
 
   const { addToCart } = useContext(CartContext);
   const handleProductAddToCart = (product) => {
-      if (product) addToCart(product, 1);
+    console.log("Adding product to cart:", product);
+    if (product) addToCart(product, 1);
   };
 
   const categoryNamesForSidebar = React.useMemo(() => {

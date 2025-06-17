@@ -9,8 +9,10 @@ const authenticate = (req, res, next) => {
     const token = req.cookies.authToken;
 
     // Verifying if user has a token
-    if(!req.cookies.authToken)
+    if(!req.cookies.authToken) {
+        console.log('No token found');
         return res.status(401).json({message:'Unauthorized', data:null, details:''});
+    }
 
     // Validating cookie and, then, proceeding to the next handler
     try {
