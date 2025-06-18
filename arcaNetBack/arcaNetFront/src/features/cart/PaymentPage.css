@@ -1,0 +1,256 @@
+/* PaymentPage.css - Cores ajustadas para o tema Mystical & Elegant */
+
+/* Container principal da página */
+.payment-page-container {
+  display: flex; /* Sua lógica */
+  justify-content: center; /* Sua lógica */
+  align-items: flex-start; /* Sua lógica */
+  min-height: 100vh; /* Sua lógica */
+  padding: 2rem; /* Sua lógica */
+  /* background-color original: #2d3339; */
+  background-color: var(--color-background-dark-page); /* Fundo escuro temático */
+  box-sizing: border-box; /* Sua lógica */
+  overflow-y: auto; /* Sua lógica */
+}
+
+/* Container para o layout flex (formulário + resumo) */
+.payment-layout {
+  display: flex; /* Sua lógica */
+  align-items: flex-start; /* Sua lógica */
+  gap: 2rem; /* Sua lógica */
+  width: 100%; /* Sua lógica */
+  max-width: 1400px; /* Sua lógica */
+}
+
+/* Card do formulário de pagamento */
+.payment-form-card {
+  flex: 2; /* Sua lógica */
+  /* background-color original: #ffffff; */
+  background-color: var(--color-background-content-box); /* Fundo branco temático */
+  padding: 2rem 2.5rem; /* Sua lógica */
+  border-radius: 8px; /* Sua lógica */
+  /* box-shadow original: 0 5px 15px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 5px 15px rgba(var(--color-shadow-soft-rgb), 0.2); /* Sombra temática */
+}
+
+.payment-form-card .form-header h1 {
+  font-size: 1.7rem; /* Sua lógica */
+  /* color original: #343a40; */
+  color: var(--color-text-headings); /* Cor de título temática */
+  text-align: center; /* Sua lógica */
+  margin-bottom: 2.25rem; /* Sua lógica */
+  font-weight: 600; /* Sua lógica */
+}
+
+.payment-form-card .form-group,
+.payment-form-card .form-row {
+  margin-bottom: 1.35rem; /* Sua lógica */
+}
+
+.payment-form-card .form-group label,
+.payment-form-card .form-group-inline label {
+  display: block; /* Sua lógica */
+  margin-bottom: 0.6rem; /* Sua lógica */
+  font-weight: 500; /* Sua lógica */
+  /* color original: #495057; */
+  color: var(--color-text-default); /* Cor de label temática (pode ser --color-text-headings se quiser mais forte) */
+  font-size: 0.875rem; /* Sua lógica */
+  text-align: left; /* Sua lógica */
+}
+
+.payment-form-card .form-group input[type="text"],
+.payment-form-card .form-group-inline input[type="text"],
+.payment-form-card .form-group select {
+  width: 100%; /* Sua lógica */
+  padding: 0.75rem 1rem; /* Sua lógica */
+  /* border original: 1px solid #d1d5db; */
+  border: 1px solid var(--color-border-input); /* Borda de input temática */
+  border-radius: 4px; /* Sua lógica */
+  font-size: 0.95rem; /* Sua lógica */
+  /* background-color original: #fff; */
+  background-color: var(--color-background-content-box); /* Fundo de input temático */
+  /* color original: #374151; (texto digitado) */
+  color: var(--color-text-input); /* Cor de texto de input temática */
+  box-sizing: border-box; /* Sua lógica */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Sua lógica */
+}
+
+.payment-form-card .form-group input[type="text"]::placeholder,
+.payment-form-card .form-group-inline input[type="text"]::placeholder {
+  /* color original: #9ca3af; */
+  color: var(--color-text-subtle); /* Cor de placeholder temática */
+}
+
+.payment-form-card .form-group input[type="text"]:focus,
+.payment-form-card .form-group-inline input[type="text"]:focus,
+.payment-form-card .form-group select:focus {
+  /* border-color original: #007bff; */
+  border-color: var(--border-color-focus); /* Borda de foco temática */
+  /* box-shadow original: 0 0 0 0.2rem rgba(0, 123, 255, 0.2); */
+  box-shadow: var(--box-shadow-focus); /* Sombra de foco temática */
+  outline: none; /* Sua lógica */
+}
+
+.payment-form-card .input-error {
+  /* border-color original: #ef4444 !important; */
+  border-color: var(--color-accent-danger) !important; /* Borda de erro temática */
+}
+
+.payment-form-card .input-error:focus {
+  /* box-shadow original: 0 0 0 0.2rem rgba(239, 68, 68, 0.2) !important; */
+  box-shadow: var(--box-shadow-error-focus) !important; /* Sombra de foco em erro temática */
+}
+
+.payment-form-card .error-text {
+  /* color original: #ef4444; */
+  color: var(--color-accent-danger); /* Cor de texto de erro temática */
+  font-size: 0.8rem; /* Sua lógica */
+  margin-top: 0.4rem; /* Sua lógica */
+}
+
+.payment-form-card .form-row {
+  display: flex; /* Sua lógica */
+  gap: 1.5rem; /* Sua lógica */
+}
+
+.payment-form-card .form-group-inline {
+  flex: 1; /* Sua lógica */
+}
+
+.payment-form-card .form-footer {
+  margin-top: 2.25rem; /* Sua lógica */
+  text-align: right; /* Sua lógica */
+}
+
+.payment-form-card .finish-button {
+  /* background-color original: #343a40; (botão escuro) */
+  background-color: var(--color-accent-primary); /* Botão com cor primária do tema (ameixa) */
+  /* color original: white; */
+  color: var(--color-text-on-accent); /* Texto branco sobre o botão temático */
+  padding: 0.7rem 1.8rem; /* Sua lógica */
+  border: none; /* Sua lógica */
+  border-radius: 4px; /* Sua lógica */
+  font-size: 0.95rem; /* Sua lógica */
+  font-weight: 500; /* Sua lógica */
+  cursor: pointer; /* Sua lógica */
+  transition: background-color 0.2s ease; /* Sua lógica */
+}
+
+.payment-form-card .finish-button:hover {
+  /* background-color original: #495057; */
+  background-color: var(--color-accent-primary-hover); /* Cor de hover do botão temático */
+}
+
+/* Card do Resumo do Pedido (ao lado) */
+.order-summary-sidebar {
+  flex: 1; /* Sua lógica */
+  /* background-color original: #ffffff; */
+  background-color: var(--color-background-content-box); /* Fundo branco temático */
+  padding: 1.75rem; /* Sua lógica */
+  border-radius: 8px; /* Sua lógica */
+  /* box-shadow original: 0 5px 15px rgba(0, 0, 0, 0.12); */
+  box-shadow: 0 5px 15px rgba(var(--color-shadow-soft-rgb), 0.12); /* Sombra temática */
+  height: fit-content; /* Sua lógica */
+}
+
+.order-summary-sidebar h2 {
+  font-size: 1.35rem; /* Sua lógica */
+  /* color original: #343a40; */
+  color: var(--color-text-headings); /* Cor de título temática */
+  margin-bottom: 1.5rem; /* Sua lógica */
+  padding-bottom: 0.85rem; /* Sua lógica */
+  /* border-bottom original: 1px solid #e9ecef; */
+  border-bottom: 1px solid var(--color-border-divider); /* Divisória temática */
+  font-weight: 600; /* Sua lógica */
+}
+
+.order-summary-sidebar .summary-details {
+  margin-bottom: 1.5rem; /* Sua lógica */
+}
+
+.order-summary-sidebar .summary-item {
+  display: flex; /* Sua lógica */
+  justify-content: space-between; /* Sua lógica */
+  align-items: center; /* Sua lógica */
+  font-size: 0.9rem; /* Sua lógica */
+  /* color original: #495057; (texto dos itens) */
+  color: var(--color-text-default); /* Cor de texto padrão temática */
+  margin-bottom: 0.75rem; /* Sua lógica */
+}
+
+.order-summary-sidebar .summary-item span:first-child {
+  max-width: 70%; /* Sua lógica */
+  overflow: hidden; /* Sua lógica */
+  text-overflow: ellipsis; /* Sua lógica */
+  white-space: nowrap; /* Sua lógica */
+  /* A cor será herdada de .summary-item */
+}
+
+.order-summary-sidebar .summary-item span:last-child { /* Preço do item */
+  font-weight: 500; /* Sua lógica */
+  /* color original: #343a40; */
+  color: var(--color-text-input); /* Cor de texto de input (cinza escuro) para o preço do item */
+}
+
+.order-summary-sidebar .summary-total {
+  display: flex; /* Sua lógica */
+  justify-content: space-between; /* Sua lógica */
+  align-items: center; /* Sua lógica */
+  font-size: 1.2rem; /* Sua lógica */
+  font-weight: 700; /* Sua lógica */
+  /* color original: #212529; (texto "Total") */
+  color: var(--color-text-headings); /* Cor de título para o "Total" */
+  margin-top: 1.25rem; /* Sua lógica */
+  padding-top: 1.25rem; /* Sua lógica */
+  /* border-top original: 1px solid #e9ecef; */
+  border-top: 1px solid var(--color-border-divider); /* Divisória temática */
+}
+
+.order-summary-sidebar .summary-total span:last-child { /* Valor total final */
+  /* color original: #007bff; (azul) */
+  color: var(--color-text-price); /* Cor de preço temática (lilás/ameixa claro) */
+  /* Alternativa para mais destaque: var(--color-accent-primary); */
+}
+
+.order-summary-sidebar .secure-payment-info {
+  font-size: 0.8rem; /* Sua lógica */
+  /* color original: #6c757d; */
+  color: var(--color-text-subtle); /* Cor de texto sutil temática */
+  margin-top: 2rem; /* Sua lógica */
+  text-align: center; /* Sua lógica */
+}
+
+/* Responsividade (Sua lógica de layout permanece AQUI) */
+@media (max-width: 860px) {
+  .payment-layout {
+    flex-direction: column; /* Sua lógica */
+    align-items: center; /* Sua lógica */
+  }
+
+  .payment-form-card,
+  .order-summary-sidebar {
+    flex: none; /* Sua lógica */
+    width: 100%; /* Sua lógica */
+    max-width: 550px; /* Sua lógica */
+  }
+
+  .order-summary-sidebar {
+    margin-top: 2rem; /* Sua lógica */
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-page-container {
+    padding: 1rem; /* Sua lógica */
+  }
+  .payment-form-card, .order-summary-sidebar {
+    padding: 1.5rem; /* Sua lógica */
+  }
+  .payment-form-card .form-header h1 {
+    font-size: 1.5rem; /* Sua lógica */
+    margin-bottom: 1.5rem; /* Sua lógica */
+  }
+  .order-summary-sidebar h2 {
+    font-size: 1.2rem; /* Sua lógica */
+  }
+}

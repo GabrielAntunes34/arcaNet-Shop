@@ -1,0 +1,123 @@
+/* Seu arquivo CSS para a Página do Carrinho - Cores ajustadas para o tema */
+
+.cart-page {
+    max-width: 960px;
+    margin: 30px auto;
+    padding: 25px;
+    /* Cor de fundo original: #ebf1f6 (um azul-acinzentado claro) */
+    background-color: var(--color-background-section-subtle); /* Sugestão: Creme leve para a área principal da página do carrinho */
+    /* Alternativa: var(--color-background-page); se quiser que seja igual ao fundo geral da página */
+    border-radius: 12px;
+    /* Sombra original: rgba(0, 0, 0, 0.08) */
+    box-shadow: 0 8px 16px rgba(var(--color-shadow-soft-rgb), 0.08); /* Usando o RGB da variável para a opacidade original */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Mantido conforme o seu CSS */
+}
+
+.cart-header {
+    text-align: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    /* Cor da borda original: #a8a7a7 */
+    border-bottom: 1px solid var(--color-border-divider); /* Divisória temática */
+}
+
+.cart-header h1 {
+    font-size: 2.2em;
+    /* Cor original: #2c3e50 (um azul-acinzentado escuro) */
+    color: var(--color-text-headings); /* Cor de título temática */
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.cart-header p {
+    font-size: 1.15em;
+    /* Cor original: #767676 */
+    color: var(--color-text-subtle); /* Cor de texto sutil temática */
+    margin: 0;
+}
+
+.cart-items {
+    margin-bottom: 30px;
+}
+
+/* Estilo para mensagem de carrinho vazio */
+.cart-page > .cart-header + p,
+.cart-page .cart-header + div > p:only-child {
+    font-size: 1.25em;
+    /* Cor original: #777 */
+    color: var(--color-text-subtle); /* Cor de texto sutil temática */
+    text-align: center;
+    padding: 40px 20px;
+    /* Cor de fundo original: #fff */
+    background-color: var(--color-background-content-box); /* Fundo de caixa de conteúdo temático */
+    border-radius: 8px;
+    /* Cor da borda original: #ccc */
+    border: 1px dashed var(--color-border-default); /* Borda padrão temática */
+}
+
+.cart-summary {
+  /* Cor de fundo original: #f8f9fa (um cinza muito claro) */
+  background-color: var(--color-background-content-box); /* Fundo de seção sutil temático */
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  /* Sombra original: rgba(0, 0, 0, 0.08) */
+  box-shadow: 0 4px 12px rgba(var(--color-shadow-soft-rgb), 0.08); /* Sombra temática */
+  margin-top: 2rem;
+  /* Cor de texto padrão original: #333 */
+  color: var(--color-text-default); /* Cor de texto padrão temática */
+}
+
+.cart-summary h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  /* Cor original: #2c3e50 */
+  color: var(--color-text-bold); /* Cor de título temática */
+  margin-bottom: 1.75rem;
+  text-align: left;
+}
+
+.cart-summary p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  /* Cor original do texto do parágrafo: #5a6570 */
+  color: var(--color-text-default); /* Cor de texto padrão temática */
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  /* Cor da borda original: #e7e9ec */
+  border-bottom: 1px solid var(--color-border-divider); /* Divisória temática */
+}
+
+.cart-summary p:last-of-type {
+  margin-bottom: 2rem;
+  border-bottom: none;
+}
+
+.cart-summary p span:first-child { /* Labels como "Subtotal", "Total" */
+  /* Cor original: #34495e (um azul-acinzentado) */
+  color: var(--color-text-input); /* Usando a cor de texto de input para um destaque moderado */
+  /* Alternativa: var(--color-text-default); se quiser menos destaque */
+  font-weight: 500;
+}
+
+.cart-summary p span:last-child { /* Valores dos preços */
+  font-weight: 700;
+  /* Cor original: #27ae60 (um verde) */
+  color: var(--color-text-money); /* Cor de preço temática (definida como accent-secondary) */
+  /* Alternativa se quiser mais impacto como o verde: var(--color-accent-primary); ou var(--color-text-success); */
+}
+
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Estas regras definem a largura dos botões, não suas cores.
+   As cores dos botões em si virão dos seus componentes Button. */
+.payment-button > :first-child,
+.cart-delete > :first-child {
+  width: 100%;
+}

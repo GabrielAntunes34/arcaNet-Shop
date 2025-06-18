@@ -1,0 +1,10 @@
+/* src/components/Layout/Layout.css */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o layout ocupe pelo menos toda a altura da tela */
+}
+
+.layout-main-content {
+  flex: 1 0 auto; 
+}
