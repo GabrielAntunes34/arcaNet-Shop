@@ -12,7 +12,7 @@ const ProductTabCard = ({
     onAddCategoryToProduct, // Para o botão "Add Category" específico do produto
     onAddSupply, // Para o botão "Add supply"
 }) => {
-    const { _id, name, image, categories = [], stock = 0, isHighlighted = false } = product;
+    const { _id, name, image, categories = [], stock = 0, highlighted = false } = product;
 
     const handleHighlightChange = (e) => {
         onToggleHighlight(_id, e.target.checked);
@@ -55,7 +55,7 @@ const ProductTabCard = ({
                 <label className={styles.highlightLabel}>
                     <input
                         type="checkbox"
-                        checked={isHighlighted}
+                        checked={highlighted}
                         onChange={handleHighlightChange}
                     />
                     Highlight

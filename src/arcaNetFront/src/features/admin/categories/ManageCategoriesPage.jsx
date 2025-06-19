@@ -61,7 +61,7 @@ const ManageCategoriesPage = () => {
                 throw new Error('Failed to delete category');
             }
 
-            setCategories(prev => prev.filter(cat => cat.id !== categoryId));
+            setCategories(prev => prev.filter(cat => cat._id !== categoryId));
         } catch (err) {
             console.error('Error deleting category:', err);
             alert('Failed to delete category.');
@@ -70,11 +70,16 @@ const ManageCategoriesPage = () => {
 
     const handleStatusChange = async (categoryId, newStatus) => {
         try {
+            const category = categories.find(cat => cat._id === categoryId);
+            if (!category) {
+                console.error('Category not found:', categoryId);
+                return;
+            }
             const res = await fetch(`http://localhost:3000/category/${categoryId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
-                body: JSON.stringify({ status: newStatus }),
+                body: JSON.stringify({ ...category, status: newStatus }),
             });
 
             if (!res.ok) {
@@ -83,7 +88,7 @@ const ManageCategoriesPage = () => {
 
             setCategories(prev =>
                 prev.map(cat =>
-                    cat.id === categoryId ? { ...cat, status: newStatus } : cat
+                    cat._id === categoryId ? { ...cat, status: newStatus } : cat
                 )
             );
         } catch (err) {
@@ -122,14 +127,14 @@ const ManageCategoriesPage = () => {
                     <tbody>
                         {filteredCategories.length > 0 ? (
                             filteredCategories.map(category => (
-                                <tr key={category.id}>
-                                    <td>{category.id}</td>
+                                <tr key={category._id}>
+                                    <td>{category._id}</td>
                                     <td>{category.name}</td>
                                     <td>
                                         <select
                                             value={category.status}
                                             onChange={(e) =>
-                                                handleStatusChange(category.id, e.target.value)
+                                                handleStatusChange(category._id, e.target.value)
                                             }
                                             className={styles.statusSelect}
                                         >
@@ -139,7 +144,7 @@ const ManageCategoriesPage = () => {
                                     </td>
                                     <td>
                                         <Button
-                                            onClick={() => handleDeleteCategory(category.id)}
+                                            onClick={() => handleDeleteCategory(category._id)}
                                             variant="danger"
                                             size="small"
                                         >

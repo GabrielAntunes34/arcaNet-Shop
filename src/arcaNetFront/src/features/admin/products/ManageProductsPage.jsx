@@ -47,7 +47,7 @@ const ManageProductsPage = () => {
     const filteredProducts = Array.isArray(products)
         ? products.filter(product => {
             const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesHighlightFilter = showHighlightedOnly ? product.isHighlighted : true;
+            const matchesHighlightFilter = showHighlightedOnly ? product.highlighted : true;
             return matchesSearchTerm && matchesHighlightFilter;
         })
         : [];
@@ -76,88 +76,132 @@ const ManageProductsPage = () => {
         }
     };
 
-    const handleToggleHighlight = (productId, newHighlightState) => {
-        setProducts(prev =>
-            prev.map(p => (p._id === productId ? { ...p, isHighlighted: newHighlightState } : p))
-        );
-    };
+    const handleToggleHighlight = async (productId, newHighlightState) => {
+        try {
+            const productToUpdate = products.find(p => p._id === productId);
+            const response = await fetch(`http://localhost:3000/product/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ ...productToUpdate, highlighted: newHighlightState }),
+            });
 
-    const handleRemoveCategoryFromProduct = (productId, categoryIdToRemove) => {
-        setProducts(prev =>
-            prev.map(p => {
-                if (p._id === productId) {
-                    return {
-                        ...p,
-                        categories: p.categories.filter(cat => {
-                            const catId = typeof cat === 'object' ? cat._id ?? cat.id : cat;
-                            return catId !== categoryIdToRemove;
-                        }),
-                    };
-                }
-                return p;
-            })
-        );
-        alert(`Category removed from product ${productId}. (Mock)`);
-    };
+            if (!response.ok) throw new Error('Failed to update highlight.');
 
-    const handleAddCategoryToProduct = (productId) => {
-        const product = products.find(p => p._id === productId);
-        if (!product) {
-            alert("Product not found!");
-            return;
+            setProducts(prev =>
+                prev.map(p => (p._id === productId ? { ...p, highlighted: newHighlightState } : p))
+            );
+        } catch (err) {
+            console.error('Error updating highlight:', err);
+            alert('Could not update highlight.');
         }
+    };
+
+
+    const handleRemoveCategoryFromProduct = async (productId, categoryIdToRemove) => {
+        const product = products.find(p => p._id === productId);
+        if (!product) return alert('Product not found.');
+
+        const updatedCategories = product.categories.filter(cat => {
+            const catId = typeof cat === 'object' ? cat._id ?? cat.id : cat;
+            return catId !== categoryIdToRemove;
+        });
+
+        try {
+            const response = await fetch(`http://localhost:3000/product/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ ...product, categories: updatedCategories }),
+            });
+
+            if (!response.ok) throw new Error('Failed to update categories.');
+
+            setProducts(prev =>
+                prev.map(p => (p._id === productId ? { ...p, categories: updatedCategories } : p))
+            );
+            alert('Category removed successfully.');
+        } catch (err) {
+            console.error('Error removing category:', err);
+            alert('Could not remove category.');
+        }
+    };
+
+    const handleAddCategoryToProduct = async (productId) => {
+        const product = products.find(p => p._id === productId);
+        if (!product) return alert('Product not found!');
 
         const categoryNameInput = prompt("Enter the name of the category to add to this product:");
-
-        if (categoryNameInput === null || categoryNameInput.trim() === "") {
-            return;
-        }
+        if (!categoryNameInput?.trim()) return;
 
         const categoryNameTrimmed = categoryNameInput.trim().toLowerCase();
 
         const categoryToAdd = allCategories.find(
             availCat => availCat.name.toLowerCase() === categoryNameTrimmed
         );
-
-        if (!categoryToAdd) {
-            alert(`Category "${categoryNameInput}" not found`);
-            return;
-        }
+        if (!categoryToAdd) return alert(`Category "${categoryNameInput}" not found`);
 
         const productHasCategory = product.categories.some(cat => {
             const catId = typeof cat === 'object' ? cat._id ?? cat.id : cat;
             return catId === (categoryToAdd._id ?? categoryToAdd.id);
         });
-
         if (productHasCategory) {
-            alert(`Product "${product.name}" already has the category "${categoryToAdd.name}".`);
-            return;
+            return alert(`Product already has the category "${categoryToAdd.name}".`);
         }
 
-        setProducts(prevProducts =>
-            prevProducts.map(p => {
-                if (p._id === productId) {
-                    return {
-                        ...p,
-                        categories: [...p.categories, { _id: categoryToAdd._id ?? categoryToAdd.id, name: categoryToAdd.name }],
-                    };
-                }
-                return p;
-            })
-        );
+        const updatedCategories = [
+            ...product.categories,
+            { _id: categoryToAdd._id, name: categoryToAdd.name }
+        ];
 
-        alert(`Category "${categoryToAdd.name}" added to product "${product.name}".`);
+        try {
+            const response = await fetch(`http://localhost:3000/product/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ ...product, categories: updatedCategories }),
+            });
+
+            if (!response.ok) throw new Error('Failed to update categories.');
+
+            setProducts(prev =>
+                prev.map(p => (p._id === productId ? { ...p, categories: updatedCategories } : p))
+            );
+            alert(`Category "${categoryToAdd.name}" added to product "${product.name}".`);
+        } catch (err) {
+            console.error('Error adding category:', err);
+            alert('Could not add category.');
+        }
     };
 
-    const handleAddSupply = (productId) => {
+    const handleAddSupply = async (productId) => {
         const amount = parseInt(prompt("Enter quantity to add to stock:", "1"), 10);
-        if (!isNaN(amount) && amount > 0) {
+        if (isNaN(amount) || amount <= 0) {
+            return alert("Please enter a positive number.");
+        }
+
+        const product = products.find(p => p._id === productId);
+        if (!product) return alert("Product not found!");
+
+        const newStock = product.stock + amount;
+
+        try {
+            const response = await fetch(`http://localhost:3000/product/${productId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ ...product, stock: newStock }),
+            });
+
+            if (!response.ok) throw new Error('Failed to update stock.');
+
             setProducts(prev =>
-                prev.map(p => (p._id === productId ? { ...p, stock: p.stock + amount } : p))
+                prev.map(p => (p._id === productId ? { ...p, stock: newStock } : p))
             );
-            alert(`${amount} added to stock for product ${productId}. (Mock)`);
-        } else if (amount <= 0) {
-            alert("Please enter a positive number.");
+            alert(`${amount} added to stock for product ${productId}.`);
+        } catch (err) {
+            console.error('Error updating stock:', err);
+            alert('Could not update stock.');
         }
     };
 

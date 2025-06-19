@@ -8,29 +8,36 @@ const AddCategoryPage = () => {
     const [status, setStatus] = useState('Active'); // Default status
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (!categoryName.trim()) {
             alert('Category name cannot be empty.');
             return;
         }
 
-        const newCategory = {
-            id: Date.now(), // ID mockado simples
-            name: categoryName,
-            status: status,
-        };
-
-        // Adicionar ao localStorage (mesma lógica da sugestão anterior)
         try {
-            const storedCategories = JSON.parse(localStorage.getItem('adminCategories') || '[]');
-            storedCategories.push(newCategory);
-            localStorage.setItem('adminCategories', JSON.stringify(storedCategories));
+            const response = await fetch('http://localhost:3000/category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    name: categoryName.trim(),
+                    status: status,
+                }),
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData?.message || 'Failed to add category.');
+            }
+
             alert(`Category "${categoryName}" (Status: ${status}) added successfully!`);
-            navigate('/admin/categories'); // Navegar de volta para a lista
+            navigate('/admin/categories');
         } catch (error) {
-            console.error("Error saving category to localStorage:", error);
-            alert("Failed to save category. See console for details.");
+            console.error('Error adding category:', error);
+            alert(`Failed to add category. ${error.message}`);
         }
     };
 
