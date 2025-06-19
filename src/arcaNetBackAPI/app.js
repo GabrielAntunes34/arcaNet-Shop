@@ -91,6 +91,8 @@ app.use('/user', userRouter);
 app.use('/cupon', cuponRouter);
 app.use('/category', categoryRouter);
 
+
+
 // errorMiddleware in the case of wrong responses
 app.use(errorMiddleware);
 

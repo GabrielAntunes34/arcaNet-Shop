@@ -4,7 +4,7 @@ import { useCart } from '../../context/useCart'; // Ajuste o caminho se necessá
 import Button from '../../components/Button/Button.jsx'; // Ajuste o caminho se necessário
 
 const PaymentForm = () => {
-  const { cartItems } = useCart(); // Obtém os itens do seu contexto
+  const { cartItems, clearCart } = useCart(); // Obtém os itens do seu contexto
 
   const precoTotal = cartItems && cartItems.length > 0
     ? cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
@@ -93,6 +93,8 @@ const PaymentForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -102,8 +104,39 @@ const PaymentForm = () => {
       };
       console.log('Form Data Submitted:', submissionData, 'Total Paid:', precoTotal.toFixed(2));
       alert('Payment data submitted! Check the console.');
-      // Considere limpar o carrinho aqui se o pagamento for bem-sucedido:
-      // if (clearCart) clearCart();
+      
+      // Formatação dos itens do carrinho para enviar ao servidor
+      const payload = cartItems.map(item => ({
+        id: item.id,
+        quantityToAdd: item.quantity
+      }));
+
+      // atualizar o BD com as novas quantidades de produtos (chamando post_payment de paymentRouter.js)
+      fetch('http://localhost:3000/payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',  // <-- ESSENCIAL para que o cookie vá junto
+        body: JSON.stringify(payload),
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Payment processed successfully:', data);
+          alert('Payment processed successfully!');
+          //clearCart();
+        })
+        .catch(error => {
+          console.error('Error processing payment:', error);
+          alert('There was an error processing your payment. Please try again.');
+        });
+
+
     } else {
       console.log('Form validation failed');
     }

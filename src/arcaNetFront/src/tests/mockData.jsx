@@ -5,6 +5,7 @@ export const defaultInitialProducts = [
         photo: 'https://m.media-amazon.com/images/I/61hAp9BEwQL._AC_UF894,1000_QL80_.jpg',
         categories: [{ id: 'c1', name: 'Indie' }, { id: 'c2', name: 'Animals' }],
         stock: 15,
+        sold: 0,
         price: 25.99,
         isHighlighted: true,
         description: "Um popular baralho de tarot indie, conhecido por suas ilustrações de animais e natureza."
@@ -114,6 +115,7 @@ export const defaultInitialUsers = [
         id: 'u1',
         name: 'Alice Wonderland',
         email: 'alice@example.com',
+        password: 'alice123',
         role: 'customer',
         avatar: 'https://media.istockphoto.com/id/1437816897/pt/foto/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring-or.jpg?s=612x612&w=0&k=20&c=OsiL-G3rU8NzppNGl3Yh9exwYzoSfCrRb9gxawy1VR4='
     },

@@ -1,90 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../components/Button/Button'; // Ajuste o caminho se necessário
-import styles from '../AdminForm.module.css'; // Reutilizando o CSS de formulário de admin
+import Button from '../../../components/Button/Button';
+import styles from '../AdminForm.module.css';
 
 const AddProductPage = () => {
     const navigate = useNavigate();
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
-    const [stock, setStock] = useState(''); // 'Amount' no mockup, mas 'stock' é mais comum
+    const [stock, setStock] = useState('');
     const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState(''); // Para URL da imagem
+    const [imageUrl, setImageUrl] = useState('');
     const [isHighlighted, setIsHighlighted] = useState(false);
-    const [selectedCategories, setSelectedCategories] = useState([]); // Array de IDs de categorias selecionadas
-    
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [availableCategories, setAvailableCategories] = useState([]);
 
-    // Carregar categorias disponíveis do localStorage (ou mock)
+    // Buscar categorias ativas do banco
     useEffect(() => {
-        try {
-            const storedCategories = localStorage.getItem('adminCategories');
-            if (storedCategories) {
-                setAvailableCategories(JSON.parse(storedCategories).filter(cat => cat.status === 'Active'));
-            } else {
-                // Fallback se não houver categorias no localStorage (idealmente, você teria um mock aqui)
-                setAvailableCategories([
-                    { id: 1, name: 'Indie', status: 'Active' },
-                    { id: 2, name: 'Classic', status: 'Active' },
-                    { id: 3, name: 'Oracle', status: 'Active' },
-                ]);
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/category', {
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                });
+
+                const result = await response.json();
+                const filtered = (result.data || []).filter(cat => cat.status === 'Active');
+                setAvailableCategories(filtered);
+            } catch (error) {
+                console.error('Error loading categories from API:', error);
+                setAvailableCategories([]);
             }
-        } catch (error) {
-            console.error("Error loading categories from localStorage:", error);
-            // Definir um fallback em caso de erro
-             setAvailableCategories([
-                { id: 1, name: 'Indie', status: 'Active' },
-                { id: 2, name: 'Classic', status: 'Active' },
-             ]);
-        }
+        };
+
+        fetchCategories();
     }, []);
 
     const handleCategoryChange = (categoryId) => {
-        setSelectedCategories(prevSelected =>
-            prevSelected.includes(categoryId)
-                ? prevSelected.filter(id => id !== categoryId)
-                : [...prevSelected, categoryId]
+        setSelectedCategories(prev =>
+            prev.includes(categoryId)
+                ? prev.filter(id => id !== categoryId)
+                : [...prev, categoryId]
         );
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         if (!productName.trim() || !price || !stock || !description.trim()) {
-            alert('Please fill in all required fields: Name, Price, Amount (Stock), and Description.');
-            return;
-        }
-        if (isNaN(parseFloat(price)) || isNaN(parseInt(stock, 10))) {
-            alert('Price and Amount (Stock) must be valid numbers.');
+            alert('Please fill in all required fields.');
             return;
         }
 
-        // Mapear IDs de categorias selecionadas para objetos {id, name}
-        const categoriesForProduct = selectedCategories.map(id => {
-            const foundCat = availableCategories.find(cat => cat.id === id);
-            return foundCat ? { id: foundCat.id, name: foundCat.name } : null;
-        }).filter(cat => cat !== null);
+        const priceNumber = parseFloat(price);
+        const stockNumber = parseInt(stock, 10);
 
+        if (isNaN(priceNumber) || isNaN(stockNumber)) {
+            alert('Price and stock must be valid numbers.');
+            return;
+        }
 
         const newProduct = {
-            id: `prod_${Date.now()}`, // ID mockado simples
             name: productName,
-            price: parseFloat(price),
-            stock: parseInt(stock, 10),
-            description: description,
-            photo: imageUrl || 'https://via.placeholder.com/150?text=No+Image', // Placeholder se URL vazia
-            isHighlighted: isHighlighted,
-            categories: categoriesForProduct,
+            price: priceNumber,
+            stock: stockNumber,
+            sold: 0, // Default value for new products
+            description,
+            photo: imageUrl || 'https://via.placeholder.com/150?text=No+Image',
+            isHighlighted,
+            categories: selectedCategories, // IDs de categoria
         };
 
         try {
-            const storedProducts = JSON.parse(localStorage.getItem('adminProducts') || '[]');
-            storedProducts.push(newProduct);
-            localStorage.setItem('adminProducts', JSON.stringify(storedProducts));
+            const response = await fetch('http://localhost:3000/product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify(newProduct),
+            });
+
+            if (!response.ok) throw new Error('Failed to add product.');
+
             alert(`Product "${productName}" added successfully!`);
-            navigate('/admin/products'); // Navegar de volta para a lista de produtos
+            navigate('/admin/products');
         } catch (error) {
-            console.error("Error saving product to localStorage:", error);
-            alert("Failed to save product. See console for details.");
+            console.error('Error creating product:', error);
+            alert('Failed to add product. See console for details.');
         }
     };
 
@@ -135,16 +137,16 @@ const AddProductPage = () => {
 
                 <div className={styles.formGroup}>
                     <label>Categories</label>
-                    <div className={styles.checkboxGroup}> {/* Você precisará de estilos para checkboxGroup */}
-                        {availableCategories.map(category => (
-                            <label key={category.id} className={styles.checkboxLabel}>
+                    <div className={styles.checkboxGroup}>
+                        {availableCategories.map(cat => (
+                            <label key={cat._id} className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
-                                    value={category.id}
-                                    checked={selectedCategories.includes(category.id)}
-                                    onChange={() => handleCategoryChange(category.id)}
+                                    value={cat._id}
+                                    checked={selectedCategories.includes(cat._id)}
+                                    onChange={() => handleCategoryChange(cat._id)}
                                 />
-                                {category.name}
+                                {cat.name}
                             </label>
                         ))}
                     </div>

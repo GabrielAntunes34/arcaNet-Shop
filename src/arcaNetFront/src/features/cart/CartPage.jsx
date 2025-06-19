@@ -27,6 +27,7 @@ const CartPage = () => {
     const precoTotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
 
+    //console.log("preco total: ", precoTotal)
     // Funções para passar ao CartItem, que chamarão as funções do contexto
     const handleIncreaseQuantity = (itemId) => {
         const item = cartItems.find(i => i.id === itemId);
@@ -63,6 +64,7 @@ const CartPage = () => {
             <div className='cart-items'>
                 {cartItems.map((item) => (
                     <CartItem
+                        key={item.id}
                         image={item.photo || '#'}
                         title={item.name}
                         price={item.price}

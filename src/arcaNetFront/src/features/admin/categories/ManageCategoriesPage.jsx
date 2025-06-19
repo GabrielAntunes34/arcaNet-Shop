@@ -1,60 +1,95 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '../../../components/SearchBar/SearchBar'; // Ajuste o caminho se necessário
-import Button from '../../../components/Button/Button';       // Ajuste o caminho se necessário
-import styles from './ManageCategoriesPage.module.css';     // Vamos criar este CSS Module
-import { defaultInitialProducts, defaultInitialCategories } from '../../../tests/mockData'; 
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import Button from '../../../components/Button/Button';
+import styles from './ManageCategoriesPage.module.css';
+import { defaultInitialCategories } from '../../../tests/mockData';
 
 const ManageCategoriesPage = () => {
-    const [categories, setCategories] = useState(
-        () => {
-            try {
-                const storedCategories = localStorage.getItem('adminCategories');
-                return storedCategories ? JSON.parse(storedCategories) : defaultInitialCategories;
-            } catch (error) {
-                console.error("Error reading categories from localStorage:", error);
-                return defaultInitialCategories;
-            }
-        }
-    );
+    const [categories, setCategories] = useState(defaultInitialCategories);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    // Lógica para filtrar categorias baseado no searchTerm
-    const filteredCategories = categories.filter(category =>
-        category.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    // Fetch real dos dados do banco de dados
     useEffect(() => {
-        try {
-            localStorage.setItem('adminCategories', JSON.stringify(categories));
-        } catch (error) {
-            console.error("Error saving categories to localStorage:", error);
-        }
-    }, [categories]);
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/category', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch categories');
+                }
+
+                const result = await response.json();
+                //console.log('Fetched categories:', result);
+                setCategories(Array.isArray(result.data) ? result.data : defaultInitialCategories);
+            } catch (error) {
+                console.error('Error fetching categories from API:', error);
+                setCategories(defaultInitialCategories);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    const filteredCategories = Array.isArray(categories)
+        ? categories.filter(category =>
+            category.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        : [];
 
     const handleAddCategory = () => {
-        // Navegar para a página de criação de categoria
-        // A rota genérica que você tem é /admin/create/:entity
         navigate('/admin/categories/add');
     };
 
-    const handleDeleteCategory = (categoryId) => {
-        // Lógica para deletar (mock)
-        if (window.confirm('Are you sure you want to delete this category?')) {
-            setCategories(prevCategories => prevCategories.filter(cat => cat.id !== categoryId));
-            // No futuro: chamar API para deletar
+    const handleDeleteCategory = async (categoryId) => {
+        if (!window.confirm('Are you sure you want to delete this category?')) return;
+
+        try {
+            const res = await fetch(`http://localhost:3000/category/${categoryId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to delete category');
+            }
+
+            setCategories(prev => prev.filter(cat => cat.id !== categoryId));
+        } catch (err) {
+            console.error('Error deleting category:', err);
+            alert('Failed to delete category.');
         }
     };
 
-    const handleStatusChange = (categoryId, newStatus) => {
-        // Lógica para mudar status (mock)
-        setCategories(prevCategories =>
-            prevCategories.map(cat =>
-                cat.id === categoryId ? { ...cat, status: newStatus } : cat
-            )
-        );
-        // No futuro: chamar API para atualizar status
+    const handleStatusChange = async (categoryId, newStatus) => {
+        try {
+            const res = await fetch(`http://localhost:3000/category/${categoryId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ status: newStatus }),
+            });
+
+            if (!res.ok) {
+                throw new Error('Failed to update category status');
+            }
+
+            setCategories(prev =>
+                prev.map(cat =>
+                    cat.id === categoryId ? { ...cat, status: newStatus } : cat
+                )
+            );
+        } catch (err) {
+            console.error('Error updating status:', err);
+            alert('Failed to update category status.');
+        }
     };
 
     return (
@@ -93,7 +128,9 @@ const ManageCategoriesPage = () => {
                                     <td>
                                         <select
                                             value={category.status}
-                                            onChange={(e) => handleStatusChange(category.id, e.target.value)}
+                                            onChange={(e) =>
+                                                handleStatusChange(category.id, e.target.value)
+                                            }
                                             className={styles.statusSelect}
                                         >
                                             <option value="Active">Active</option>
@@ -104,11 +141,10 @@ const ManageCategoriesPage = () => {
                                         <Button
                                             onClick={() => handleDeleteCategory(category.id)}
                                             variant="danger"
-                                            size="small" // Supondo que seu Button aceite 'size'
+                                            size="small"
                                         >
                                             Delete
                                         </Button>
-                                        {/* Botão de Editar pode ser adicionado aqui no futuro */}
                                         {/* <Button onClick={() => navigate(`/admin/update/category/${category.id}`)} variant="secondary" size="small">Edit</Button> */}
                                     </td>
                                 </tr>

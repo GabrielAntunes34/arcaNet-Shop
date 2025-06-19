@@ -1,55 +1,97 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchBar from '../../../components/SearchBar/SearchBar'; 
-import Button from '../../../components/Button/Button';         
-import styles from './ManageUsersPage.module.css';           
-import { defaultInitialUsers } from '../../../tests/mockData'; 
+import SearchBar from '../../../components/SearchBar/SearchBar';
+import Button from '../../../components/Button/Button';
+import styles from './ManageUsersPage.module.css';
+import { defaultInitialUsers } from '../../../tests/mockData';
 
 const ManageUsersPage = () => {
-    const [users, setUsers] = useState(() => {
-        try {
-            const storedUsers = localStorage.getItem('adminUsers');
-            const parsed = storedUsers ? JSON.parse(storedUsers) : null;
-            return (parsed && parsed.length > 0) ? parsed : defaultInitialUsers;
-        } catch (error) {
-            console.error("Error reading users from localStorage:", error);
-            return defaultInitialUsers;
-        }
-    });
+    const [users, setUsers] = useState(defaultInitialUsers);
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        try {
-            localStorage.setItem('adminUsers', JSON.stringify(users));
-        } catch (error) {
-            console.error("Error saving users to localStorage:", error);
-        }
-    }, [users]);
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/user', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch users');
+                }
+
+                const result = await response.json();
+                //console.log('Fetched users:', result);
+                const data = result.data;
+
+                setUsers(Array.isArray(data) ? data : defaultInitialUsers);
+            } catch (error) {
+                console.error('Error fetching users from API:', error);
+                setUsers(defaultInitialUsers);
+            }
+        };
+
+        fetchUsers();
+    }, []);
 
     const filteredUsers = users.filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const handleDeleteUser = (userId) => {
-        // Não permitir deletar o próprio usuário logado (lógica futura)
-        // ou o admin padrão se for uma conta crítica.
-        // Por enquanto, apenas um confirm.
-        if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
-            setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-            // No futuro: chamar API para deletar
+    const handleDeleteUser = async (userId) => {
+        if (!window.confirm('Are you sure you want to delete this user?')) return;
+
+        try {
+            const response = await fetch(`http://localhost:3000/user/${userId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete user');
+            }
+
+            setUsers(prevUsers => prevUsers.filter(user => user._id !== userId));
+        } catch (err) {
+            console.error('Error deleting user:', err);
+            alert('Failed to delete user.');
         }
     };
 
-    const handleRoleChange = (userId, newRole) => {
-        // Lógica para não permitir rebaixar o último admin (lógica futura)
-        setUsers(prevUsers =>
-            prevUsers.map(user =>
-                user.id === userId ? { ...user, role: newRole } : user
-            )
-        );
-        // No futuro: chamar API para atualizar role
+    const handleRoleChange = async (userId, newRole) => {
+        try {
+            const userToUpdate = users.find(u => u._id === userId);
+            if (!userToUpdate) return;
+
+            const response = await fetch(`http://localhost:3000/user/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({ ...userToUpdate, role: newRole }),
+            });
+
+            if (!response.ok) throw new Error('Failed to update user');
+
+            const result = await response.json();
+            const updatedUser = result.data;
+
+            setUsers(prev =>
+                prev.map(user =>
+                    user._id === userId ? updatedUser : user
+                )
+            );
+        } catch (err) {
+            console.error('Error updating user:', err);
+            alert('Failed to update user.');
+        }
     };
 
     return (
@@ -64,10 +106,8 @@ const ManageUsersPage = () => {
                     onSearch={setSearchTerm}
                     placeholder="Search users by name or email..."
                 />
-                {/* O botão de adicionar usuário pode ser implementado depois */}
-                {/* <Button onClick={handleAddUser} variant="primary">
-                    Add User
-                </Button> */}
+                {/* Futuro botão de adicionar usuário */}
+                {/* <Button onClick={() => navigate('/admin/users/add')} variant="primary">Add User</Button> */}
             </div>
 
             <div className={styles.userList}>
@@ -84,28 +124,31 @@ const ManageUsersPage = () => {
                     <tbody>
                         {filteredUsers.length > 0 ? (
                             filteredUsers.map(user => (
-                                <tr key={user.id}>
+                                <tr key={user._id}>
                                     <td className={styles.avatarColumn}>
-                                        <img src={user.avatar} className={styles.avatarImage} />
+                                        <img
+                                            src={user.avatar || '/default-avatar.png'}
+                                            className={styles.avatarImage}
+                                            alt="User Avatar"
+                                        />
                                     </td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>
                                         <select
                                             value={user.role}
-                                            onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                                            onChange={(e) => handleRoleChange(user._id, e.target.value)}
                                             className={styles.roleSelect}
                                         >
-                                            <option value="customer">Customer</option>
+                                            <option value="client">Client</option>
                                             <option value="admin">Admin</option>
                                         </select>
                                     </td>
                                     <td>
                                         <Button
-                                            onClick={() => handleDeleteUser(user.id)}
+                                            onClick={() => handleDeleteUser(user._id)}
                                             variant="danger"
                                             size="small"
-                                            // disabled={user.email === 'admin@admin.com'} // Exemplo
                                         >
                                             Delete
                                         </Button>
