@@ -14,12 +14,14 @@ const COOKIE_OPTIONS = {
     httpOnly: true,
     secure: false,
     maxAge: 3600000,
-    sameSite: 'strict'
+    sameSite: 'Lax'
 }
 
 const login = async (req, res) => {
     const { email, password } = req.body;
     
+    console.log(email, password);
+
     try {
         // Verifying if user already exists
         const user = await User.findOne({email});

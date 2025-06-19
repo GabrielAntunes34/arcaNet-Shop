@@ -9,7 +9,7 @@ const COOKIE_OPTIONS = {
     httpOnly: true,
     secure: false,
     maxAge: 24 * 60 * 60 * 1000,    // duration of one day
-    sameSite: 'strict'
+    sameSite: 'Lax'
 }
 
 // Auxiliar function to encapsulate random card's choice logic

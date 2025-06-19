@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {loginMock, registerMock} from '../../tests/mockAuth';
+import {makeLogin, makeRegister} from '../../services/authServices';
 
 // Creating a new context to encapsulate information about our user state
 const authContext = createContext();
@@ -11,21 +12,14 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
      // Resets user from localStorage at each reload
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser)
-            setUser(JSON.parse(storedUser));
-    }, []);
+    
 
     // Saves user at localStorage when it changes
-    useEffect(() => {
-        if (user)
-            localStorage.setItem('user', JSON.stringify(user));
-    }, [user]);
+  
 
     // Defining a local login function --> Should become our real logic
     const login = async (email, password) => {
-        const newUser = await loginMock(email, password);
+        const newUser = await makeLogin(email, password);
         if(!newUser)
             return false
 
@@ -36,10 +30,13 @@ const AuthProvider = ({ children }) => {
     // Defining a local logout function
     const logout = async () => {
         setUser(null);
+
+        // Limpando o cookie
+        document.cookie = 'authToken=; Max-Age=0; Path=/; SameSite=Lax';
     }
 
     const register = async(formData) => {
-        const res = await registerMock(formData);
+        const res = await makeRegister(formData);
     }
 
     return (
