@@ -17,7 +17,7 @@ const read_product = async (req, res, next) => {
 
         // Awaiting and returning all products
         const allProds = await allProdsQuery;
-        console.log(allProds);
+        //console.log(allProds);
         res.json({ message:'Success', data:allProds, details:'' });
     }
     catch(err) {

@@ -2,6 +2,7 @@ const apiUrl = import.meta.env.API_BASE_URL;
 console.log(apiUrl);
 
 const makeRegister = async (user) => {
+    console.log(user);
     const resp = await fetch('http://localhost:3000/auth/register', {
     method: 'POST',
     headers: {

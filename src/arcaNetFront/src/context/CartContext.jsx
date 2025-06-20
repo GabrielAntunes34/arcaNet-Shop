@@ -11,19 +11,19 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = (product, quantityToAdd) => {
     setCartItems(prevItems => {
-        const existingItem = prevItems.find(item => item.id === product.id);
+        const existingItem = prevItems.find(item => item._id === product._id);
         let updatedItems = [...prevItems];
 
         if (existingItem) {
             // Se o item já existe, verifica se a quantidade total não excede o estoque
-            if (existingItem.quantity + quantityToAdd > product.stock) {
-                alert("Quantidade excede o estoque!");
-                return prevItems;
-            }
+            //if (existingItem.quantity + quantityToAdd > product.stock) {
+            //    alert("Quantidade excede o estoque!");
+            //    return prevItems;
+            //}
 
             // Atualiza a quantidade se já existe no carrinho
             return prevItems.map(item =>
-                item.id === product.id
+                item._id === product._id
                     ? { ...item, quantity: item.quantity + quantityToAdd }
                     : item
             );
@@ -42,13 +42,13 @@ export const CartProvider = ({ children }) => {
     };
 
     const removeFromCart = (productId) => { // Adicionei as suas outras funções aqui
-        setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+        setCartItems(prevItems => prevItems.filter(item => item._id !== productId));
     };
 
     const updateQuantity = (productId, newQuantity) => {
         setCartItems(prevItems =>
             prevItems.map(item =>
-                item.id === productId ? { ...item, quantity: newQuantity } : item
+                item._id === productId ? { ...item, quantity: newQuantity } : item
             ).filter(item => item.quantity > 0)
         );
     };

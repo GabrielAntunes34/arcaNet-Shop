@@ -107,7 +107,7 @@ const PaymentForm = () => {
       
       // Formatação dos itens do carrinho para enviar ao servidor
       const payload = cartItems.map(item => ({
-        id: item.id,
+        _id: item._id,
         quantityToAdd: item.quantity
       }));
 
@@ -117,7 +117,7 @@ const PaymentForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',  // <-- ESSENCIAL para que o cookie vá junto
+        credentials: 'include',
         body: JSON.stringify(payload),
         })
         .then(response => {
@@ -223,7 +223,7 @@ const PaymentForm = () => {
           <h2>Order Summary</h2>
           <div className="summary-details">
             {cartItems.map(item => (
-              <div className="summary-item" key={item.id}>
+              <div className="summary-item" key={item._id}>
                 <span>{item.name} (x{item.quantity})</span>
                 <span>$ {(item.price * item.quantity).toFixed(2)}</span>
               </div>

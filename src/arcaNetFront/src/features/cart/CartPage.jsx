@@ -30,13 +30,13 @@ const CartPage = () => {
     //console.log("preco total: ", precoTotal)
     // Funções para passar ao CartItem, que chamarão as funções do contexto
     const handleIncreaseQuantity = (itemId) => {
-        const item = cartItems.find(i => i.id === itemId);
+        const item = cartItems.find(i => i._id === itemId);
         if (item) {
             updateQuantity(itemId, item.quantity + 1);
         }
     };
     const handleDecreaseQuantity = (itemId) => {
-        const item = cartItems.find(i => i.id === itemId);
+        const item = cartItems.find(i => i._id === itemId);
         if (item && item.quantity > 1) {
             updateQuantity(itemId, item.quantity - 1);
         } else if (item && item.quantity === 1) {
@@ -64,14 +64,14 @@ const CartPage = () => {
             <div className='cart-items'>
                 {cartItems.map((item) => (
                     <CartItem
-                        key={item.id}
-                        image={item.photo || '#'}
+                        key={item._id}
+                        image={item.image || '#'}
                         title={item.name}
                         price={item.price}
                         quantity={item.quantity}
-                        onIncrease={() => handleIncreaseQuantity(item.id)}
-                        onDecrease={() => handleDecreaseQuantity(item.id)}
-                        onRemove={() => handleRemoveItem(item.id)}
+                        onIncrease={() => handleIncreaseQuantity(item._id)}
+                        onDecrease={() => handleDecreaseQuantity(item._id)}
+                        onRemove={() => handleRemoveItem(item._id)}
                     />
                 ))}
             </div>

@@ -45,12 +45,12 @@ const read_user_id = async (req, res, next) => {
 
 // Creates a new user at the database from the data passed at the requisition's body
 const create_user = async (req, res, next) => {
+    console.log("body:   ", req.body);
     const {
         name,
         email,
         address,
         phone,
-        role,
         password
     } = req.body;
 
@@ -66,10 +66,11 @@ const create_user = async (req, res, next) => {
             email,
             address,
             phone,
-            role,
+            role: 'client', // Default role
             password: hashedPassword
         });
 
+        console.log(newUser);
         await newUser.save();
         res.status(201).json({ message:'Success', data:null, details:'' });
     }

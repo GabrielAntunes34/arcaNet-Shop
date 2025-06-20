@@ -1,25 +1,13 @@
-// src/features/products/ProductDetailPage.jsx
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom'; 
 import { CartContext } from '../../context/CartContext'; 
 import styles from './ProductDetailPage.module.css'; 
 import Button from '../../components/Button/Button'; 
-import { defaultInitialProducts, defaultInitialCategories } from '../../tests/mockData'; 
 
 const ProductDetailPage = () => {
     const { id: productIdFromUrl } = useParams();
     const [product, setProduct] = useState(null);
-    const [allSystemCategories, setAllSystemCategories] = useState(() => {
-        try {
-            const stored = localStorage.getItem('adminCategories');
-            const parsed = stored ? JSON.parse(stored) : null;
-            return (parsed && parsed.length > 0) ? parsed : defaultInitialCategories;
-        } catch (e) {
-            console.error("Error reading categories (ProductDetailPage):", e);
-            return defaultInitialCategories;
-        }
-    });
-
+    const [allSystemCategories, setAllSystemCategories] = useState([]);
     const [displayedCategories, setDisplayedCategories] = useState([]);
     const [isAvailable, setIsAvailable] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -27,38 +15,53 @@ const ProductDetailPage = () => {
     const { addToCart } = useContext(CartContext);
 
     useEffect(() => {
-        setIsLoading(true);
-        let productData = null;
-        try {
-            const storedProducts = localStorage.getItem('adminProducts');
-            const products = (storedProducts && JSON.parse(storedProducts).length > 0) 
-                ? JSON.parse(storedProducts) 
-                : defaultInitialProducts;
-            productData = products.find(p => p.id === productIdFromUrl);
-        } catch (error) {
-            console.error("Error loading product from localStorage:", error);
-            productData = defaultInitialProducts.find(p => p.id === productIdFromUrl); // Fallback to default mock
-        }
+        const fetchData = async () => {
+            setIsLoading(true);
+            try {
+                // Busca produto
+                console.log(`Fetching product with ID: ${productIdFromUrl}`);
+                const productResp = await fetch(`http://localhost:3000/product/${productIdFromUrl}`);
+                if (!productResp.ok) {
+                    throw new Error(`Product not found, status: ${productResp.status}`);
+                }
+                const productData = await productResp.json();
 
-        if (productData) {
-            setProduct(productData);
-            const activeSystemCategoriesMap = new Map(
-                allSystemCategories
-                    .filter(cat => cat.status === 'Active')
-                    .map(cat => [cat.id, cat])
-            );
-            const productActiveCategories = (productData.categories || [])
-                .map(prodCat => activeSystemCategoriesMap.get(prodCat.id))
-                .filter(Boolean);
+                // Busca categorias
+                const categoriesResp = await fetch('http://localhost:3000/category');
+                if (!categoriesResp.ok) {
+                    throw new Error(`Error fetching categories, status: ${categoriesResp.status}`);
+                }
+                const categoriesData = await categoriesResp.json();
 
-            setDisplayedCategories(productActiveCategories);
-            setIsAvailable(true);
-        } else {
-            setProduct(null);
-            setIsAvailable(false);
-        }
-        setIsLoading(false);
-    }, [productIdFromUrl, allSystemCategories]);
+                setProduct(productData.data);
+                setAllSystemCategories(categoriesData.data);
+                console.log("Product data:", productData.data);
+                console.log("Categories data:", categoriesData.data);
+
+                // Filtra categorias ativas e que pertencem ao produto
+                const activeSystemCategoriesMap = new Map(
+                    categoriesData.data
+                        .filter(cat => cat.status === 'Active')
+                        .map(cat => [cat.id, cat])
+                );
+
+                const productActiveCategories = (productData.categories || [])
+                    .map(prodCat => activeSystemCategoriesMap.get(prodCat.id))
+                    .filter(Boolean);
+
+                setDisplayedCategories(productActiveCategories);
+                setIsAvailable(true);
+            } catch (error) {
+                console.error("Error loading data from API:", error);
+                setProduct(null);
+                setIsAvailable(false);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [productIdFromUrl]);
 
     const handleAddToCart = () => {
         if (product && quantity > 0 && isAvailable && product.stock > 0) {
@@ -76,7 +79,7 @@ const ProductDetailPage = () => {
     if (!isAvailable) return (
         <div className={styles.messageContainer}>
             <h2>{product.name}</h2>
-            <img src={product.photo || 'https://via.placeholder.com/200x300.png?text=No+Image'} alt={product.name} className={styles.unavailableProductImage} />
+            <img src={product.image || 'https://via.placeholder.com/200x300.png?text=No+Image'} alt={product.name} className={styles.unavailableProductImage} />
             <p className={styles.unavailableMessage}>Product unavailable.</p>
             <Link to="/products" className={styles.backLink}><Button variant="secondary">Back</Button></Link>
         </div>
@@ -85,7 +88,7 @@ const ProductDetailPage = () => {
     return (
         <div className={styles.productDetailPage}>
             <div className={styles.imageColumn}>
-                <img src={product.photo || 'https://via.placeholder.com/400x600.png?text=No+Image'} alt={product.name} className={styles.productImage} />
+                <img src={product.image || 'https://via.placeholder.com/400x600.png?text=No+Image'} alt={product.name} className={styles.productImage} />
             </div>
             <div className={styles.detailsColumn}>
                 <h2>{product.name}</h2>

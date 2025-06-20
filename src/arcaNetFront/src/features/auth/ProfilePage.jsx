@@ -46,26 +46,38 @@ const ProfilePage = () => {
     setMessage(null);
     setErrors(null);
 
-    // Verifying if all data is curretly set
-    const newErrors = validateData(formData, false)
+    const newErrors = validateData(formData, false);
     setErrors(newErrors);
 
+    if (Object.keys(newErrors).length > 0) return;
+
     try {
-      // Simulating an user update
-      if(Object.keys(newErrors).length === 0) {
-        const updatedUser = {
-          ...user,
+      const response = await fetch(`http://localhost:3000/user/me`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
           name: formData.name,
           address: formData.address,
-          phone: formData.phone,
-        };
+          phone: formData.phone
+        }),
+      });
 
-        // Updating at userContext, and consequently in the localstorage.
-        setUser(updatedUser);
-        setMessage('Profile successfully updated!');
+      if (!response.ok) {
+        throw new Error('Falha ao atualizar perfil');
       }
+
+      const data = await response.json();
+      setUser(prev => ({
+        ...prev,
+        ...data.data // Atualiza user com o retorno do servidor
+      }));
+      setMessage('Perfil atualizado com sucesso!');
     } catch (err) {
-      console.log('An error occurred');
+      console.error('Erro ao atualizar perfil:', err.message);
+      setMessage('Erro ao atualizar o perfil. Tente novamente mais tarde.');
     }
   };
 
