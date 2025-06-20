@@ -14,12 +14,15 @@ const COOKIE_OPTIONS = {
     httpOnly: true,
     secure: false,
     maxAge: 3600000,
-    sameSite: 'strict'
+    sameSite: 'Lax'
 }
 
 const login = async (req, res) => {
     const { email, password } = req.body;
     
+    console.log(email, password);
+    console.log('Login route hit!');
+
     try {
         // Verifying if user already exists
         const user = await User.findOne({email});
@@ -27,11 +30,17 @@ const login = async (req, res) => {
             throw Error('Invalid credentials');
         }
 
+        console.log('User found:', user);
+
         // Comparing the passwords, if the user exists
         const isMatch = await bcrypt.compare(password, user.password);
+        
         if(!isMatch) {
+            console.log('Password does not match');
             throw new Error('Invalid credentials');
         }
+
+        console.log('Password match:', isMatch);
 
         // If data match, we generate and return a new token and prepare user to be sent
         const token = generateAuthToken(user._id, user.role);
@@ -41,6 +50,8 @@ const login = async (req, res) => {
         // Putting everything in a cookie and sending
         res.cookie('authToken', token, COOKIE_OPTIONS);
         res.json({message:'Success', data:resUser, details:''});
+
+
     }
     catch(err) {
         if(err.message === 'Invalid credentials')

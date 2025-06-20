@@ -56,12 +56,11 @@ const create_category = async (req, res, next) => {
 // at the requisition's body
 const update_category = async (req, res, next) => {
     const id = req.params.id;
-    const { name } = req.body;
+    const updateData = req.body; // recebe tudo que vier no body
 
     try {
-        const updatedCat = await Category.findOneAndUpdate({_id: id}, { name }, {new: true, runValidators: true});
+        const updatedCat = await Category.findOneAndUpdate({_id: id}, updateData, {new: true, runValidators: true});
 
-        // Verifying if the given category exists
         if(!updatedCat) {
             const errMess = new ErrorMessage('Category', id, 404);
             return next(errMess);
@@ -74,6 +73,7 @@ const update_category = async (req, res, next) => {
         return next(errMess);
     }
 };
+
 
 // Deletes from database the category expressed by it's id at the request
 // This also removes all it's references from the product's that have them

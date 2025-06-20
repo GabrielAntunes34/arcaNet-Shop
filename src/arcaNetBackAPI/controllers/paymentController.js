@@ -32,6 +32,7 @@ const post_payment = async (req, res, next) => {
             
             // Getting current stock and sold from product
             const prod = await Product.findOne(
+                // para testar sem os products implementados ainda, utilize {id:item.id}
                 {_id: item._id},         // select filter
                 { stock:1, sold:1 }     // projection
             );
@@ -55,6 +56,7 @@ const post_payment = async (req, res, next) => {
   
             // Ading the quantity to sold, while removing it from stock
             const test = await Product.findOneAndUpdate(
+                // para testar sem os products implementados ainda, utilize {id:item.id}
                 {_id:item._id},
                 {sold: newSold, stock: newStock},
                 {new: true, runValidators: true} 

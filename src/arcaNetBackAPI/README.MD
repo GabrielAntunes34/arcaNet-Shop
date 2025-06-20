@@ -167,3 +167,4 @@ that had them. The product, however, may exist without any category.
 
 * Payment dosen't use cupons yet. It could check if the user has a valid cupon (verify valid attibute, date and token's vality) to return the final discounted price
 
+``

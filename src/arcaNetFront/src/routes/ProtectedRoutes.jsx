@@ -1,11 +1,11 @@
 import {Navigate, Outlet} from 'react-router-dom';
+import { useAuth } from '../features/auth/AuthContext';
 
 // This is a wrapper component to implement access control for
 // the pages in the front-end
 
 const ProtectedRoutes = ({ allowedUsers }) => {
-    // Pulling our mockup user from localstorage --> should be changed in the future
-    const user = JSON.parse(localStorage.getItem('user'));
+    const {user} = useAuth();
 
     // Case for unlogged clients
     if(!user) {

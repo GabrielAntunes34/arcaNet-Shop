@@ -1,4 +1,5 @@
 const path = require('path');
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -16,6 +17,7 @@ const productRouter = require('./routes/productRouter');
 const cuponRouter = require('./routes/cuponRouter');
 const userRouter = require('./routes/userRouter');
 const authRouter = require('./routes/authRouter');
+const { constants } = require('os');
 
 // Enviroment configs
 require('dotenv').config();
@@ -26,8 +28,12 @@ DB_URI = process.env.DB_URI;
 // Putting the server to listen
 const app = express();
 mongoose.connect(DB_URI)
-    .then(console.log('DB successfully connected'))
-    .then(app.listen(PORT))
+    .then(() => {
+        console.log('DB successfully connected');
+        app.listen(PORT, () => {
+            console.log(`API already linstening at port ${PORT}`);
+        });
+    })
     .catch(err => { 
         console.log('!-- ERROR --!');
         console.log('Couldn\'t connect do data base.');
@@ -37,6 +43,14 @@ mongoose.connect(DB_URI)
 //================================
 // MIDDLEWARES
 //================================
+
+// 
+app.use(cors({
+  origin: ['http://localhost:5173'], // *não* use '*'
+  credentials: true,                   // permite envio de cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
 
 // Adds URL encoding parsing
 app.use(express.urlencoded({ extended:true }));
@@ -76,6 +90,8 @@ app.use('/product', productRouter);
 app.use('/user', userRouter);
 app.use('/cupon', cuponRouter);
 app.use('/category', categoryRouter);
+
+
 
 // errorMiddleware in the case of wrong responses
 app.use(errorMiddleware);

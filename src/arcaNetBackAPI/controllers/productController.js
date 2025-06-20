@@ -17,6 +17,7 @@ const read_product = async (req, res, next) => {
 
         // Awaiting and returning all products
         const allProds = await allProdsQuery;
+        //console.log(allProds);
         res.json({ message:'Success', data:allProds, details:'' });
     }
     catch(err) {
@@ -55,21 +56,26 @@ const read_product_id = async (req, res, next) => {
 
 // Creates a new product at the database from the data passed at the requisition's body
 const create_product = async (req, res, next) => {
-    const {name, description, price, stock, sold, highlighted, categories} = req.body;
-    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    const {name, description, price, stock, sold, highlighted, categories, photo} = req.body;
+
+    //console.log(req.body);
+
+    //const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
     
-    
+    //console.log('Image URL:', imageUrl);
     try {
         const newProd = new Product({
             name: name,
             description: description,
-            image: imageUrl,
+            image: photo,
             price: price,
             stock: stock,
             sold: sold,
             highlighted: highlighted,
             categories: categories
         });
+
+        console.log('New Product:', newProd);
         await newProd.save();
         res.status(201).json({ message:'Success', data:null, details:'' });
     }

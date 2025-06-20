@@ -1,4 +1,4 @@
-// Auxiliar function that mplements validations for each field
+// Auxiliar function that implements validations for each field
 
 const validateData = (formData, verifyPass=true) => {
     const errors = {};
