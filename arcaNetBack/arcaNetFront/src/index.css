@@ -1,0 +1,159 @@
+:root {
+  /* ===== Cores de Fundo ===== */
+  --color-background-page: #FDFCFB;         /* Creme/branco muito claro (Fundo principal da página) */
+  --color-background-section-subtle: #FAF7F2; /* Creme leve (Seções com leve destaque, sidebars) */
+  --color-background-content-box: #FFFFFF;   /* Branco (Cards, inputs, interior de modais) */
+  --color-background-overlay-dark: rgba(0, 0, 0, 0.5); /* Overlay escuro genérico */
+  --color-background-dark: rgb(29, 28, 28); /* Overlay escuro genérico */
+  --color-background-disabled: #E9ECEF;    /* Fundo para elementos desabilitados */
+
+  /* ===== Cores de Texto ===== */
+  --color-text-default: #5A5A5A;           /* Cinza escuro suave (Corpo de texto principal) */
+  --color-text-faded: #a1a1a1;           /* Cinza escuro suave (Corpo de texto principal) */
+  --color-text-headings: #5C3A77;          /* Ameixa/Amethysta Profundo (Títulos H1, H2, H3, labels importantes) */
+  --color-text-subtle: #7f8c8d;            /* Cinza claro (Placeholders, informações secundárias) */
+  --color-text-input: #495057;             /* Cinza escuro (Texto digitado em inputs) */
+  --color-text-on-accent: #FFFFFF;         /* Branco (Texto sobre fundos com cor de destaque, como botões) */
+  --color-text-link: var(--color-accent-secondary); /* Cor para links (usa acento secundário) */
+  --color-text-link-hover: var(--color-accent-primary); /* Cor para links no hover (usa acento primário) */
+  --color-text-success: #B8860B;           /* Dourado Escuro/Ocre (Mensagens de sucesso, destaques especiais) */
+  --color-text-price: var(--color-accent-secondary); /* Cor para preços (pode ser igual a links ou um tom dourado) */
+  --color-text-bold: #292929;          /* Ameixa/Amethysta Profundo (Texto em negrito, títulos secundários) */
+
+  /* ===== Cores de Destaque (Accents) ===== */
+  --color-accent-primary: #6A0DAD;         /* Ameixa/Amethysta (Ação principal, botões) */
+  --color-accent-primary-hover: #5C0099;    /* Ameixa mais escuro (Hover para ações primárias) */
+  --color-accent-secondary: #AF7AC5;       /* Lilás/Ameixa Claro (Links, bordas de foco, elementos interativos) */
+  --color-accent-tertiary: #E6E0F8;        /* Lavanda Pálido (Bordas sutis, divisórias, trilhas de range sliders) */
+
+  /* ===== Cores de Borda ===== */
+  --color-border-default: #E0D8CC;         /* Bege/creme suave (Bordas gerais sutis) */
+  --color-border-input: #D8BFD8;           /* Lilás claro (Bordas de campos de input) */
+  --color-border-divider: var(--color-accent-tertiary); /* Para divisórias de seção, hr */
+  --color-border-card: var(--color-accent-tertiary);    /* Borda para cards, se houver */
+
+  /* ===== Cores de Sombra e Foco (podem incluir opacidade) ===== */
+  --color-shadow-soft-rgb: 0, 0, 0;           /* Componentes RGB para sombras suaves (usar com alfa) */
+  --color-shadow-accent-hint-rgb: 92, 58, 119; /* Componentes RGB para sombras com tom de ameixa */
+  --color-focus-glow-rgb: 175, 122, 197;      /* Componentes RGB para brilho de foco */
+  --box-shadow-focus: 0 0 0 3px rgba(var(--color-focus-glow-rgb), 0.25); /* Sombra de caixa para estados de foco */
+  --border-color-focus: var(--color-accent-secondary); /* Cor da borda para estados de foco */
+
+
+  --color-accent-danger: #B75D69; /* Rosa/Vinho suave para "perigo" */
+  --color-accent-danger-hover: #A14C5E; /* Mais escuro para hover */
+  --color-text-on-danger: #FFFFFF;
+  --color-text-money: #27ae60;
+  --color-icons: #FFFFFF;
+  --color-classic: #3f4040;
+  --color-login-btn: #565757;
+  --color-classic-hover: #2c2d2d;
+
+  --color-background-footer: #4A315A; /* Um ameixa escuro e dessaturado para o fundo do footer */
+  /* Alternativa: --color-background-footer: #3D2C2A; (Um carvão/marrom escuro) */
+  /* Alternativa: --color-background-footer: var(--color-text-headings); (Se quiser usar o ameixa principal) */
+
+  --color-text-on-footer: #E0E0F8;    /* Texto lavanda muito claro para contraste no footer escuro */
+  /* Alternativa: --color-text-on-footer: var(--color-accent-tertiary); */
+  
+  --color-text-on-footer-strong: #FFFFFF; /* Para títulos ou links hover no footer */
+
+  --color-border-footer-divider: rgba(var(--color-shadow-accent-hint-rgb), 0.2); /* Divisória sutil com tom de ameixa */
+  --color-border-footer-heading: var(--color-accent-secondary); /* Lilás/Ameixa claro para borda de título no footer */
+
+
+  --color-background-mystic-dark: rgb(20, 15, 30); /* Um roxo/azul muito escuro, baseado no seu .result-container */
+  --color-border-accent-strong: var(--color-accent-primary);
+
+
+
+  --qtd-carrossel: 4;
+
+  /* ===== Fontes ===== */
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Example font stack */
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: justify;
+  --font-family-headings: 'Playfair Display', serif;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: var(--txt-dtl-clr);
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  /*display: flex;*/
+  /*place-items: center;*/
+  height: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h1, h2, h3, h4, h5, h6 {    /* Just to facilitate the fullfilment of the screen */
+    margin: 0% 0% 2% 0%;
+    text-align: center;
+}
+
+p {
+    margin: 0% 0% 2% 0%;
+    font-weight: 200;
+}
+
+a {
+    text-decoration: none;
+    color: var(--txt-dtl-clr);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--btn-clr);
+  color: var(--btn-txt-clr);
+  border: none;
+}
+button:hover {
+  background-color: #0d074e;
+}
+
+main {
+  padding: 5% 5% 5% 5%;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
