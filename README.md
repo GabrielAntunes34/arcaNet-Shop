@@ -1,17 +1,75 @@
 # arcaNet-Shop
 
-## Group and members
+## 👥 Group and members
 Group 7
 
 * Gabriel Antunes Afonso de Araujo - 14571077
 * Thales Sena de Queiroz - 14608873
 * Thiago Zero Araujo - 11814183
 
-## Introduction
+## 📍 Introduction
 
 This project is the final assignment for the discipline SCC0219-2025 (Introduction to Web Development) and aims to develop an Online Store as a full web application where customers can view, interact and buy products of a given theme. In order to make things more interesting, we chose to create a Tarot Card and supplies store.
 
-## Requirements
+
+## 🛠️ How To Build
+    
+To run this project locally, follow the steps below: 
+
+If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
+```bash
+sudo apt update
+sudo apt install nodejs npm
+```
+
+After that you can clone our github repository with
+```bash
+git clone https://github.com/GabrielAntunes34/arcaNet-Shop/
+cd ./arcaNet-Shop
+```
+
+### Setting up MongoDB
+The database of this project was delevoped using a local MongoDB database, called 'arcanet', running it with docker. The visual interface is run by Mongo Express. The configuration file of those services are present on mongo.yaml
+
+To run those, you will need first to install the dependecies:
+```bash
+sudo apt install docker docker-compose
+```
+
+Then run:
+```bash
+docker compose -f mongo.yaml up --build -d
+```
+
+After ~1min, the services will be up and ready to go, to visualize the database via mongo express. In your web browser access [localhost:8081](http://localhost:8081). 
+- user: admin
+- password: pass
+
+After you finalize the tests, if you want to remove the container, run:
+```bash
+docker compose -f mongo.yaml down -v
+```
+
+### Running the backend
+After you run the MongoDB, go to the backend folder and initialize the app.js server with:
+```bash
+cd ./src/arcaNetBackAPI
+node app.js
+```
+
+### Running the Frontend
+After the backend is up, go to the root directory and then to the frontend folder, after that run:
+
+```bash
+cd ./src/arcaNetBackAPI
+npm install
+npm run dev
+```
+    
+To see the project itself, then open the url [http://localhost:5173/](http://localhost:5173/). And thats it.
+
+
+## 📥 Requirements
 
 As an online store, this system is required to be developed as a Web Application with intuitive and accessible user interfaces, as well as many functionalities to manage, buy and view products; login and register new users; complete purchases in a chard with valid Card Numbers. In the following is a detailed list of this requirements:
 
@@ -39,7 +97,7 @@ As an online store, this system is required to be developed as a Web Application
     - Interfaces must be accessible and user friendly.
     - System must be responsive.
 
-## Project Description
+## 📖 Project Description
 The project will be structured following the MVC and SPA patterns, using Java Script as front-end and back-end languages. In this section we will present it's components, functionalities and Interfaces, also using diagrams and mock ups
 
 1. Functionalities
@@ -68,7 +126,7 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
    The following diagram represent how the data will be modeled:
    - [BD Diagram](https://github.com/GabrielAntunes34/arcaNet-Shop/blob/main/docs/dataBaseDiagram.pdf)
     
-## Code Comments
+## 💻 Code Comments
 
 ### Front-end
 
@@ -132,7 +190,7 @@ Every feature has it's own page, which may or not need to use specific states. I
 
 ### Back-end
 
-## Test Plan/Results
+## 🔍 Test Plan/Results
 
 ### Front-end
 
@@ -167,62 +225,5 @@ Every feature has it's own page, which may or not need to use specific states. I
   - [Mock data developed](/src/arcaNetFront/src/tests/mockData.jsx)
 
 ### Back-end
-
-## How To Build
-    
-To run this project locally, follow the steps below: 
-
-If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
-```bash
-sudo apt update
-sudo apt install nodejs npm
-```
-
-After that you can clone our github repository with
-```bash
-git clone https://github.com/GabrielAntunes34/arcaNet-Shop/
-cd ./arcaNet-Shop
-```
-
-### Setting up MongoDB
-The database of this project was delevoped using a local MongoDB database, called 'arcanet', running it with docker. The visual interface is run by Mongo Express. The configuration file of those services are present on mongo.yaml
-
-To run those, you will need first to install the dependecies:
-```bash
-sudo apt install docker docker-compose
-```
-
-Then run:
-```bash
-docker compose -f mongo.yaml up --build -d
-```
-
-After ~1min, the services will be up and ready to go, to visualize the database via mongo express. In your web browser access [localhost:8081](http://localhost:8081). 
-- user: admin
-- password: pass
-
-After you finalize the tests, if you want to remove the container, run:
-```bash
-docker compose -f mongo.yaml down -v
-```
-
-### Running the backend
-After you run the MongoDB, go to the backend folder and initialize the app.js server with:
-```bash
-cd ./src/arcaNetBackAPI
-node app.js
-```
-
-### Running the Frontend
-After the backend is up, go to the root directory and then to the frontend folder, after that run:
-
-```bash
-cd ./src/arcaNetBackAPI
-npm install
-npm run dev
-```
-    
-To see the project itself, then open the url [http://localhost:5173/](http://localhost:5173/). And thats it.
-
 
 Project still under construction :)
