@@ -1,9 +1,7 @@
-/* ProductTabCard.module.css */
-
 .productTabCard {
   display: flex;
-  align-items: center; /* Alinha verticalmente imagem, info e ações */
-  gap: 20px; /* Espaço entre as seções principais do card */
+  align-items: center;
+  gap: 20px;
   padding: 18px 20px;
   background-color: var(--color-background-content-box);
   border: 1px solid var(--color-border-card);
@@ -17,43 +15,42 @@
 }
 
 .productImage {
-  width: 100px; /* Tamanho da imagem do produto */
+  width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid var(--color-border-divider);
-  flex-shrink: 0; /* Impede que a imagem encolha */
+  flex-shrink: 0;
 }
 
 .productInfo {
-  flex-grow: 1; /* Ocupa o espaço disponível entre imagem e ações */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Espaço entre nome, categorias e estoque */
-  min-width: 0; /* Ajuda na quebra de texto e ellipsis */
+  gap: 8px;
+  min-width: 0;
 }
 
 .productName {
-  /* font-family: var(--font-family-headings); (Herdado) */
   font-size: 1.2rem;
   color: var(--color-text-headings);
   font-weight: 600;
   margin: 0;
   line-height: 1.3;
-  white-space: nowrap; /* Evita quebra de linha no nome */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Adiciona "..." se o nome for muito longo */
+  text-overflow: ellipsis;
 }
 
 .categories {
   display: flex;
-  flex-wrap: wrap; /* Permite que as tags de categoria quebrem linha */
+  flex-wrap: wrap;
   align-items: center;
-  gap: 6px; /* Espaço entre as tags e o label "Categories:" */
+  gap: 6px;
   font-size: 0.8rem;
 }
 
-.categories > span:first-child { /* Label "Categories:" */
+.categories > span:first-child {
   color: var(--color-text-subtle);
   font-weight: 500;
   white-space: nowrap;
@@ -63,10 +60,10 @@
   background-color: var(--color-accent-tertiary);
   color: var(--color-accent-primary);
   padding: 3px 8px;
-  border-radius: 12px; /* Tags mais arredondadas */
+  border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 500;
-  display: inline-flex; /* Para alinhar o botão de remover com o texto */
+  display: inline-flex;
   align-items: center;
   gap: 5px;
   line-height: 1;
@@ -83,28 +80,27 @@
 .removeCatButton {
   background: none;
   border: none;
-  color: var(--color-accent-secondary); /* Cor sutil para o 'x' */
+  color: var(--color-accent-secondary);
   cursor: pointer;
   padding: 0;
   margin: 0;
-  font-size: 1.2em; /* Tamanho do 'x' */
-  line-height: 0.5; /* Ajusta o alinhamento vertical do 'x' */
+  font-size: 1.2em;
+  line-height: 0.5;
   opacity: 0.7;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .removeCatButton:hover {
-  color: var(--color-accent-danger); /* Cor de perigo no hover */
+  color: var(--color-accent-danger);
   opacity: 1;
 }
 
 .inactiveCategoryTag .removeCatButton {
-  color: var(--color-text-subtle); /* 'x' mais sutil em tags inativas */
+  color: var(--color-text-subtle);
 }
 .inactiveCategoryTag .removeCatButton:hover {
   color: var(--color-accent-danger);
 }
-
 
 .noCategory {
   font-style: italic;
@@ -119,7 +115,7 @@
   margin: 0;
 }
 
-.stock span { /* Para o valor do estoque, se você quiser destacá-lo */
+.stock span {
   font-weight: 600;
   color: var(--color-text-input);
 }
@@ -128,9 +124,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-shrink: 0; /* Impede que a seção de ações encolha demais */
-  flex-wrap: wrap; /* Permite que os botões quebrem linha */
-  justify-content: flex-end; /* Alinha os botões à direita por padrão */
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .highlightLabel {
@@ -140,15 +136,15 @@
   font-size: 0.9rem;
   color: var(--color-text-default);
   cursor: pointer;
-  padding: 5px; /* Espaço de clique maior */
+  padding: 5px;
   border-radius: 4px;
   transition: background-color 0.2s ease;
 }
+
 .highlightLabel:hover {
   background-color: var(--color-background-section-subtle);
 }
 
-/* Reutilizando o estilo de checkbox do AdminForm (ou defina aqui se for diferente) */
 .highlightLabel input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
@@ -161,7 +157,7 @@
   cursor: pointer;
   position: relative;
   flex-shrink: 0;
-  margin-right: 0; /* Removido pois o gap do .highlightLabel já cuida disso */
+  margin-right: 0;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -176,7 +172,8 @@
   font-size: 11px;
   font-weight: bold;
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1;
 }
@@ -187,76 +184,60 @@
   box-shadow: var(--box-shadow-focus);
 }
 
-/* Os botões (Add Category, Add Supply, Delete Item) usarão as variantes
-   e o tamanho "small" do seu componente Button.
-   Se precisar de ajustes muito específicos para o 'size="small"' que não
-   estão no componente Button, você pode adicionar classes e estilizá-los aqui.
-   Ex:
-.productActions > button {
-  padding: 6px 12px !important; // Override se o Button não tiver size="small" adequado
-  font-size: 0.8rem !important;
-}
-*/
-
-
-/* --- Responsividade --- */
-@media (max-width: 1024px) { /* Telas de tablet menores */
+@media (max-width: 1024px) {
   .productTabCard {
-    /* Pode precisar empilhar as ações abaixo das informações se ficarem muito espremidas */
-    flex-wrap: wrap; /* Permite que .productActions quebre linha */
+    flex-wrap: wrap;
   }
   .productInfo {
-    min-width: 200px; /* Garante um espaço mínimo para as infos antes de quebrar as ações */
+    min-width: 200px;
   }
   .productActions {
-    width: 100%; /* Ações ocupam a linha inteira se quebrar */
-    justify-content: flex-start; /* Alinha à esquerda quando quebrado */
-    margin-top: 10px; /* Espaço se quebrar linha */
-    border-top: 1px solid var(--color-border-divider); /* Divisor se quebrar */
-    padding-top: 10px; /* Espaçamento acima dos botões se quebrar */
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 10px;
+    border-top: 1px solid var(--color-border-divider);
+    padding-top: 10px;
   }
 }
 
-
-@media (max-width: 767px) { /* Telas de celular */
+@media (max-width: 767px) {
   .productTabCard {
-    flex-direction: column; /* Empilha imagem, info, ações */
-    align-items: flex-start; /* Alinha tudo à esquerda */
+    flex-direction: column;
+    align-items: flex-start;
     gap: 15px;
     padding: 15px;
   }
 
   .productImage {
-    width: 100px; /* Imagem pode ser um pouco maior e centralizada (ou à esquerda) */
+    width: 100px;
     height: 100px;
-    /* align-self: center; (Opcional, se quiser centralizar a imagem) */
   }
 
   .productInfo {
-    width: 100%; /* Ocupa toda a largura */
+    width: 100%;
   }
 
   .productName {
     font-size: 1.1rem;
-    white-space: normal; /* Permite quebra de linha no nome */
-    text-overflow: clip; /* Remove ellipsis se quebrar linha */
+    white-space: normal;
+    text-overflow: clip;
     overflow: visible;
   }
 
   .productActions {
     width: 100%;
-    flex-direction: column; /* Empilha os botões de ação */
-    align-items: stretch; /* Botões ocupam 100% da largura */
+    flex-direction: column;
+    align-items: stretch;
     gap: 8px;
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid var(--color-border-divider);
   }
 
-  .productActions > button, /* Seus botões do componente Button */
+  .productActions > button,
   .highlightLabel {
     width: 100%;
-    justify-content: center; /* Centraliza texto do highlightLabel se o checkbox estiver à esquerda */
+    justify-content: center;
   }
 }
 
@@ -268,7 +249,9 @@
   .productName {
     font-size: 1rem;
   }
-  .categories, .stock, .highlightLabel {
+  .categories,
+  .stock,
+  .highlightLabel {
     font-size: 0.8rem;
   }
   .categoryTag {

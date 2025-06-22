@@ -2,7 +2,7 @@
 
 .manageProductsPage {
   width: 100%;
-  min-height: calc(100vh - 80px); /* Exemplo: Altura da viewport menos um header global */
+  min-height: calc(100vh - 80px); /* Example: viewport height minus global header */
   padding: 30px 40px;
   background-color: var(--color-background-page);
   box-sizing: border-box;
@@ -16,9 +16,9 @@
 }
 
 .header h1 {
-  /* font-family: var(--font-family-headings); (Herdado) */
+  /* font-family: var(--font-family-headings); (Inherited) */
   color: var(--color-text-headings);
-  font-size: 2.4rem; /* Título da página de admin um pouco maior */
+  font-size: 2.4rem; /* Slightly larger admin page title */
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: 600;
@@ -28,59 +28,54 @@
   font-size: 1.1rem;
   color: var(--color-text-default);
   max-width: 600px;
-  margin: 0 auto; /* Centraliza o parágrafo de descrição */
+  margin: 0 auto; /* Centers the description paragraph */
 }
 
 .controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px; /* Espaço entre os grupos de controle */
+  gap: 20px; /* Space between control groups */
   margin-bottom: 40px;
   padding: 20px;
   background-color: var(--color-background-content-box);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.07);
   border: 1px solid var(--color-border-card);
-  flex-wrap: wrap; /* Permite que os controles quebrem linha em telas menores */
+  flex-wrap: wrap; /* Allows controls to wrap on smaller screens */
 }
 
-
-/* Você pode precisar de um seletor mais específico se a estrutura do SearchBar for diferente */
-
+/* You may need a more specific selector depending on your SearchBar structure */
 
 .filterButtons {
   display: flex;
   gap: 10px;
-  flex-shrink: 0; /* Impede que os botões de filtro encolham demais */
+  flex-shrink: 0; /* Prevents filter buttons from shrinking too much */
 }
 
-/* Estilo para os botões de filtro (Show All, Show Highlighted)
-   Assumindo que seu componente Button lida bem com as variantes "primary" e "secondary"
-   Se a variante "secondary" não estiver bem definida, você pode adicionar estilos globais para ela
-   ou passar uma className específica. */
+/* Style for filter buttons (Show All, Show Highlighted)
+   Assuming your Button component handles "primary" and "secondary" variants properly.
+   If "secondary" isn't styled, add global styles or a specific className. */
 .filterButtons > button {
-  padding: 8px 16px; /* Padding um pouco menor para botões de filtro */
+  padding: 8px 16px; /* Slightly smaller padding for filter buttons */
   font-size: 0.9rem;
 }
 
-/* Estilo para o botão "Add Product" */
-.controls > button:last-child { /* Assume que o botão "Add Product" é o último filho direto */
+/* Style for the "Add Product" button */
+.controls > button:last-child { /* Assumes the last direct child is "Add Product" */
   padding: 8px 20px;
   font-size: 0.9rem;
-  white-space: nowrap; /* Evita quebra de linha no texto do botão */
+  white-space: nowrap; /* Prevents line break inside the button text */
   flex-shrink: 0;
 }
-
 
 .productList {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espaço entre os ProductTabCards */
+  gap: 20px; /* Space between ProductTabCards */
 }
 
-
-.productList > p { /* Mensagem "No products found." */
+.productList > p { /* "No products found." message */
   text-align: center;
   font-size: 1.1rem;
   color: var(--color-text-subtle);
@@ -91,8 +86,7 @@
   margin-top: 20px;
 }
 
-
-/* --- Responsividade --- */
+/* --- Responsiveness --- */
 
 @media (max-width: 1024px) {
   .manageProductsPage {
@@ -100,42 +94,45 @@
   }
 
   .controls {
-    flex-direction: column; /* Empilha os controles principais */
-    align-items: stretch; /* Faz os itens ocuparem a largura total */
+    flex-direction: column; /* Stack control sections */
+    align-items: stretch; /* Let items fill the width */
     gap: 15px;
     padding: 15px;
   }
 
-  /* Garante que a SearchBar e os grupos de botões ocupem a largura total quando empilhados */
+  /* Ensure SearchBar, button groups, and "Add Product" fill width when stacked */
   .controls > :global(div[class*="SearchBar_searchBarContainer__"]),
   .controls > :global(input[class*="SearchBar_searchInput__"]),
   .filterButtons,
-  .controls > button:last-child { /* Botão Add Product */
+  .controls > button:last-child {
     width: 100%;
-    box-sizing: border-box; /* Garante que padding/border não cause overflow */
+    box-sizing: border-box;
   }
 
   .filterButtons {
-    justify-content: center; /* Centraliza os botões de filtro */
+    justify-content: center; /* Center filter buttons */
   }
+
   .filterButtons > button {
-    flex-grow: 1; /* Faz os botões de filtro dividirem o espaço */
-    max-width: 200px; /* Limita a largura máxima dos botões de filtro */
+    flex-grow: 1;
+    max-width: 200px;
   }
 }
-
 
 @media (max-width: 767px) {
   .manageProductsPage {
     padding: 20px 15px;
   }
+
   .header {
     margin-bottom: 30px;
     padding-bottom: 15px;
   }
+
   .header h1 {
     font-size: 2rem;
   }
+
   .header p {
     font-size: 1rem;
   }
@@ -144,11 +141,11 @@
     margin-bottom: 30px;
   }
 
-  /* Estilo placeholder para ProductTabCard em telas menores */
+  /* Placeholder style for ProductTabCard on small screens */
   .productList > :global(div[class*="ProductTabCard_"]),
   .productList > div {
     padding: 15px;
-    /* Em telas menores, o ProductTabCard pode precisar de um layout interno empilhado */
+    /* On small screens, ProductTabCard might need a stacked layout */
   }
 }
 
@@ -156,19 +153,21 @@
   .header h1 {
     font-size: 1.8rem;
   }
+
   .header p {
     font-size: 0.9rem;
   }
 
   .filterButtons {
-    flex-direction: column; /* Empilha os botões de filtro em telas muito pequenas */
+    flex-direction: column; /* Stack filter buttons vertically */
     align-items: stretch;
   }
+
   .filterButtons > button {
-    max-width: none; /* Remove a largura máxima para que ocupem 100% */
+    max-width: none;
   }
 
-  .controls > button:last-child { /* Botão Add Product */
+  .controls > button:last-child {
     padding-top: 10px;
     padding-bottom: 10px;
   }

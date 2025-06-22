@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Button from '../../../components/Button/Button';
 import styles from './ManageCategoriesPage.module.css';
-import { defaultInitialCategories } from '../../../tests/mockData';
 
 const ManageCategoriesPage = () => {
-    const [categories, setCategories] = useState(defaultInitialCategories);
+    const [categories, setCategories] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Fetch real dos dados do banco de dados
+    // Fetch of the Database
     useEffect(() => {
         const fetchCategories = async () => {
             try {
+                setLoading(true);
                 const response = await fetch('http://localhost:3000/category', {
                     method: 'GET',
                     headers: {
@@ -27,22 +28,21 @@ const ManageCategoriesPage = () => {
                 }
 
                 const result = await response.json();
-                //console.log('Fetched categories:', result);
-                setCategories(Array.isArray(result.data) ? result.data : defaultInitialCategories);
+                setCategories(Array.isArray(result.data) ? result.data : []);
             } catch (error) {
                 console.error('Error fetching categories from API:', error);
-                setCategories(defaultInitialCategories);
+                setCategories([]);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchCategories();
     }, []);
 
-    const filteredCategories = Array.isArray(categories)
-        ? categories.filter(category =>
-            category.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        : [];
+    const filteredCategories = categories.filter(category =>
+        category.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const handleAddCategory = () => {
         navigate('/admin/categories/add');
@@ -96,6 +96,17 @@ const ManageCategoriesPage = () => {
             alert('Failed to update category status.');
         }
     };
+
+    if (loading) {
+        return (
+            <div className={styles.manageCategoriesPage}>
+                <header className={styles.header}>
+                    <h1>Manage Categories</h1>
+                    <p>Loading categories...</p>
+                </header>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.manageCategoriesPage}>

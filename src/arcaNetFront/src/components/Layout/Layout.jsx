@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavBar from './NavBar';
 import Footer from './Footer';
-import './Layout.css'; // Crie este arquivo CSS
+import './Layout.css'; 
 
 const Layout = () => {
     return (

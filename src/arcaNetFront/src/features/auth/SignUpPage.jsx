@@ -110,7 +110,9 @@ const SignUpPage = () => {
                 value={formData.address}
                 onChange={handleInputChange}
                 required
+                style={{resize: 'none'}}
             />
+            <ErrorMessage message={errors && errors.address}/>
 
             <label htmlFor="password">Password:</label>
             <input

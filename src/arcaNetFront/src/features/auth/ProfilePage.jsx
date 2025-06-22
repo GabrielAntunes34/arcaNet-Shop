@@ -25,8 +25,8 @@ const ProfilePage = () => {
     if (user) {
       setFormData({
         name: user.name || '',
-        address: user.address || '',
-        phone: user.phone || '',
+        address: user.address === '$' ? '' : (user.address || ''),
+        phone: user.phone === '$' ? '' : (user.phone || ''),
         email: user.email || '',
         password: '********', // password shouldn't be diplayed
       });
@@ -60,32 +60,32 @@ const ProfilePage = () => {
         credentials: 'include',
         body: JSON.stringify({
           name: formData.name,
-          address: formData.address,
-          phone: formData.phone
+          address: formData.address.trim() === '' ? '$' : formData.address,
+          phone: formData.phone.trim() === '' ? '$' : formData.phone
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Falha ao atualizar perfil');
+        throw new Error('Failed to update profile');
       }
 
       const data = await response.json();
       setUser(prev => ({
         ...prev,
-        ...data.data // Atualiza user com o retorno do servidor
+        ...data.data // update user with server return
       }));
-      setMessage('Perfil atualizado com sucesso!');
+      setMessage('Profile updated!');
     } catch (err) {
-      console.error('Erro ao atualizar perfil:', err.message);
-      setMessage('Erro ao atualizar o perfil. Tente novamente mais tarde.');
+      console.error('Error while updating profile:', err.message);
+      setMessage('Error while trying to update profile, try again later');
     }
   };
 
   return (
     <>
-      <h2>Perfil do Usuário</h2>
+      <h2>User Profile</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Nome</label>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           id="name"
@@ -95,15 +95,17 @@ const ProfilePage = () => {
           required
         />
 
-        <label htmlFor="address">Endereço</label>
+        <label htmlFor="address">Address</label>
         <textarea
           id="address"
           name="address"
           value={formData.address}
           onChange={handleChange}
+          style={{resize: 'none'}}
         />
+        <ErrorMessage message={errors && errors.address}/>
 
-        <label htmlFor="phone">Telefone</label>
+        <label htmlFor="phone">Phone number</label>
         <input
           type="text"
           id="phone"
@@ -122,7 +124,7 @@ const ProfilePage = () => {
           disabled
         />
 
-        <label htmlFor="password">Senha</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -131,7 +133,7 @@ const ProfilePage = () => {
           disabled
         />
 
-        <button className='form-btn' type="submit" >Salvar alterações</button>
+        <button className='form-btn' type="submit" >Save changes</button>
 
         {message && <p>{message}</p>}
       </form>

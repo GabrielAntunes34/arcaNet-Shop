@@ -21,7 +21,7 @@ const HomePage = () => {
 
                 const result = await response.json();
                 const allProducts = Array.isArray(result.data) ? result.data : [];
-                const highlighted = allProducts.filter(p => p.highlighted); // Use p.highlighted e não p.isHighlighted
+                const highlighted = allProducts.filter(p => p.highlighted); 
                 setHighlightedProducts(highlighted);
             } catch (error) {
                 console.error('Error fetching highlighted products:', error);
@@ -33,7 +33,9 @@ const HomePage = () => {
     }, []);
 
     const handleProductAddToCart = (product) => {
-        if (product) addToCart(product, 1);
+        if (product) {
+            addToCart(product, 1);
+        }
     };
 
     return (
@@ -60,6 +62,7 @@ const HomePage = () => {
                                 title={product.name}
                                 description={product.description}
                                 price={product.price}
+                                stock={product.stock}
                                 onAddToCart={() => handleProductAddToCart(product)}
                             />
                         ))}

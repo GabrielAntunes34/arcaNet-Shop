@@ -1,6 +1,5 @@
-// src/features/admin/products/ProductTabCard.jsx
 import React from 'react';
-import Button from '../../../components/Button/Button'; // Ajuste o caminho
+import Button from '../../../components/Button/Button';
 import styles from './ProductTabCard.module.css';
 
 const ProductTabCard = ({
@@ -9,8 +8,8 @@ const ProductTabCard = ({
     onDelete,
     onToggleHighlight,
     onRemoveCategoryFromProduct,
-    onAddCategoryToProduct, // Para o botão "Add Category" específico do produto
-    onAddSupply, // Para o botão "Add supply"
+    onAddCategoryToProduct,
+    onAddSupply,
 }) => {
     const { _id, name, image, categories = [], stock = 0, highlighted = false } = product;
 
@@ -20,22 +19,29 @@ const ProductTabCard = ({
 
     return (
         <div className={styles.productTabCard}>
-            <img src={image || 'https://via.placeholder.com/100x100.png?text=No+Image'} alt={name} className={styles.productImage} />
+            <img
+                src={image || 'https://via.placeholder.com/100x100.png?text=No+Image'}
+                alt={name}
+                className={styles.productImage}
+            />
             <div className={styles.productInfo}>
                 <h3 className={styles.productName}>{name || 'Unnamed Product'}</h3>
                 <div className={styles.categories}>
                     <span>Categories: </span>
                     {categories.length > 0 ? product.categories.map(prodCatStub => {
-                        // Encontra a info completa da categoria na lista 'allSystemCategories'
-                        // prodCatStub pode ser apenas um ID ou um objeto {id, name} mais antigo
+                        // Find full category info from the system-wide category list
+                        // prodCatStub might be an ID or an old object like {id, name}
                         const categoryId = typeof prodCatStub === 'object' ? (prodCatStub._id ?? prodCatStub.id) : prodCatStub;
                         const currentCategoryInfo = allSystemCategories.find(sysCat => sysCat._id === categoryId);
 
-                        if (currentCategoryInfo) { // Só exibe se a categoria ainda existir no sistema
+                        if (currentCategoryInfo) { // Only display if category still exists in the system
                             return (
-                                <span key={currentCategoryInfo._id} className={`${styles.categoryTag} ${currentCategoryInfo.status !== 'Active' ? styles.inactiveCategoryTag : ''}`}>
-                                    {currentCategoryInfo.name} 
-                                    {currentCategoryInfo.status !== 'Active' && " (Inactive)"} {/* Opcional: indicar se inativa */}
+                                <span
+                                    key={currentCategoryInfo._id}
+                                    className={`${styles.categoryTag} ${currentCategoryInfo.status !== 'Active' ? styles.inactiveCategoryTag : ''}`}
+                                >
+                                    {currentCategoryInfo.name}
+                                    {currentCategoryInfo.status !== 'Active' && " (Inactive)"} {/* Optionally indicate inactive */}
                                     <Button
                                         onClick={() => onRemoveCategoryFromProduct(_id, currentCategoryInfo._id)}
                                         className={styles.removeCatButton}
@@ -46,7 +52,7 @@ const ProductTabCard = ({
                                 </span>
                             );
                         }
-                        return null; // Ou alguma indicação de categoria "desconhecida"
+                        return null; // Or some indicator of "unknown" category
                     }) : <span className={styles.noCategory}>None</span>}
                 </div>
                 <p className={styles.stock}>Remaining: {stock}</p>

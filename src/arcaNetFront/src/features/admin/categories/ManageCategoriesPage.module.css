@@ -1,8 +1,6 @@
-/* ManageCategoriesPage.module.css */
-
 .manageCategoriesPage {
   width: 100%;
-  min-height: calc(100vh - 80px); /* Ajuste conforme a altura do seu header/footer global */
+  min-height: calc(100vh - 80px); /* Adjust according to your global header/footer height */
   padding: 30px 40px;
   background-color: var(--color-background-page);
   box-sizing: border-box;
@@ -44,18 +42,16 @@
   flex-wrap: wrap;
 }
 
-
-/* Estilo para o botão "Add Category" */
-.controls > button { /* Assume que o botão "Add Category" é o outro filho direto */
-  padding: 8px 20px; /* Consistente com ManageProductsPage */
+/* Style for the "Add Category" button */
+.controls > button {
+  padding: 8px 20px; /* Consistent with ManageProductsPage */
   font-size: 0.9rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-
 .categoryList {
-  overflow-x: auto; /* Permite scroll horizontal em telas pequenas para a tabela */
+  overflow-x: auto; /* Allows horizontal scroll on small screens for the table */
   background-color: var(--color-background-content-box);
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(var(--color-shadow-soft-rgb), 0.06);
@@ -81,8 +77,6 @@
   font-weight: 600;
   font-size: 0.9rem;
   border-bottom: 2px solid var(--color-border-divider);
-  /* text-transform: uppercase; */
-  /* letter-spacing: 0.5px; */
 }
 
 .categoryList tbody tr:hover {
@@ -100,7 +94,7 @@
 }
 
 .statusSelect {
-  padding: 6px 30px 6px 10px; /* Padding (direita maior para a seta) */
+  padding: 6px 30px 6px 10px; /* Extra right padding for the arrow */
   font-size: 0.9rem;
   font-family: var(--font-family-body);
   color: var(--color-text-input);
@@ -112,12 +106,12 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235C3A77" viewBox="0 0 16 16"><path d="M8 11.293l-4.646-4.647a.5.5 0 0 1 .708-.708L8 9.879l3.938-3.938a.5.5 0 1 1 .708.708L8 11.293z"/></svg>'); /* Seta com cor temática (Ameixa) */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%235C3A77" viewBox="0 0 16 16"><path d="M8 11.293l-4.646-4.647a.5.5 0 0 1 .708-.708L8 9.879l3.938-3.938a.5.5 0 1 1 .708.708L8 11.293z"/></svg>'); /* Arrow with themed color (Plum) */
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 10px 10px;
   cursor: pointer;
-  min-width: 120px; /* Largura mínima para o select */
+  min-width: 120px;
 }
 
 .statusSelect:focus {
@@ -126,26 +120,23 @@
   box-shadow: var(--box-shadow-focus);
 }
 
-/* Estilo para o botão de deletar (o componente Button já deve ter variant="danger" e size="small") */
+/* Style for delete button (your Button component should already use variant="danger" and size="small") */
 .categoryList td > button {
-  /* Se precisar de ajustes de padding/font-size para o size="small" na tabela: */
-  /* padding: 4px 8px !important; */
-  /* font-size: 0.8rem !important; */
+  /* Optional: fine-tune padding/font-size if needed */
 }
 
-/* Mensagem "No categories found." */
-.categoryList td[colSpan="4"] { /* colSpan correto para 4 colunas */
+/* "No categories found." message */
+.categoryList td[colSpan="4"] {
   text-align: center;
   padding: 30px 20px;
   color: var(--color-text-subtle);
   font-style: italic;
 }
 .categoryList tbody tr:hover td[colSpan="4"] {
-  background-color: transparent; /* Remove hover da linha para esta célula especial */
+  background-color: transparent; /* Remove row hover for this special cell */
 }
 
-
-/* --- Responsividade --- */
+/* --- Responsive --- */
 @media (max-width: 1024px) {
   .manageCategoriesPage {
     padding: 25px 20px;
@@ -158,7 +149,7 @@
   }
   .controls > :global(div[class*="SearchBar_searchBarContainer__"]),
   .controls > :global(input[class*="SearchBar_searchInput__"]),
-  .controls > button { /* Botão Add Category */
+  .controls > button {
     width: 100%;
     box-sizing: border-box;
   }
@@ -168,40 +159,51 @@
   .manageCategoriesPage {
     padding: 20px 10px;
   }
-  .header { margin-bottom: 30px; padding-bottom: 15px; }
-  .header h1 { font-size: 2rem; }
-  .header p { font-size: 1rem; }
+  .header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .header p {
+    font-size: 1rem;
+  }
 
   .categoryList th,
   .categoryList td {
     padding: 10px 8px;
     font-size: 0.9rem;
-    white-space: normal; /* Permite quebra de linha nas células */
+    white-space: normal; /* Allow line breaks in cells */
   }
 
-  /* Opcional: Ocultar colunas menos importantes em telas pequenas */
-  /* Exemplo: Ocultar coluna "ID" */
+  /* Optional: hide less important columns on small screens */
   /*
   .categoryList th:nth-child(1),
   .categoryList td:nth-child(1) {
     display: none;
   }
-  .categoryList td[colSpan="4"] { // Se ocultar ID, o colSpan muda para 3
+  .categoryList td[colSpan="4"] {
     colSpan: 3;
   }
   */
+
   .statusSelect {
     padding: 5px 25px 5px 8px;
     font-size: 0.85rem;
-    min-width: 100px; /* Reduzir min-width */
+    min-width: 100px;
     background-size: 9px 9px;
     background-position: right 8px center;
   }
 }
 
 @media (max-width: 480px) {
-  .header h1 { font-size: 1.7rem; }
-  .header p { font-size: 0.85rem; }
+  .header h1 {
+    font-size: 1.7rem;
+  }
+  .header p {
+    font-size: 0.85rem;
+  }
 
   .categoryList th,
   .categoryList td {

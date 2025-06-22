@@ -78,16 +78,3 @@ const AppRoutes = () => {
 export default AppRoutes;
 
 
-/*
-TEMPORARY NOTES:
- - AS ROTAS DOS IMPORTS DAS PÁGINAS PODEM MUDAR!!!
-
- - a rota /product/:id recebe um número em ':id'
- - Esse valor deve ser acessado no .jsx da página com o hook useParams
- - ele é necessário para buscar o produto exato no banco de dados
- - const { id } = useParams();
-
- - ProfilePage não precisa de um id na rota pois usaremos o cookie
-  do usuário autenticado e o context da lógica que desenvolveremos
- - Isso é melhor para a segurança também; evita IDOR
-*/

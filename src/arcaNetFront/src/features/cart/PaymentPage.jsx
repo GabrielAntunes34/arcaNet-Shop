@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import './PaymentPage.css'; // Seu arquivo CSS
-import { useCart } from '../../context/useCart'; // Ajuste o caminho se necessário
-import Button from '../../components/Button/Button.jsx'; // Ajuste o caminho se necessário
+import { useNavigate } from 'react-router-dom';
+import './PaymentPage.css';
+import { useCart } from '../../context/useCart';
+import Button from '../../components/Button/Button.jsx';
 
 const PaymentForm = () => {
-  const { cartItems, clearCart } = useCart(); // Obtém os itens do seu contexto
+  const { cartItems, clearCart } = useCart(); // Get items from context
+  const navigate = useNavigate(); // Hook for navigation
 
   const precoTotal = cartItems && cartItems.length > 0
     ? cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
@@ -20,7 +22,7 @@ const PaymentForm = () => {
 
   const [errors, setErrors] = useState({});
 
-  // --- Funções de Formatação ---
+  // --- Formatting Functions ---
   const formatCardNumber = (value) => {
     const cleaned = value.replace(/\s+/g, '').replace(/\D/g, '');
     const truncated = cleaned.substring(0, 16);
@@ -32,22 +34,17 @@ const PaymentForm = () => {
   };
 
   const formatExpirationDate = (value) => {
-    // 1. Remove qualquer caractere que não seja um dígito.
     const cleaned = value.replace(/\D/g, '');
 
-    // 2. Se não houver dígitos, retorna string vazia.
     if (cleaned.length === 0) {
       return '';
     }
-    // 3. Se houver 1 ou 2 dígitos, retorna os dígitos (permitindo MM).
     if (cleaned.length <= 2) {
       return cleaned;
     }
-    // 4. Se houver mais de 2 dígitos, forma MM/YY.
-    //    Pega os dois primeiros dígitos para o mês e os próximos até dois para o ano.
     return `${cleaned.substring(0, 2)}/${cleaned.substring(2, 4)}`;
   };
-  // --- Fim das Funções de Formatação ---
+  // --- End of Formatting Functions ---
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,8 +90,6 @@ const PaymentForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -105,13 +100,13 @@ const PaymentForm = () => {
       console.log('Form Data Submitted:', submissionData, 'Total Paid:', precoTotal.toFixed(2));
       alert('Payment data submitted! Check the console.');
       
-      // Formatação dos itens do carrinho para enviar ao servidor
+      // Format cart items for sending to the server
       const payload = cartItems.map(item => ({
         _id: item._id,
         quantityToAdd: item.quantity
       }));
 
-      // atualizar o BD com as novas quantidades de produtos (chamando post_payment de paymentRouter.js)
+      // Send updated product quantities to backend via POST /payment
       fetch('http://localhost:3000/payment', {
         method: 'POST',
         headers: {
@@ -119,7 +114,7 @@ const PaymentForm = () => {
         },
         credentials: 'include',
         body: JSON.stringify(payload),
-        })
+      })
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -129,14 +124,17 @@ const PaymentForm = () => {
         .then(data => {
           console.log('Payment processed successfully:', data);
           alert('Payment processed successfully!');
-          //clearCart();
+
+          // Clear cart after successful payment
+          clearCart();
+
+          // Redirect to homepage
+          navigate('/');
         })
         .catch(error => {
           console.error('Error processing payment:', error);
           alert('There was an error processing your payment. Please try again.');
         });
-
-
     } else {
       console.log('Form validation failed');
     }
@@ -166,7 +164,7 @@ const PaymentForm = () => {
                 value={formData.cardNumber}
                 onChange={handleChange}
                 placeholder="XXXX XXXX XXXX XXXX"
-                maxLength="19" // 16 dígitos + 3 espaços
+                maxLength="19"
                 className={errors.cardNumber ? 'input-error' : ''}
               />
               {errors.cardNumber && <p className="error-text">{errors.cardNumber}</p>}
@@ -196,7 +194,7 @@ const PaymentForm = () => {
                   value={formData.expirationDate}
                   onChange={handleChange}
                   placeholder="MM/YY"
-                  maxLength="5" // MM/YY (Ex: 12/25)
+                  maxLength="5"
                   className={errors.expirationDate ? 'input-error' : ''}
                 />
                 {errors.expirationDate && <p className="error-text">{errors.expirationDate}</p>}

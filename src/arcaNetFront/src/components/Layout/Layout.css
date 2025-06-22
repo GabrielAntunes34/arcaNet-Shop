@@ -1,8 +1,8 @@
-/* src/components/Layout/Layout.css */
+
 .layout-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o layout ocupe pelo menos toda a altura da tela */
+  min-height: 100vh;
 }
 
 .layout-main-content {

@@ -4,19 +4,20 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  height: 100%; /* Importante para preencher o espaço no slide/grid */
+  height: 100%;             /* Important to fill the space in slide/grid */
   outline: none;
-  border-radius: 10px; /* Raio do card */
+  border-radius: 10px;      /* Card border radius */
 }
 
 .cardLink:hover {
-  text-decoration: none; /* Remove sublinhado no hover */
-  box-shadow: 0 3px 6px rgba(var(--color-shadow-soft-rgb), 0.05), 0 5px 10px rgba(var(--color-shadow-soft-rgb), 0.03);
+  text-decoration: none;    /* Remove underline on hover */
+  box-shadow: 0 3px 6px rgba(var(--color-shadow-soft-rgb), 0.05),
+              0 5px 10px rgba(var(--color-shadow-soft-rgb), 0.03);
 }
 
-
 .cardLink:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-background-content-box), 0 0 0 4px var(--color-accent-secondary);
+  box-shadow: 0 0 0 2px var(--color-background-content-box),
+              0 0 0 4px var(--color-accent-secondary);
 }
 
 .card {
@@ -24,70 +25,78 @@
   flex-direction: column;
   height: 100%;
   background-color: var(--color-background-content-box);
-  border-radius: 10px; /* Consistente com .cardLink */
-  box-shadow: 0 3px 6px rgba(var(--color-shadow-soft-rgb), 0.05), 0 5px 10px rgba(var(--color-shadow-soft-rgb), 0.03);
+  border-radius: 10px;      /* Consistent with .cardLink */
+  box-shadow: 0 3px 6px rgba(var(--color-shadow-soft-rgb), 0.05),
+              0 5px 10px rgba(var(--color-shadow-soft-rgb), 0.03);
   overflow: hidden;
   transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 6px 12px rgba(var(--color-shadow-soft-rgb), 0.07), 0 10px 20px rgba(var(--color-shadow-soft-rgb), 0.05);
+  box-shadow: 0 6px 12px rgba(var(--color-shadow-soft-rgb), 0.07),
+              0 10px 20px rgba(var(--color-shadow-soft-rgb), 0.05);
 }
 
 .image {
   width: 100%;
-  aspect-ratio: 4 / 3; /* Mantém a proporção da imagem */
-  object-fit: cover; /* Garante que a imagem cubra a área, pode cortar */
+  aspect-ratio: 4 / 3;      /* Keeps image ratio */
+  object-fit: cover;        /* Ensures image covers area, may crop */
   background-color: var(--color-background-section-subtle);
   border-bottom: 1px solid var(--color-border-card);
 }
 
 .info {
-  padding: 15px 18px 18px; /* Padding padrão para a seção de informações */
+  padding: 15px 18px 18px;  /* Default padding for info section */
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Faz esta seção ocupar o espaço vertical restante */
+  flex-grow: 1;             /* Occupies remaining vertical space */
   text-align: left;
 }
 
 .title {
-  font-size: 1.05rem; /* Tamanho de fonte padrão para o título */
+  font-size: 1.05rem;       /* Default title size */
   font-weight: 600;
   color: var(--color-text-headings);
   margin-top: 0;
   margin-bottom: 6px;
   line-height: 1.35;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limita a 2 linhas */
-  line-clamp: 2;         /* Padrão */
+  -webkit-line-clamp: 2;    /* Limit to 2 lines */
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  min-height: calc(1.35em * 2); /* Reserva espaço para 2 linhas para evitar "pulos" */
+  min-height: calc(1.35em * 2); /* Reserve space for 2 lines to avoid jump */
 }
 
 .description {
-  font-size: 0.85rem; /* Tamanho de fonte padrão para descrição */
+  font-size: 0.85rem;       /* Default description size */
   color: var(--color-text-default);
   margin-bottom: 10px;
   line-height: 1.4;
-  flex-grow: 1; /* Permite que a descrição cresça se houver espaço */
+  flex-grow: 1;             /* Allows description to grow if space allows */
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limita a 2 linhas */
-  line-clamp: 2;         /* Padrão */
+  -webkit-line-clamp: 2;    /* Limit to 2 lines */
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* min-height para descrição não é usual, a menos que haja uma necessidade estrita de alinhamento vertical */
 }
 
 .price {
-  font-size: 1.15rem; /* Tamanho de fonte padrão para o preço */
+  font-size: 1.15rem;       /* Default price size */
   font-weight: 700;
   color: var(--color-text-price);
-  margin-top: auto; /* Empurra o preço para baixo se a descrição for curta */
+  margin-top: auto;         /* Pushes price down if description is short */
+  margin-bottom: 8px;
+}
+
+.stock {
+  font-size: 0.8rem;
+  color: var(--color-text-default);
   margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .info > :global(button.productCardButton),
@@ -95,15 +104,15 @@
   background-color: var(--color-accent-primary);
   color: var(--color-text-on-accent);
   border: none;
-  padding: 10px 15px; /* Padding padrão do botão */
-  font-size: 0.9rem;  /* Tamanho de fonte padrão do botão */
+  padding: 10px 15px;       /* Default button padding */
+  font-size: 0.9rem;        /* Default button font size */
   font-weight: 500;
   font-family: var(--font-family-body);
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  width: 100%; /* Botão ocupa a largura disponível na seção .info */
-  margin-top: auto; /* Garante que o botão fique na parte inferior se houver espaço */
+  width: 100%;              /* Button takes full width of .info */
+  margin-top: auto;         /* Keeps button at the bottom if space allows */
   text-align: center;
 }
 
@@ -112,68 +121,71 @@
   background-color: var(--color-accent-primary-hover);
 }
 
-/* --- Responsividade --- */
+/* --- Responsiveness --- */
 
-/* Ajustes para telas menores onde o card pode ficar um pouco mais apertado
-   ou quando o carrossel exibe menos itens, tornando o card individualmente maior.
-   Este breakpoint é genérico para telas pequenas; se o card estiver em um contêiner
-   que o torna muito estreito mesmo em telas maiores, um "container query" seria ideal,
-   mas media queries são o padrão. */
+/* Adjustments for smaller screens where the card becomes tighter
+   or when the carousel shows fewer items and the card becomes larger individually.
+   This breakpoint is generic for small screens; if the card becomes too narrow
+   in larger contexts, a container query would be ideal, but media queries are standard. */
 
-@media (max-width: 767px) { /* Telas de celular e tablets menores */
+@media (max-width: 767px) { /* Mobile and small tablets */
   .info {
-    padding: 12px 15px 15px; /* Reduz um pouco o padding interno */
+    padding: 12px 15px 15px; /* Slightly reduced padding */
   }
 
   .title {
-    font-size: 1rem; /* Leve redução no título */
-    min-height: calc(1.35em * 2); /* Ajustar se line-height mudar */
+    font-size: 1rem;
+    min-height: calc(1.35em * 2);
   }
 
   .description {
-    font-size: 0.8rem; /* Leve redução na descrição */
-    /* -webkit-line-clamp: 2; (manter 2 linhas ou ajustar se necessário) */
+    font-size: 0.8rem;
   }
 
   .price {
-    font-size: 1.1rem; /* Leve redução no preço */
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .stock {
+    font-size: 0.75rem;
     margin-bottom: 10px;
   }
 
   .info > :global(button.productCardButton),
   .info > button {
-    padding: 9px 12px; /* Padding do botão ligeiramente menor */
-    font-size: 0.85rem; /* Fonte do botão ligeiramente menor */
+    padding: 9px 12px;
+    font-size: 0.85rem;
   }
 }
 
-
-/* Breakpoint para telas muito pequenas, onde cada pixel conta.
-   Se o carrossel estiver mostrando 1 item, o card terá a largura da tela,
-   então estas reduções podem não ser estritamente necessárias, mas são um ajuste fino. */
+/* Fine-tuning for very small screens */
 @media (max-width: 420px) {
   .info {
-    padding: 10px 12px 12px; /* Padding ainda menor */
+    padding: 10px 12px 12px;
   }
 
   .title {
-    font-size: 0.9rem; /* Título menor */
-    min-height: calc(1.3em * 2); /* Ajustar se line-height mudar */
+    font-size: 0.9rem;
+    min-height: calc(1.3em * 2);
     line-height: 1.3;
   }
 
   .description {
-    font-size: 0.75rem; /* Descrição menor */
-    /* Considerar -webkit-line-clamp: 1; se o espaço for muito limitado */
+    font-size: 0.75rem;
   }
 
   .price {
-    font-size: 1rem; /* Preço menor */
+    font-size: 1rem;
+  }
+
+  .stock {
+    font-size: 0.7rem;
   }
 
   .info > :global(button.productCardButton),
   .info > button {
-    padding: 8px 10px; /* Padding do botão menor */
-    font-size: 0.8rem; /* Fonte do botão menor */
+    padding: 8px 10px;
+    font-size: 0.8rem;
   }
 }
