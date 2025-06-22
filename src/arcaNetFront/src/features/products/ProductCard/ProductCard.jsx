@@ -13,9 +13,10 @@ import { Link } from 'react-router-dom'; // Import Link
  * @param {string} props.title - Title or name of the product
  * @param {string} props.description - Short description of the product (optional for card view)
  * @param {number|string} props.price - Product price
+ * @param {number|string} props.stock - Available stock of the product
  * @param {function} props.onAddToCart - Callback triggered when "Add to cart" is clicked
  */
-const ProductCard = ({ id, image, title, description, price, onAddToCart }) => {
+const ProductCard = ({ id, image, title, description, price, stock, onAddToCart }) => {
   
   // Prevent click on button from navigating
   const handleButtonClick = (event) => {
@@ -25,6 +26,10 @@ const ProductCard = ({ id, image, title, description, price, onAddToCart }) => {
       onAddToCart();
     }
   };
+
+  // Trata casos onde stock pode ser undefined ou null
+  const stockNumber = stock !== undefined && stock !== null ? Number(stock) : 0;
+  const isOutOfStock = stockNumber <= 0;
 
   return (
     <Link to={`/products/${id}`} className={styles.cardLink}> {/* Link to product detail page */}
@@ -40,9 +45,18 @@ const ProductCard = ({ id, image, title, description, price, onAddToCart }) => {
           {/* Product price */}
           <p className={styles.price}>$ {Number(price).toFixed(2)}</p>
 
+          {/* Stock information */}
+          <p className={styles.stock}>
+            {isOutOfStock ? 'Out of Stock' : `${stockNumber} in stock`}
+          </p>
+
           {/* Add to cart button */}
-          <Button onClick={handleButtonClick}> {/* Use adjusted handler */}
-            Add to cart
+          <Button 
+            onClick={handleButtonClick}
+            disabled={isOutOfStock}
+            variant={isOutOfStock ? "disabled" : "primary"}
+          >
+            {isOutOfStock ? 'Out of Stock' : 'Add to cart'}
           </Button>
         </div>
       </div>

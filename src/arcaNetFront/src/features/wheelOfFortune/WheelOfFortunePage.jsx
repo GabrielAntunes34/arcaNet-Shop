@@ -3,17 +3,15 @@ import { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card.jsx';
 import './WheelOfFortunePage.css';
 
-
 const LOCAL_STORAGE_KEY = 'wheelOfFortuneDailyNumbers';
 
-// Função para gerar números aleatórios
+// Function to generate random numbers
 const generateRandomNumbers = () => {
     return Array.from(
         { length: 3 },
         () => Math.floor(Math.random() * 9) + 1
     );
 };
-
 
 const WheelOfFortunePage = () => {
     const [flippedCards, setFlippedCards] = useState([false, false, false]);
@@ -24,64 +22,63 @@ const WheelOfFortunePage = () => {
         const storedDataString = localStorage.getItem(LOCAL_STORAGE_KEY);
         const today = new Date();
 
-        // Deixa a data no formato string YYYY-MM-DD (para comparação fácil)
+        // Format the date as YYYY-MM-DD (for easy comparison)
         const todayDateString = today.toISOString().split('T')[0];
-        console.log('Data de hoje:', todayDateString);
+        console.log('Today date:', todayDateString);
 
         let dailyNumbers;
         if (storedDataString) {
             try {
                 const storedData = JSON.parse(storedDataString);
 
-                // Verifica se os dados são do dia atual e se o array de valores é válido
+                // Check if the data is from today and if the values array is valid
                 if (storedData.date === todayDateString && Array.isArray(storedData.values) && storedData.values.length === 3) {
                     dailyNumbers = storedData.values;
-                    console.log('Números carregados do localStorage para hoje:', dailyNumbers);
+                    console.log('Numbers loaded from localStorage for today:', dailyNumbers);
                 }
             } catch (error) {
-                console.error("Erro ao parsear dados do localStorage:", error);
+                console.error("Error parsing data from localStorage:", error);
             }
         }
 
-        // Se não há números para hoje no localStorage (ou os dados são inválidos/antigos)
+        // If there is no valid data for today
         if (!dailyNumbers) {
             dailyNumbers = generateRandomNumbers();
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({
                 date: todayDateString,
                 values: dailyNumbers
             }));
-            console.log('Novos números gerados e salvos para hoje:', dailyNumbers);
+            console.log('New numbers generated and saved for today:', dailyNumbers);
         }
 
         setNumbers(dailyNumbers);
-    }, []); // O array de dependências vazio [] garante que este efeito rode apenas uma vez, quando o componente é montado.
-
+    }, []); // This effect runs only once when the component mounts
 
     useEffect(() => {
-        // Só executa a lógica se os números já foram carregados/gerados e são um array de 3 posições
+        // Only proceed if numbers are loaded and valid
         if (!numbers || numbers.length !== 3) {
-            setGameMessage(''); // Limpa a mensagem se os números não estiverem prontos
+            setGameMessage('');
             return;
         }
 
-        // Verifica se todas as 3 cartas estão viradas
+        // Check if all cards are flipped
         const allCardsAreFlipped = flippedCards.every(isFlipped => isFlipped === true);
 
         if (allCardsAreFlipped) {
-            // Se todas estão viradas, verifica se os números são iguais
+            // Check if all numbers are equal
             const allNumbersAreEqual = numbers[0] === numbers[1] && numbers[1] === numbers[2];
 
             if (allNumbersAreEqual) {
-                // A se inserir o cupom gerado aqui
+                // Insert reward logic here if needed
                 setGameMessage("Congratulations!");
             } else {
                 setGameMessage("Better luck next time!");
             }
         } else {
-            // Se nem todas as cartas estão viradas, limpa a mensagem anterior
+            // Reset message if not all cards are flipped
             setGameMessage('');
         }
-    }, [flippedCards, numbers]); // Dependências do efeito
+    }, [flippedCards, numbers]); // Effect dependencies
 
     const handleCardClick = (index) => {
         setFlippedCards(currentFlippedCards => {
@@ -91,38 +88,34 @@ const WheelOfFortunePage = () => {
         });
     };
 
-    // Renderiza um indicador de carregamento enquanto os números não são definidos
+    // Show loading indicator while numbers are being prepared
     if (!numbers) {
         return (
             <div className="wheel-of-fortune-container">
                 <h1>Wheel of Fortune</h1>
-                <p>Carregando cartas...</p>
+                <p>Loading cards...</p>
             </div>
         );
     }
-
 
     return (
         <div className="wheel-of-fortune-container">
             <div className='box-container'>
                 <h1> Wheel of Fortune </h1>
                 <div className='card-container'>
-                    <Card number={numbers[0]} index={0} flipped={flippedCards[0]} func={handleCardClick}> </Card>
-                    <Card number={numbers[1]} index={1} flipped={flippedCards[1]} func={handleCardClick}> </Card>
-                    <Card number={numbers[2]} index={2} flipped={flippedCards[2]} func={handleCardClick}> </Card>
+                    <Card number={numbers[0]} index={0} flipped={flippedCards[0]} func={handleCardClick} />
+                    <Card number={numbers[1]} index={1} flipped={flippedCards[1]} func={handleCardClick} />
+                    <Card number={numbers[2]} index={2} flipped={flippedCards[2]} func={handleCardClick} />
                 </div>
                 <div className='result-container'>
-                    <h2>The Sun Goddness whispers to you:</h2>
+                    <h2>The Sun Goddess whispers to you:</h2>
                     <div className='result'>
-                        <h3> {gameMessage} </h3>
+                        <h3>{gameMessage}</h3>
                     </div>
-
                 </div>
             </div>
-            
-
         </div>
-    )
-}
+    );
+};
 
 export default WheelOfFortunePage;

@@ -116,28 +116,24 @@ export const defaultInitialUsers = [
         name: 'Alice Wonderland',
         email: 'alice@example.com',
         password: 'alice123',
-        role: 'customer',
-        avatar: 'https://media.istockphoto.com/id/1437816897/pt/foto/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring-or.jpg?s=612x612&w=0&k=20&c=OsiL-G3rU8NzppNGl3Yh9exwYzoSfCrRb9gxawy1VR4='
+        role: 'customer'
     },
     {
         id: 'u2',
         name: 'Bob The Builder',
         email: 'bob@example.com',
-        role: 'customer',
-        avatar: 'https://i.ytimg.com/vi/8kFfHnre85o/maxresdefault.jpg'
+        role: 'customer'
     },
     {
         id: 'u3',
         name: 'Charlie Admin',
         email: 'charlie@admin.com',
-        role: 'admin',
-        avatar: 'https://i0.wp.com/www.splento.com/blog/wp-content/uploads/2020/02/8-1-1.jpg?resize=1200%2C1200&ssl=1' // Cor diferente para admin
+        role: 'admin'
     },
     {
         id: 'adminDefault', 
         name: 'Admin Default',
         email: 'admin@admin.com',
-        role: 'admin',
-        avatar: 'https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D'
+        role: 'admin'
     }
 ];

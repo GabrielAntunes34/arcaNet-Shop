@@ -12,7 +12,7 @@ const ProductListPage = () => {
   const [allSystemCategories, setAllSystemCategories] = useState([]);
   const [productsReadyForDisplay, setProductsReadyForDisplay] = useState([]);
 
-  // 🔁 Buscar produtos e categorias do backend
+  // Fetch products and categories from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,7 +42,7 @@ const ProductListPage = () => {
     fetchData();
   }, []);
 
-  // 🔄 Atualiza os produtos visíveis com base nas categorias ativas
+  // Update visible products based on active categories
   useEffect(() => {
     const activeCategoriesMap = new Map(
       allSystemCategories
@@ -55,27 +55,31 @@ const ProductListPage = () => {
       return product.categories.some(catId => activeCategoriesMap.has(catId));
     });
 
-    // Normaliza categorias no produto para formato { id, name }
+    // Normalize product categories to { id, name }
     const normalized = visibleProducts.map(product => ({
       ...product,
       categories: (product.categories || []).map(catId => {
         const found = allSystemCategories.find(c => c._id === catId);
-        return found ? { id: catId, name: found.name } : { id: catId, name: 'Unknown' };
+        return found
+          ? { id: catId, name: found.name }
+          : { id: catId, name: 'Unknown' };
       }),
     }));
 
     setProductsReadyForDisplay(normalized);
   }, [allSystemProducts, allSystemCategories]);
 
-  // Prepara faixa de preço com base nos produtos visíveis
+  // Determine the price range based on visible products
   const priceRangeForFilter = useMemo(() => {
-    const prices = productsReadyForDisplay.map(p => Number(p.price)).filter(p => !isNaN(p));
+    const prices = productsReadyForDisplay
+      .map(p => Number(p.price))
+      .filter(p => !isNaN(p));
     const min = Math.min(...prices, 0);
     const max = Math.max(...prices, 1000);
     return { min: Math.floor(min), max: Math.ceil(max <= min ? min + 100 : max) };
   }, [productsReadyForDisplay]);
 
-  // Hook de filtros reutilizável
+  // Reusable filter hook
   const {
     setSearchTerm,
     categoryFilter,
@@ -91,7 +95,7 @@ const ProductListPage = () => {
     if (product) addToCart(product, 1);
   };
 
-  // Lista de nomes únicos de categorias ativas, com letras corretas
+  // Unique, active category names for the sidebar (proper case)
   const categoryNamesForSidebar = useMemo(() => {
     const activeCategories = new Map(
       allSystemCategories
@@ -132,7 +136,9 @@ const ProductListPage = () => {
 
         <h3>Filter by Price</h3>
         <div className={styles.priceFilter}>
-          <label htmlFor="minPriceSliderList">Min: ${priceFilter.min.toFixed(2)}</label>
+          <label htmlFor="minPriceSliderList">
+            Min: ${priceFilter.min.toFixed(2)}
+          </label>
           <input
             type="range"
             id="minPriceSliderList"
@@ -143,7 +149,9 @@ const ProductListPage = () => {
           />
         </div>
         <div className={styles.priceFilter}>
-          <label htmlFor="maxPriceSliderList">Max: ${priceFilter.max.toFixed(2)}</label>
+          <label htmlFor="maxPriceSliderList">
+            Max: ${priceFilter.max.toFixed(2)}
+          </label>
           <input
             type="range"
             id="maxPriceSliderList"
@@ -167,6 +175,7 @@ const ProductListPage = () => {
                 title={p.name}
                 description={p.description}
                 price={p.price}
+                stock={p.stock}
                 onAddToCart={() => handleProductAddToCart(p)}
               />
             ))}

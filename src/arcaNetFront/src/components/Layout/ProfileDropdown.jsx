@@ -1,12 +1,10 @@
-// ProfileDropdown.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
 
-
 /*
-  user -> prop do user
-  onLogout -> função que é chamada quando o usuário clica em logout
+  user -> user prop
+  onLogout -> function to be called when the user clicks logout
 */
 const ProfileDropdown = ({ user, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +16,7 @@ const ProfileDropdown = ({ user, onLogout }) => {
   };
 
   const handleLogoutClick = () => {
-    setIsOpen(false); 
+    setIsOpen(false);
     if (onLogout) {
       onLogout();
     }
@@ -28,13 +26,24 @@ const ProfileDropdown = ({ user, onLogout }) => {
   return (
     <div className="profile-dropdown-container" ref={dropdownRef}>
 
-      {/* Botão de perfil */}
-      <button onClick={toggleDropdown} className="profile-button" aria-haspopup="true" aria-expanded={isOpen}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      {/* Profile button */}
+      <button
+        onClick={toggleDropdown}
+        className="profile-button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
+          strokeLinejoin="round" className="feather feather-user"
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
       </button>
 
       {/* Dropdown menu */}
-      {/* Se o dropdown estiver aberto, renderiza o menu */}
+      {/* If the dropdown is open, render the menu */}
       {isOpen && (
         <div className="dropdown-menu" role="menu">
           <ul>
@@ -44,19 +53,18 @@ const ProfileDropdown = ({ user, onLogout }) => {
               </Link>
             </li>
 
-
             {/*===========================================*/}
-            {/* Itens somente de Admin */}
+            {/* Admin-only items */}
             {user.role === 'admin' && (
               <>
                 <li>
                   <Link to="/admin/products" onClick={() => setIsOpen(false)} role="menuitem">
-                    Manage products 
+                    Manage products
                   </Link>
                 </li>
                 <li>
                   <Link to="/admin/users" onClick={() => setIsOpen(false)} role="menuitem">
-                    Manage users 
+                    Manage users
                   </Link>
                 </li>
                 <li>
@@ -68,19 +76,14 @@ const ProfileDropdown = ({ user, onLogout }) => {
             )}
             {/*===========================================*/}
 
-
-            
             <li className="dropdown-separator"></li>
             <li>
-              {/* Botão de Logout chama handleLogoutClick */}
+              {/* Logout button calls handleLogoutClick */}
               <button onClick={handleLogoutClick} className="logout-button" role="menuitem">
                 Logout
               </button>
             </li>
-
           </ul>
-
-
         </div>
       )}
     </div>

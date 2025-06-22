@@ -30,7 +30,7 @@ const Carousel = ({ items }) => {
       <div className={styles.carousel}>
         <div className={styles.sliderWindow}>
           <div className={styles.slide} style={{ justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-            Nenhum item para exibir.
+            No items to show.
           </div>
         </div>
       </div>
@@ -103,11 +103,17 @@ const Carousel = ({ items }) => {
           className={styles.sliderTrack}
           style={{ transform: `translateX(-${current * 100}%)` }}
         >
-          {items.map((item, index) => (
-            <div key={index} className={styles.slide}>
-              {item}
-            </div>
-          ))}
+          {items.map((item, index) => {
+            // Try to get the product ID from the item if it's a ProductCard
+            // For ProductCards, use the product ID; for other items, use index
+            const productId = item?.props?.id || `carousel-item-${index}`;
+            
+            return (
+              <div key={productId} className={styles.slide}>
+                {item}
+              </div>
+            );
+          })}
         </div>
       </div>
 

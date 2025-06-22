@@ -1,30 +1,29 @@
-// src/features/products/useProductFilters.jsx
 import { useState, useEffect } from "react";
 
 const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 1000 }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   
-  // Estado interno para o filtro de preço, inicializado com o range fornecido
+  // Internal state for price filter, initialized with the provided range
   const [priceFilter, setPriceFilter] = useState({
     min: initialPriceRange.min,
     max: initialPriceRange.max,
   });
 
-  // Estado para o filtro de categorias (array de nomes de categoria em minúsculas)
+  // State for category filter (array of category names in lowercase)
   const [categoryFilter, setCategoryFilter] = useState([]);
 
-  // Efeito para resetar o priceFilter interno quando o initialPriceRange (vindo das props) mudar
+  // Effect to reset internal priceFilter when initialPriceRange changes
   useEffect(() => {
     setPriceFilter({
       min: initialPriceRange.min,
       max: initialPriceRange.max,
     });
-  }, [initialPriceRange.min, initialPriceRange.max]); // Depende do range que vem de fora
+  }, [initialPriceRange.min, initialPriceRange.max]);
 
-  // Efeito principal para aplicar todos os filtros
+  // Main effect to apply all filters
   useEffect(() => {
-    // Garante que productsToFilter é um array antes de tentar filtrar
+    // Ensure productsToFilter is an array before filtering
     if (!Array.isArray(productsToFilter)) {
       setFilteredProducts([]);
       return;
@@ -32,28 +31,27 @@ const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 
 
     let processedProducts = productsToFilter;
 
-    // 1. Filtrar por categoria (comparando com product.categories, que é um array de objetos)
+    // 1. Filter by category (compare with product.categories, which is an array of objects)
     if (categoryFilter.length > 0) {
       processedProducts = processedProducts.filter(product => {
         if (!product.categories || product.categories.length === 0) {
-          return false; // Ou true, se produtos sem categoria devem passar por este filtro
+          return false; // Or true, if products without categories should pass this filter
         }
-        // Verifica se alguma das categorias do produto (convertida para minúscula) está no categoryFilter
+        // Check if any of the product's categories (converted to lowercase) is in categoryFilter
         return product.categories.some(catObj => 
             typeof catObj.name === 'string' && categoryFilter.includes(catObj.name.toLowerCase())
         );
       });
     }
 
-    // 2. Filtrar por preço
-    // Garante que product.price é um número antes de comparar
+    // 2. Filter by price
+    // Ensure product.price is a number before comparing
     processedProducts = processedProducts.filter(product => {
         const price = parseFloat(product.price);
         return !isNaN(price) && price >= priceFilter.min && price <= priceFilter.max;
     });
 
-
-    // 3. Filtrar por termo de busca (no nome do produto)
+    // 3. Filter by search term (within the product name)
     if (searchTerm.trim() !== "") {
       processedProducts = processedProducts.filter(product =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -61,9 +59,9 @@ const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 
     }
 
     setFilteredProducts(processedProducts);
-  }, [productsToFilter, searchTerm, categoryFilter, priceFilter]); // priceFilter agora é uma dependência
+  }, [productsToFilter, searchTerm, categoryFilter, priceFilter]);
 
-  // Função para adicionar/remover categoria do filtro (recebe nome da categoria em minúsculas)
+  // Function to add/remove a category from the filter (expects lowercase category name)
   const toggleCategory = (categoryNameLowercase) => {
     setCategoryFilter((prev) =>
       prev.includes(categoryNameLowercase)
@@ -72,10 +70,10 @@ const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 
     );
   };
 
-  // Funções para atualizar o range de preço
+  // Functions to update the price range
   const handleMinPriceChange = (value) => {
     const newMin = Number(value);
-    // Garante que o novo min não ultrapasse o max atual e não seja menor que o min global
+    // Ensure new min does not exceed current max and is not less than global min
     setPriceFilter((prev) => ({
       ...prev,
       min: Math.max(initialPriceRange.min, Math.min(newMin, prev.max)),
@@ -84,7 +82,7 @@ const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 
 
   const handleMaxPriceChange = (value) => {
     const newMax = Number(value);
-    // Garante que o novo max não seja menor que o min atual e não ultrapasse o max global
+    // Ensure new max is not less than current min and does not exceed global max
     setPriceFilter((prev) => ({
       ...prev,
       max: Math.min(initialPriceRange.max, Math.max(newMax, prev.min)),
@@ -92,14 +90,14 @@ const useProductFilters = (productsToFilter, initialPriceRange = { min: 0, max: 
   };
 
   return {
-    searchTerm,
-    setSearchTerm,    // Para a SearchBar atualizar
-    categoryFilter,   // Para a ProductListPage saber quais categorias estão ativas no filtro
-    toggleCategory,   // Para os checkboxes de categoria chamarem
-    priceFilter,      // Para a ProductListPage exibir os valores min/max atuais dos sliders
-    handleMinPriceChange, // Para o slider de min preço
-    handleMaxPriceChange, // Para o slider de max preço
-    filteredProducts, // A lista final de produtos filtrados para a ProductListPage renderizar
+    searchTerm,               // For SearchBar input
+    setSearchTerm,            // Allows SearchBar to update the term
+    categoryFilter,           // Indicates which categories are active
+    toggleCategory,           // Called by category checkboxes
+    priceFilter,              // Current min/max values for the sliders
+    handleMinPriceChange,     // For min price slider
+    handleMaxPriceChange,     // For max price slider
+    filteredProducts,         // Final list of filtered products to render
   };
 };
 

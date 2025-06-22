@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../../components/SearchBar/SearchBar';
 import Button from '../../../components/Button/Button';
 import styles from './ManageUsersPage.module.css';
-import { defaultInitialUsers } from '../../../tests/mockData';
 
 const ManageUsersPage = () => {
-    const [users, setUsers] = useState(defaultInitialUsers);
+    const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
+                setLoading(true);
                 const response = await fetch('http://localhost:3000/user', {
                     method: 'GET',
                     headers: {
@@ -26,13 +27,14 @@ const ManageUsersPage = () => {
                 }
 
                 const result = await response.json();
-                //console.log('Fetched users:', result);
                 const data = result.data;
 
-                setUsers(Array.isArray(data) ? data : defaultInitialUsers);
+                setUsers(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error('Error fetching users from API:', error);
-                setUsers(defaultInitialUsers);
+                setUsers([]);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -94,6 +96,20 @@ const ManageUsersPage = () => {
         }
     };
 
+    // Conta quantos admins existem
+    const adminCount = users.filter(u => u.role === 'admin').length;
+
+    if (loading) {
+        return (
+            <div className={styles.manageUsersPage}>
+                <header className={styles.header}>
+                    <h1>Manage Users</h1>
+                    <p>Loading users...</p>
+                </header>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.manageUsersPage}>
             <header className={styles.header}>
@@ -114,7 +130,6 @@ const ManageUsersPage = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className={styles.avatarColumn}>Avatar</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -123,41 +138,39 @@ const ManageUsersPage = () => {
                     </thead>
                     <tbody>
                         {filteredUsers.length > 0 ? (
-                            filteredUsers.map(user => (
-                                <tr key={user._id}>
-                                    <td className={styles.avatarColumn}>
-                                        <img
-                                            src={user.avatar || '/default-avatar.png'}
-                                            className={styles.avatarImage}
-                                            alt="User Avatar"
-                                        />
-                                    </td>
-                                    <td>{user.name}</td>
-                                    <td>{user.email}</td>
-                                    <td>
-                                        <select
-                                            value={user.role}
-                                            onChange={(e) => handleRoleChange(user._id, e.target.value)}
-                                            className={styles.roleSelect}
-                                        >
-                                            <option value="client">Client</option>
-                                            <option value="admin">Admin</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <Button
-                                            onClick={() => handleDeleteUser(user._id)}
-                                            variant="danger"
-                                            size="small"
-                                        >
-                                            Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))
+                            filteredUsers.map(user => {
+                                const isLastAdmin = user.role === 'admin' && adminCount === 1;
+                                return (
+                                    <tr key={user._id}>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>
+                                            <select
+                                                value={user.role}
+                                                onChange={(e) => handleRoleChange(user._id, e.target.value)}
+                                                className={styles.roleSelect}
+                                                disabled={isLastAdmin}
+                                            >
+                                                <option value="client" disabled={isLastAdmin}>Client</option>
+                                                <option value="admin">Admin</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <Button
+                                                onClick={() => handleDeleteUser(user._id)}
+                                                variant="danger"
+                                                size="small"
+                                                disabled={isLastAdmin}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                );
+                            })
                         ) : (
                             <tr>
-                                <td colSpan="5">No users found.</td>
+                                <td colSpan="4">No users found.</td>
                             </tr>
                         )}
                     </tbody>

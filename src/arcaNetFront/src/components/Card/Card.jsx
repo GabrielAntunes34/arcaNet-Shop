@@ -11,9 +11,7 @@ import card7Img from '../../assets/carta7.jpg';
 import card8Img from '../../assets/carta8.jpg';
 import card9Img from '../../assets/carta9.jpg';
 
-
 import './Card.css';
-
 
 const frontImageMap = {
     1: card1Img,
@@ -34,26 +32,26 @@ export default function Card({ number, index, flipped, func }) {
         }
     };
 
-    const currentFrontImage = frontImageMap[number]; // Mapeia o índice para a imagem da frente
+    const currentFrontImage = frontImageMap[number]; // Maps the index to the correct front image
 
     return (
-        // Container principal que lida com a perspectiva para o efeito 3D e o clique
+        // Main container that manages perspective for the 3D flip effect and handles click
         <div
             className={`card-perspective-container ${flipped ? 'is-flipped' : ''}`}
             onClick={handleClick}
         >
 
-            <div className="card-inner"> {/* Este elemento é o que realmente gira */}
+            <div className="card-inner"> {/* The element that actually flips */}
 
 
-                {/* Carta com o número, depende do que foi passado como prop */}
+                {/* Front of the card, shows the back image by default */}
                 <div className="card-face card-face--front">
-                    <img src={verso} className='card-image'/>
+                    <img src={verso} className='card-image' />
                 </div>
 
-                {/* Verso da carta, comum para todos os número */}
+                {/* Back of the card, specific image based on number */}
                 <div className="card-face card-face--back">
-                    <img src={currentFrontImage} className='card-image'/>
+                    <img src={currentFrontImage} className='card-image' />
                 </div>
             </div>
         </div>

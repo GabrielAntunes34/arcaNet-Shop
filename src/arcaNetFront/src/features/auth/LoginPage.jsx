@@ -30,18 +30,22 @@ const LoginPage = () => {
     // Form submition handler
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
+        setError('');
         setLoading(true);
 
-        // if Logged, it should return the user to the home page
-        const success = await login(email, password);
-        if(success)
-            navigate('/');
-        else {
-            setError('Wrong email or password');
+        try {
+            // if Logged, it should return the user to the home page
+            const success = await login(email, password);
+            if(success) {
+                navigate('/');
+            } else {
+                setError('Invalid email or password. Try again later.');
+            }
+        } catch (err) {
+            setError('Error while trying to connect to the server. Try again later.');
+        } finally {
+            setLoading(false);
         }
-        
-        setLoading(false);
     }
 
     return (
@@ -59,6 +63,7 @@ const LoginPage = () => {
                 value = {email}
                 onChange = {e => setEmail(e.target.value)}
                 required
+                disabled={loading}
             />
 
             <label htmlFor="password">Password:</label>
@@ -68,11 +73,12 @@ const LoginPage = () => {
                 value={password}
                 onChange = {e => setPassword(e.target.value)}
                 required
+                disabled={loading}
             />
 
             {/* Button may inform if we are expecting a new request */}
             <Button className='form-btn' type="submit" disabled={loading}>
-                { loading ? 'Verifying...' : 'Submit' }
+                { loading ? 'Verifying...' : 'Enter' }
             </Button>
             
               <Link to='/signup'>Do not have an account? Sign Up!</Link>

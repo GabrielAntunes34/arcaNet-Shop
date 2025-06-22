@@ -15,11 +15,11 @@
   background-color: var(--color-background-section-subtle);
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(var(--color-shadow-accent-hint-rgb), 0.06);
-  border: 1px solid var(--color-border-card); /* Borda lavanda muito clara */
+  border: 1px solid var(--color-border-card); /* Very light lavender border */
 }
 
 .sidebar h3 {
-  /* font-family: var(--font-family-headings); (Herdado globalmente) */
+  /* font-family is inherited globally */
   color: var(--color-text-headings);
   font-size: 1.3rem;
   margin-top: 0;
@@ -59,7 +59,7 @@
 
 .categoryLabel input[type="checkbox"]:checked {
   background-color: var(--color-accent-secondary);
-  border-color: var(--color-accent-primary); /* Borda mais escura quando marcado */
+  border-color: var(--color-accent-primary); /* Darker border when checked */
 }
 
 .categoryLabel input[type="checkbox"]:checked::after {
@@ -78,13 +78,13 @@
 .priceFilter input[type="range"] {
   width: 100%; height: 8px;
   -webkit-appearance: none; appearance: none;
-  background: var(--color-accent-tertiary); /* Trilho lavanda claro */
+  background: var(--color-accent-tertiary); /* Light lavender track */
   border-radius: 5px; cursor: pointer; outline: none;
 }
 .priceFilter input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
   width: 18px; height: 18px;
-  background: var(--color-accent-primary); /* Ameixa */
+  background: var(--color-accent-primary); /* Plum color */
   border-radius: 50%; border: 2px solid var(--color-background-content-box);
   box-shadow: 0 0 3px rgba(var(--color-shadow-soft-rgb), 0.2);
   margin-top: -5px;
@@ -115,25 +115,24 @@
   border-radius: 8px; border: 1px dashed var(--color-border-default);
 }
 
-
-/* --- Responsividade --- */
+/* --- Responsiveness --- */
 @media (max-width: 992px) {
   .sidebar {
-    flex: 0 0 220px; /* Sidebar um pouco mais estreita */
+    flex: 0 0 220px; /* Slightly narrower sidebar */
   }
 }
 
 @media (max-width: 768px) {
   .pageContainer {
-    flex-direction: column; /* Empilha sidebar e conteúdo principal */
+    flex-direction: column; /* Stack sidebar and main content */
     gap: 25px;
     padding: 20px 15px 40px;
   }
 
   .sidebar {
-    flex-basis: auto; /* Permite que a sidebar ocupe a largura necessária */
-    width: 100%; /* Sidebar ocupa toda a largura */
-    margin-bottom: 0; /* Removido pois o gap do flex-container cuida disso */
+    flex-basis: auto; /* Sidebar adapts width */
+    width: 100%;
+    margin-bottom: 0; /* Removed since container gap handles spacing */
   }
 
   .mainContent :global(.searchBarContainer),

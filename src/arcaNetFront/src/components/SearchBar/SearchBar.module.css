@@ -1,4 +1,4 @@
-/* SearchBar.module.css (ou onde .searchInput está definido) */
+
 
 .searchInput {
   width: 100%;
@@ -12,7 +12,7 @@
   outline: none;
   box-shadow: 0 1px 3px rgba(var(--color-shadow-soft-rgb), 0.04);
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  box-sizing: border-box; /* Garante que padding e border sejam incluídos na altura/largura total */
+  box-sizing: border-box; 
   height: 20px; 
 }
 

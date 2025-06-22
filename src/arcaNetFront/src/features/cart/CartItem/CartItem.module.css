@@ -1,9 +1,9 @@
 .item {
   display: flex;
-  align-items: flex-start; /* Alinha imagem e detalhes pelo topo */
-  gap: 20px; /* Espaço entre imagem e detalhes */
+  align-items: flex-start; /* Align image and details at the top */
+  gap: 20px; /* Space between image and details */
   padding: 20px;
-  margin-bottom: 15px; /* Espaço entre itens do carrinho */
+  margin-bottom: 15px; /* Space between cart items */
   background-color: var(--color-background-content-box);
   border-radius: 10px;
   border: 1px solid var(--color-border-divider);
@@ -11,25 +11,25 @@
 }
 
 .image {
-  width: 90px; /* Tamanho da imagem */
+  width: 90px;
   height: 90px;
-  object-fit: cover; /* Cobre a área, pode cortar */
+  object-fit: cover; /* Cover area, may crop */
   border-radius: 6px;
   border: 1px solid var(--color-border-card);
-  flex-shrink: 0; /* Impede que a imagem encolha */
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 .details {
-    flex: 1;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  flex: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .name {
   font-family: var(--font-family-headings);
-  font-size: 1.15rem; /* Nome do produto um pouco maior */
+  font-size: 1.15rem;
   color: var(--color-text-bold);
   margin: 0 0 8px 0;
   font-weight: 600;
@@ -37,66 +37,79 @@
 }
 
 .price,
-.total {
+.total,
+.stock {
   font-size: 0.9rem;
   color: var(--color-text-default);
   margin: 3px 0;
 }
 
-.price span, /* Para destacar o valor */
+.price span,
 .total span {
   font-weight: 500;
-  color: var(--color-text-input); /* Ou var(--color-text-price) se quiser a cor de destaque */
+  color: var(--color-text-input); /* Or var(--color-text-price) if highlight is preferred */
 }
 
 .total {
-  font-weight: 600; /* Subtotal em negrito */
-  color: var(--color-text-default); /* Subtotal com cor de título */
+  font-weight: 600;
+  color: var(--color-text-default);
   margin-top: 8px;
+}
+
+.stock {
+  font-size: 0.85rem;
+  color: var(--color-text-default);
+  margin-top: 4px;
+  font-weight: 500;
 }
 
 .controls {
   display: flex;
   align-items: center;
-  gap: 12px; /* Espaço entre os botões e a quantidade */
+  gap: 12px; /* Space between buttons and quantity */
   margin-top: 15px;
 }
 
-/* Estilos para os botões de quantidade e remover.
-   Seu componente Button já pode ter variantes, mas aqui damos um estilo específico
-   para o contexto do CartItem se ele aceitar uma className. */
+/* Buttons inside the item control section */
 
 .quantityButton,
-.deleteButton { /* Estilo base para botões no controle */
+.deleteButton {
   padding: 6px 10px;
   font-size: 0.9rem;
   font-weight: 500;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  border: 1px solid transparent; /* Para manter o layout ao adicionar borda no hover/focus */
-  line-height: 1; /* Para alinhar melhor o texto/ícone do botão */
+  border: 1px solid transparent;
+  line-height: 1;
 }
 
 .quantityButton {
-  background-color: var(--color-accent-tertiary); /* Lavanda pálido */
-  color: var(--color-accent-primary); /* Ameixa */
-  min-width: 30px; /* Garante que os botões +/- tenham um tamanho mínimo */
+  background-color: var(--color-accent-tertiary);
+  color: var(--color-accent-primary);
+  min-width: 30px;
   text-align: center;
 }
 
-.quantityButton:hover {
-  background-color: var(--color-accent-secondary); /* Lilás/Ameixa claro */
+.quantityButton:hover:not(:disabled) {
+  background-color: var(--color-accent-secondary);
   color: var(--color-text-on-accent);
   border-color: var(--color-accent-secondary);
+}
+
+.quantityButton:disabled {
+  background-color: #6c757d;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .quantity {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--color-text-input);
-  padding: 0 5px; /* Pequeno padding lateral para não colar nos botões */
-  min-width: 25px; /* Largura mínima para o número */
+  padding: 0 5px;
+  min-width: 25px;
   text-align: center;
 }
 
@@ -104,7 +117,7 @@
   background-color: transparent;
   color: var(--color-accent-danger);
   border: 1px solid var(--color-accent-danger);
-  margin-left: auto; /* Empurra o botão de deletar para a direita */
+  margin-left: auto;
 }
 
 .deleteButton:hover {
@@ -113,8 +126,7 @@
   border-color: var(--color-accent-danger-hover);
 }
 
-
-/* --- Responsividade --- */
+/* --- Responsiveness --- */
 @media (max-width: 767px) {
   .item {
     padding: 15px;
@@ -131,7 +143,8 @@
   }
 
   .price,
-  .total {
+  .total,
+  .stock {
     font-size: 0.85rem;
   }
 
@@ -149,36 +162,36 @@
 
 @media (max-width: 480px) {
   .item {
-    flex-direction: column; /* Empilha imagem e detalhes */
-    align-items: center; /* Centraliza itens quando empilhado */
-    text-align: center; /* Centraliza texto nos detalhes */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .image {
-    margin-bottom: 15px; /* Espaço abaixo da imagem quando empilhado */
-    width: 100px; /* Imagem pode ser um pouco maior quando centralizada */
+    margin-bottom: 15px;
+    width: 100px;
     height: 100px;
   }
 
   .details {
-    align-items: center; /* Centraliza o conteúdo dos detalhes */
-    width: 100%; /* Detalhes ocupam toda a largura */
+    align-items: center;
+    width: 100%;
   }
 
   .name {
-    font-size: 1.1rem; /* Pode até aumentar um pouco o nome do produto */
+    font-size: 1.1rem;
   }
 
   .controls {
-    justify-content: center; /* Centraliza os controles */
-    flex-wrap: wrap; /* Permite que os botões quebrem linha se necessário */
+    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
   }
 
   .deleteButton {
-    margin-left: 0; /* Remove o margin-left auto */
-    margin-top: 10px; /* Adiciona margem superior se quebrar linha */
-    width: calc(100% - 88px); /* Exemplo de largura para o botão deletar, considerando os outros botões. Ajuste! */
-    min-width: 120px; /* Largura mínima para o botão deletar */
+    margin-left: 0;
+    margin-top: 10px;
+    width: calc(100% - 88px);
+    min-width: 120px;
   }
 }

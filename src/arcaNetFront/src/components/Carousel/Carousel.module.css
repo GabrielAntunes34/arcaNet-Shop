@@ -1,5 +1,3 @@
-/* Carousel.module.css */
-
 .carousel {
   position: relative;
   width: 100%;
@@ -8,10 +6,10 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  background-color: var(--color-background-content-box); /* Fundo branco para o carrossel */
+  background-color: var(--color-background-content-box);
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.08); /* Sombra com tom de ameixa */
-  padding: 20px 0; /* Ajuste conforme o design dos botões */
+  box-shadow: 0 5px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.08);
+  padding: 20px 0;
 }
 
 .sliderWindow {
@@ -29,11 +27,11 @@
   flex-basis: calc(100% / var(--qtd-carrossel));
   flex-shrink: 0;
   box-sizing: border-box;
-  padding: 10px; /* Espaçamento entre os ProductCards */
+  padding: 10px;
 }
 
 .navButton {
-  background-color: rgba(var(--color-shadow-accent-hint-rgb), 0.8); /* Ameixa semi-transparente */
+  background-color: rgba(var(--color-shadow-accent-hint-rgb), 0.8);
   color: var(--color-text-on-accent);
   border: none;
   padding: 0;
@@ -54,37 +52,39 @@
 }
 
 .navButton:hover:not(:disabled) {
-  background-color: var(--color-accent-primary); /* Ameixa sólido */
+  background-color: var(--color-accent-primary);
 }
 
 .navButton:active:not(:disabled) {
-  background-color: var(--color-accent-primary-hover); /* Ameixa mais escuro */
+  background-color: var(--color-accent-primary-hover);
 }
 
 .navButton:disabled {
-  opacity: 0.4; /* Opacidade para desabilitado */
+  opacity: 0.4;
   cursor: not-allowed;
-  background-color: var(--color-text-subtle); /* Fundo cinza para desabilitado */
+  background-color: var(--color-text-subtle);
 }
 
-.carousel > Button:first-of-type { margin-left: 10px; margin-right: 5px; }
-.carousel > Button:last-of-type { margin-right: 10px; margin-left: 5px; }
+.carousel > Button:first-of-type {
+  margin-left: 10px;
+  margin-right: 5px;
+}
 
-/* --- Responsividade --- */
+.carousel > Button:last-of-type {
+  margin-right: 10px;
+  margin-left: 5px;
+}
 
-/* Telas Médias-Grandes (ex: tablets em paisagem, laptops menores) */
 @media (max-width: 1200px) {
   .carousel {
-    --qtd-carrossel: 3; /* Exibe 3 itens */
-    /* max-width: 95%; (Opcional: se quiser que o carrossel não vá até as bordas extremas) */
+    --qtd-carrossel: 3;
   }
 }
 
-/* Telas Médias (ex: tablets em retrato) */
 @media (max-width: 992px) {
   .carousel {
-    --qtd-carrossel: 2; /* Exibe 2 itens */
-    padding: 15px 0; /* Reduz padding vertical do carrossel */
+    --qtd-carrossel: 2;
+    padding: 15px 0;
   }
 
   .navButton {
@@ -97,22 +97,20 @@
     margin-left: 10px;
     margin-right: 5px;
   }
+
   .carousel > Button:last-of-type {
     margin-right: 10px;
     margin-left: 5px;
   }
 }
 
-/* Telas Pequenas (ex: celulares maiores em paisagem ou celulares em retrato) */
 @media (max-width: 767px) {
   .carousel {
-    --qtd-carrossel: 1; /* Exibe 1 item */
-    /* box-shadow: none; (Opcional: remover sombra em telas muito pequenas) */
-    /* border-radius: 0; (Opcional: remover bordas arredondadas para ocupar mais espaço) */
+    --qtd-carrossel: 1;
   }
 
   .slide {
-    padding: 5px; /* Reduz o espaçamento do slide para dar mais espaço ao conteúdo */
+    padding: 5px;
   }
 
   .navButton {
@@ -120,42 +118,38 @@
     height: 36px;
     font-size: 24px;
   }
-    
+
   .carousel > Button:first-of-type {
     margin-left: 8px;
     margin-right: 4px;
   }
+
   .carousel > Button:last-of-type {
     margin-right: 8px;
     margin-left: 4px;
   }
 }
 
-/* Telas Muito Pequenas (ex: celulares menores em retrato) */
 @media (max-width: 480px) {
   .carousel {
-    padding: 10px 0; /* Menos padding vertical ainda */
-    /* Considere se o carrossel deve ter botões visíveis ou depender apenas do swipe.
-       Se os botões ficarem muito apertados com o item único: */
+    padding: 10px 0;
   }
 
   .slide {
-    padding: 0px; /* Sem padding lateral no slide para maximizar o espaço do card */
-    /* Ou um padding bem pequeno: padding: 0 5px; */
+    padding: 0px;
   }
 
   .navButton {
     width: 32px;
     height: 32px;
     font-size: 20px;
-    /* Exemplo de como esconder botões e confiar no swipe:
-    display: none;
-    */
   }
+
   .carousel > Button:first-of-type {
     margin-left: 5px;
     margin-right: 2px;
   }
+
   .carousel > Button:last-of-type {
     margin-right: 5px;
     margin-left: 2px;

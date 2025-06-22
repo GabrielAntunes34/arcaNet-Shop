@@ -1,24 +1,21 @@
 form {
-    margin: 0% 20% 0% 20%; /* Sua lógica */
-    border-radius: 8px; /* Sua lógica */
-    padding: 2%; /* Sua lógica */
-
-    display: flex; /* Sua lógica */
-    flex-direction: column; /* Sua lógica */
-
-    justify-content: center; /* Sua lógica */
-    text-align: justify; /* Sua lógica */
-
-    background-color: var(--color-background-content-box); /* Usa a variável que definimos para :root */
-    border: 1px solid var(--color-border-divider);
-    box-shadow: 0 4px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.08);
-    color: var(--color-text-faded);
+  margin: 0% 20% 0% 20%;
+  border-radius: 8px;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  background-color: var(--color-background-content-box);
+  border: 1px solid var(--color-border-divider);
+  box-shadow: 0 4px 15px rgba(var(--color-shadow-accent-hint-rgb), 0.08);
+  color: var(--color-text-faded);
 }
 
 form a {
-    text-align: center; /* Sua lógica */
-    color: var(--color-text-link);
-    text-decoration: none;
+  text-align: center;
+  color: var(--color-text-link);
+  text-decoration: none;
 }
 
 form a:hover {
@@ -27,35 +24,32 @@ form a:hover {
 }
 
 label {
-    margin-top: 3%; /* Sua lógica */
-    color: var(--color-text-headings); /* Labels como mini-títulos */
-    font-weight: 500;
+  margin-top: 3%;
+  color: var(--color-text-headings);
+  font-weight: 500;
 }
 
 input {
-    margin: 1% 0% 1% 0%; /* Sua lógica */
-    padding: 2%; /* Sua lógica */
-
-    border: solid 1px var(--brd-clr); /* Bordas temáticas (ajustei .5px para 1px para melhor visibilidade) */
-    border-radius: 8px; /* Sua lógica */
-
-    /* Cores e fontes temáticas para inputs */
-    background-color: #FFFFFF; /* Fundo branco para inputs */
-    color: var(--text-color-input);
-    font-size: 0.95rem; /* Ou 1rem, dependendo do seu design base */
-    font-family: 'Lato', sans-serif; /* Ou herda do form/body */
-    outline: none; /* Remove outline padrão para usar box-shadow no foco */
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Para transições suaves no foco */
+  margin: 1% 0% 1% 0%;
+  padding: 2%;
+  border: solid 1px var(--brd-clr);
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  color: var(--text-color-input);
+  font-size: 0.95rem;
+  font-family: 'Lato', sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-input[type="text"], /* Seja específico com os tipos de input se necessário */
+input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
-textarea { /* Adicione textarea se usar */
-  margin: 1% 0% 1% 0%; /* Sua lógica */
-  padding: 2%; /* Sua lógica */
-  border-radius: 8px; /* Sua lógica */
+textarea {
+  margin: 1% 0% 1% 0%;
+  padding: 2%;
+  border-radius: 8px;
   border: solid 1px var(--color-border-input);
   background-color: var(--color-background-content-box);
   color: var(--color-text-input);
@@ -79,62 +73,59 @@ textarea:focus {
 
 input::placeholder {
   color: var(--placeholder-color);
-  opacity: 1; /* Garante que a opacidade seja controlada pela cor */
+  opacity: 1;
 }
 
 input:focus {
-  border-color: var(--focus-border-color); /* Cor da borda no foco */
-  box-shadow: 0 0 0 3px var(--focus-box-shadow-color); /* Brilho sutil no foco */
+  border-color: var(--focus-border-color);
+  box-shadow: 0 0 0 3px var(--focus-box-shadow-color);
 }
 
-
 .form-btn {
-    align-self: center; /* Sua lógica */
-    margin: 4% 0% 4% 0%; /* Sua lógica */
-    width: 25%; /* Sua lógica */
-    padding: 2%; /* Sua lógica */
-
-    border-radius: 8px; /* Sua lógica */
-
-    border: none; /* Ou 1px solid var(--color-accent-primary-hover); */
-    background-color: var(--color-accent-primary);
-    color: var(--color-text-on-accent);
-    font-weight: 500;
-    font-size: 1rem;
-    font-family: var(--font-family-body);
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.2s ease;
+  align-self: center;
+  margin: 4% 0% 4% 0%;
+  width: 25%;
+  padding: 2%;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--color-accent-primary);
+  color: var(--color-text-on-accent);
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: var(--font-family-body);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
 }
 
 .form-btn:hover {
   background-color: var(--color-accent-primary-hover);
 }
 
-/* Telas Médias (Tablets) */
+/* Medium screens (Tablets) */
 @media (max-width: 1024px) {
   form {
-    margin: 0% 10% 0% 10%; /* Reduz as margens laterais */
-    padding: 3%; /* Pode aumentar um pouco o padding interno relativo */
+      margin: 0% 10% 0% 10%;
+      padding: 3%;
   }
 
   .form-btn {
-    width: 60%; /* Botão um pouco mais largo */
+      width: 60%;
   }
 }
 
-/* Telas Pequenas (Celulares) */
+/* Small screens (Phones) */
 @media (max-width: 767px) {
   form {
-    margin: 30px 15px; /* Margens fixas para telas pequenas, removendo % */
-    padding: 20px; /* Padding fixo */
-    text-align: left; /* 'justify' pode não ficar bom em colunas estreitas, 'left' é mais seguro */
+      margin: 30px 15px;
+      padding: 20px;
+      text-align: left;
   }
 
   label {
-    margin-top: 20px; /* Margem fixa */
-    margin-bottom: 8px; /* Margem fixa */
-    font-size: 0.85rem;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
   }
 
   input[type="text"],
@@ -142,29 +133,29 @@ input:focus {
   input[type="password"],
   input[type="number"],
   textarea {
-    margin: 0 0 15px 0; /* Margens fixas */
-    padding: 10px 12px; /* Padding fixo um pouco menor */
-    font-size: 0.95rem;
+      margin: 0 0 15px 0;
+      padding: 10px 12px;
+      font-size: 0.95rem;
   }
 
   .form-btn {
-    width: 100%; /* Botão ocupa largura total para fácil toque */
-    max-width: 300px; /* Mas com um limite máximo razoável */
-    margin: 25px 0 10px 0; /* Margens fixas */
-    padding: 12px; /* Padding fixo */
-    font-size: 0.95rem;
+      width: 100%;
+      max-width: 300px;
+      margin: 25px 0 10px 0;
+      padding: 12px;
+      font-size: 0.95rem;
   }
 }
 
-/* Telas Muito Pequenas (Ajustes Finos) */
+/* Extra small screens */
 @media (max-width: 480px) {
   form {
-    margin: 20px 10px;
-    padding: 15px;
+      margin: 20px 10px;
+      padding: 15px;
   }
 
   label {
-    font-size: 0.8rem;
+      font-size: 0.8rem;
   }
 
   input[type="text"],
@@ -172,12 +163,12 @@ input:focus {
   input[type="password"],
   input[type="number"],
   textarea {
-    font-size: 0.9rem;
-    padding: 8px 10px;
+      font-size: 0.9rem;
+      padding: 8px 10px;
   }
 
   .form-btn {
-    font-size: 0.9rem;
-    padding: 10px;
+      font-size: 0.9rem;
+      padding: 10px;
   }
 }

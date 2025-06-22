@@ -7,13 +7,18 @@
     transition: all 0.2s ease-in-out;
   }
   
+  .button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
   /* Variantes */
   .primary {
     background-color: var(--color-accent-primary);
     color: var(--color-text-on-accent);
   }
   
-  .primary:hover {
+  .primary:hover:not(:disabled) {
     background-color: var(--color-accent-primary-hover);
   }
   
@@ -22,7 +27,7 @@
     color: var(--color-text-on-accent);
   }
   
-  .secondary:hover {
+  .secondary:hover:not(:disabled) {
     background-color: #565e64;
   }
 
@@ -31,7 +36,7 @@
     color: white;
   }
 
-  .classic:hover {
+  .classic:hover:not(:disabled) {
     background-color: var(--color-classic-hover);
   }
   
@@ -40,7 +45,7 @@
     color: white;
   }
   
-  .danger:hover {
+  .danger:hover:not(:disabled) {
     background-color: #b02a37;
   }
   
@@ -50,9 +55,19 @@
     color: #007bff;
   }
   
-  .outline:hover {
+  .outline:hover:not(:disabled) {
     background-color: #007bff;
     color: white;
+  }
+  
+  .disabled {
+    background-color: #6c757d;
+    color: #ffffff;
+    cursor: not-allowed;
+  }
+  
+  .disabled:hover {
+    background-color: #6c757d;
   }
   
   @keyframes press {

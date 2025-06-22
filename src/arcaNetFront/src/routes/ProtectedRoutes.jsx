@@ -22,8 +22,3 @@ const ProtectedRoutes = ({ allowedUsers }) => {
 
 export default ProtectedRoutes;
 
-/* 
-Temporariamente foi feito um armazenamento no localstorage sem
-criptografia ou modelos de token mais seguros, uma vez que ainda
-não há back-end.
-*/

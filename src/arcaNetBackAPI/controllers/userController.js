@@ -87,6 +87,15 @@ const update_user = async (req, res, next) => {
     const userData = req.body;
 
     try {
+        // Se for admin e está tentando virar client, checar se é o último admin
+        const user = await User.findOne({_id: id});
+        if (user.role === 'admin' && userData.role === 'client') {
+            const adminCount = await User.countDocuments({ role: 'admin' });
+            if (adminCount === 1) {
+                return res.status(400).json({ message: 'Cannot change the last admin to client.', data: null, details: '' });
+            }
+        }
+
         const updatedUser = await User.findOneAndUpdate({_id: id}, userData, {new: true, runValidators: true});
 
         // Verifying if the given user exists
@@ -111,6 +120,15 @@ const delete_user = async (req, res, next) => {
     const id = req.params.id;
 
     try{
+        // Checar se está tentando deletar o último admin
+        const user = await User.findOne({_id: id});
+        if (user.role === 'admin') {
+            const adminCount = await User.countDocuments({ role: 'admin' });
+            if (adminCount === 1) {
+                return res.status(400).json({ message: 'Cannot delete the last admin.', data: null, details: '' });
+            }
+        }
+
         const deletedUser = await User.findOneAndDelete({_id: id});
 
         // Verifying if the given user exists
@@ -167,9 +185,16 @@ const update_own_user = async (req, res, next) => {
     try {
         // the client user can only update it's name, address
         // or phone number
+        // Treat '$' as empty string for address and phone
+        const updateData = {
+            name,
+            address: address === '$' ? '' : (address || ''),
+            phone: phone === '$' ? '' : (phone || '')
+        };
+        
         const updatedUser = await User.findOneAndUpdate(
             {_id: id},
-            {name, address, phone},
+            updateData,
             {new: true, runValidators: true});
 
         // Verifying if the given user exists
@@ -184,7 +209,7 @@ const update_own_user = async (req, res, next) => {
         res.status(200).json({ message:'Success', data:updatedUser, details:'' });
     }
     catch(err) {
-        const errMess = new ErrorMessage('User', id, 500);
+        const errMess = new ErrorMessage('User', id, 500, err.message);
         next(errMess);
     }
 }
