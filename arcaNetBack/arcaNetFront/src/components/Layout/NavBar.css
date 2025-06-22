@@ -1,0 +1,238 @@
+/* NavBar.css - Cores ajustadas para o tema Mystical & Elegant */
+/* (Mantendo suas variáveis de cores e lógica original, adicionando responsividade) */
+
+/*
+=====================================================
+  NAVBAR COMPONENTE TODO
+=====================================================
+*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-background-dark); /* Sua variável */
+  color: var(--color-text-on-accent); /* Sua variável (assumindo que é para texto sobre fundo escuro) */
+  padding: 2px 25px; /* Seu padding original */
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--color-border-divider); /* Sua variável (ou uma específica para borda escura) */
+  box-shadow: 0 2px 8px rgba(var(--color-shadow-soft-rgb), 0.06); /* Sua variável */
+  min-height: 54px; /* Adicionado: Para evitar que a navbar fique muito achatada com o padding de 2px */
+}
+
+/*
+======================================================
+  NAVBAR COMPONENTES DA ESQUERDA
+======================================================
+*/
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Seu gap original */
+}
+
+.navbar-logo-img {
+  height: 50px; /* Seu tamanho original */
+  transition: height 0.3s ease; /* Adicionado para suavizar mudança de tamanho */
+}
+
+.navbar-brand-name {
+  color: var(--color-text-on-accent); /* Sua variável */
+  text-decoration: none;
+  font-size: 1.1em; /* Seu tamanho original */
+  font-weight: bold;
+  font-family: var(--font-family-headings); /* Sua variável */
+  transition: color 0.3s ease; /* Transição já existente */
+}
+
+.navbar-brand-name:hover {
+  color: var(--color-accent-secondary); /* Sua variável */
+}
+
+/*
+======================================================
+  NAVBAR COMPONENTES DA DIREITA
+======================================================
+*/
+.navbar-main-links {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Seu gap original */
+  flex-wrap: nowrap; /* Por padrão, não quebra linha. Será alterado em @media */
+}
+
+.navbar-main-links a {
+  color: var(--color-text-on-accent); /* Sua variável */
+  text-decoration: none;
+  font-size: 1em; /* Seu tamanho original */
+  font-weight: 500;
+  font-family: var(--font-family-body); /* Sua variável */
+  padding: 5px 0; /* Seu padding original */
+  transition: color 0.3s ease, font-size 0.3s ease, padding 0.3s ease; /* Transição já existente e adicionadas */
+  white-space: nowrap; /* Evita que o texto do link quebre linha */
+}
+
+.navbar-main-links a:hover {
+  color: var(--color-accent-secondary); /* Sua variável */
+}
+
+/*
+------------------------------------------------------
+  NAVBAR COMPONENTES DA DIREITA (continuacao)
+------------------------------------------------------
+*/
+
+.navbar-cart-link {
+  color: var(--color-text-on-accent); /* Sua variável */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.navbar-cart-link svg { /* Para controlar o tamanho do SVG do carrinho */
+    transition: transform 0.3s ease;
+}
+
+.navbar-cart-link:hover {
+  color: var(--color-accent-secondary); /* Sua variável */
+}
+
+.navbar-login-button-custom {
+  background-color: var(--color-login-btn); /* Sua variável */
+  color: var(--color-text-on-accent); /* Sua variável */
+  border: 1px solid var(--color-text-on-accent); /* Sua variável */
+  padding: 6px 16px; /* Seu padding original */
+  font-weight: 600;
+  font-family: var(--font-family-body); /* Sua variável */
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, padding 0.3s ease, font-size 0.3s ease; /* Transição já existente e adicionadas */
+  white-space: nowrap;
+}
+
+.navbar-login-button-custom:hover {
+  background-color: var(--color-classic); /* Sua variável */
+  color: var(--color-text-on-accent); /* Sua variável */
+  border-color: var(--color-text-on-accent); /* Sua variável */
+}
+
+
+/* === Media Queries para Responsividade === */
+
+/* Telas Médias (Tablets e celulares maiores em paisagem) */
+@media (max-width: 992px) {
+  .navbar {
+    padding: 2px 15px; /* Padding horizontal reduzido */
+  }
+
+  .navbar-logo-img {
+    height: 45px; /* Logo um pouco menor */
+  }
+
+  .navbar-brand-name {
+    font-size: 1em; /* Nome da marca um pouco menor */
+  }
+
+  .navbar-main-links {
+    gap: 15px; /* Espaço entre links principais reduzido */
+  }
+
+  .navbar-main-links a {
+    font-size: 0.95em; /* Links um pouco menores */
+  }
+
+  .navbar-login-button-custom {
+    padding: 5px 12px; /* Botão de login um pouco menor */
+    font-size: 0.9em;
+  }
+
+  .navbar-cart-link svg {
+    width: 26px; /* Ícone do carrinho um pouco menor */
+    height: 26px;
+  }
+}
+
+
+/* Telas Pequenas (Celulares em retrato e paisagem) */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 5px 10px; /* Padding ainda menor, mas com um pouco mais de altura */
+    flex-wrap: wrap; /* Permite que .navbar-brand e .navbar-main-links quebrem linha */
+    justify-content: center; /* Centraliza quando quebra linha */
+    gap: 10px; /* Espaço se as seções quebrarem linha */
+  }
+
+  .navbar-brand {
+    /* flex-grow: 1; (Opcional: para ocupar espaço se .navbar-main-links quebrar abaixo) */
+    /* justify-content: center; (Se quiser centralizar a marca quando sozinha na linha) */
+  }
+
+  .navbar-logo-img {
+    height: 40px; /* Logo ainda menor */
+  }
+
+  .navbar-main-links {
+    gap: 10px; /* Espaço entre links bem reduzido */
+    flex-wrap: wrap; /* Permite que os próprios links quebrem linha */
+    justify-content: center; /* Centraliza os links se eles quebrarem linha */
+    width: 100%; /* Ocupa toda a largura se quebrar abaixo da marca */
+    order: 3; /* Garante que os links fiquem abaixo da marca se o navbar empilhar */
+  }
+
+  .navbar-main-links a {
+    font-size: 0.9em;
+    padding: 3px 0;
+  }
+
+  .navbar-login-button-custom {
+    padding: 4px 10px;
+    font-size: 0.85em;
+  }
+  
+  .navbar-cart-link svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Opcional: Se quiser esconder alguns links menos importantes em telas muito pequenas */
+  /*
+  .navbar-main-links a:nth-child(1), // Exemplo: esconder o primeiro link
+  .navbar-main-links a:nth-child(2) { // Exemplo: esconder o segundo link
+    display: none;
+  }
+  */
+}
+
+
+/* Telas Muito Pequenas */
+@media (max-width: 480px) {
+  .navbar {
+    /* Se o justify-content: center; do breakpoint anterior não for suficiente
+       para o caso de .navbar-brand e .navbar-main-links ficarem em linhas separadas: */
+    flex-direction: column; /* Empilha a marca e os links */
+    align-items: center; /* Centraliza os itens empilhados */
+    padding: 10px 10px; /* Aumenta padding vertical para acomodar empilhamento */
+  }
+
+  .navbar-brand {
+    margin-bottom: 10px; /* Espaço entre a marca e os links quando empilhados */
+  }
+
+  .navbar-main-links {
+    /* width: 100%; (Já definido no breakpoint anterior) */
+    /* justify-content: center; (Já definido) */
+    /* order: não é mais necessário se flex-direction for column no pai */
+  }
+
+  .navbar-logo-img {
+    height: 35px;
+  }
+
+  .navbar-brand-name {
+    font-size: 0.95em;
+  }
+
+  .navbar-main-links a {
+    font-size: 0.85em;
+  }
+}

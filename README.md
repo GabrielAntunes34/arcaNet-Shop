@@ -1,17 +1,75 @@
 # arcaNet-Shop
 
-## Group and members
+## 👥 Group and members
 Group 7
 
 * Gabriel Antunes Afonso de Araujo - 14571077
 * Thales Sena de Queiroz - 14608873
 * Thiago Zero Araujo - 11814183
 
-## Introduction
+## 📍 Introduction
 
 This project is the final assignment for the discipline SCC0219-2025 (Introduction to Web Development) and aims to develop an Online Store as a full web application where customers can view, interact and buy products of a given theme. In order to make things more interesting, we chose to create a Tarot Card and supplies store.
 
-## Requirements
+
+## 🛠️ How To Build
+    
+To run this project locally, follow the steps below: 
+
+If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
+```bash
+sudo apt update
+sudo apt install nodejs npm
+```
+
+After that you can clone our github repository with
+```bash
+git clone https://github.com/GabrielAntunes34/arcaNet-Shop/
+cd ./arcaNet-Shop
+```
+
+### Setting up MongoDB
+The database of this project was delevoped using a local MongoDB database, called 'arcanet', running it with docker. The visual interface is run by Mongo Express. The configuration file of those services are present on mongo.yaml
+
+To run those, you will need first to install the dependecies:
+```bash
+sudo apt install docker docker-compose
+```
+
+Then run:
+```bash
+docker compose -f mongo.yaml up --build -d
+```
+
+After ~1min, the services will be up and ready to go, to visualize the database via mongo express. In your web browser access [localhost:8081](http://localhost:8081). 
+- user: admin
+- password: pass
+
+After you finalize the tests, if you want to remove the container, run:
+```bash
+docker compose -f mongo.yaml down -v
+```
+
+### Running the backend
+After you run the MongoDB, go to the backend folder and initialize the app.js server with:
+```bash
+cd ./src/arcaNetBackAPI
+node app.js
+```
+
+### Running the Frontend
+After the backend is up, go to the root directory and then to the frontend folder, after that run:
+
+```bash
+cd ./src/arcaNetBackAPI
+npm install
+npm run dev
+```
+    
+To see the project itself, then open the url [http://localhost:5173/](http://localhost:5173/). And thats it.
+
+
+## 📥 Requirements
 
 As an online store, this system is required to be developed as a Web Application with intuitive and accessible user interfaces, as well as many functionalities to manage, buy and view products; login and register new users; complete purchases in a chard with valid Card Numbers. In the following is a detailed list of this requirements:
 
@@ -39,7 +97,7 @@ As an online store, this system is required to be developed as a Web Application
     - Interfaces must be accessible and user friendly.
     - System must be responsive.
 
-## Project Description
+## 📖 Project Description
 The project will be structured following the MVC and SPA patterns, using Java Script as front-end and back-end languages. In this section we will present it's components, functionalities and Interfaces, also using diagrams and mock ups
 
 1. Functionalities
@@ -68,7 +126,7 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
    The following diagram represent how the data will be modeled:
    - [BD Diagram](https://github.com/GabrielAntunes34/arcaNet-Shop/blob/main/docs/dataBaseDiagram.pdf)
     
-## Code Comments
+## 💻 Code Comments
 
 ### Front-end
 
@@ -132,63 +190,78 @@ Every feature has it's own page, which may or not need to use specific states. I
 
 ### Back-end
 
-## Test Plan/Results
+## 🔍 Test Plan/Results
 
-### Front-end
+### 🎨 Front-end
 
 * #### Authentication
 
-    To test the authentication interface, some mock functions were developed to simulare login, register and logout placing and fetching users at localstorage. At first, many problems within the validation mechanism of the forms ocurred, because the asyncronical code for the User state weren't corrctly set, and some variables were compared before their atualization, even bypassing the validation check at the first time. This problems, however were overcommed and the authentication interface started to behave properly.
+    To test the authentication interface, the login, registration, and logout functionalities were verified in an integrated environment. Users are stored and retrieved from the users collection in the database. For testing purposes, two users are automatically created during the database initialization: client@example.com (password: Admin12#) with regular privileges, and admin@example.com (password: Admin12#) with administrative access.
 
-    - [Mock auth functions](/src/arcaNetFront/src/tests/mockAuth.js)
+The registration process was tested via the Sign Up page by filling out the required form fields and submitting new user data. The logout functionality was tested for both users by clicking the Logout button in the user avatar menu. All three authentication features — login, registration, and logout — functioned as expected during testing.
 
 * #### Products
   
- See if it is being resposive, if it is being highlighted and redirecting to the respective product detail page, everything turned out ok.
-    - [Mock auth functions](/src/arcaNetFront/src/tests/productCardMock.jsx)
+To test the product-related functionalities, sample products were populated into the database during initialization. Several core features were validated: the filtering system on the Products page, the highlight mechanism (which displays selected products on the Home page), category assignment for each product, and the stock control system, which prevents purchases exceeding available inventory.
+
+These functionalities are best observed and tested through the admin interface, which allows administrators to manage active categories, toggle product highlights, update stock levels, and perform general CRUD operations.
+
+All product-related features were tested and performed as expected.
  
 * #### WheelOfFortune
 
-    Wheel of fortunes uses the localstorage credentials of the user to generate the random numbers, for now, to see different numbers being generated you need to login with another user or clean the localstorage of your web browser, so it can be generated new numbers. Future work involves upgrading the logic of the numbers generated by linking it to the user on the database, not new credentials generated on the localstorage of the web browser.
+Wheel of fortunes uses the localstorage credentials of the user to generate the random numbers, for now, to see different numbers being generated you need to login with another user or clean the localstorage of your web browser, so it can be generated new numbers. Future work involves upgrading the logic of the numbers generated by linking it to the user on the database, not new credentials generated on the localstorage of the web browser.
 
 * #### Cart
 
-    By now, testing the cart functionality is based on adding and removing items from it. It can be done as usual, some functionalities may be developed by the integration of the backend, but for now the core is developed to work with the integration of front and back end.
+The cart functionality was tested by adding and removing products, as well as verifying whether it correctly prevents users from purchasing quantities that exceed the available stock. Currently, the cart state is managed entirely on the frontend. Future improvements may include implementing server-side cart persistence to enhance consistency across sessions and devices.
 
 * #### Routes
 
-    To test the router, a series of components for the so called page were developed with a”Mock - component name” data inside. Therefore, we started to match the defined URL’s and verify if they responded with the components. Some errors in the linking of them occurred, but they were easily resolved. Besides, the protected routes were also tested with a Mock code that checked the URL query to instantiate an user with the specified role into the local storage, which was then fetched by the ProtectedRoutes component. This last test worked really well, and we didn’t face problems with the routing among “authenticated” users.
-
-    - [Mock auth functions](/src/arcaNetFront/src/tests/mockAuth.js)
+All route definitions were tested by creating mock components for each page and verifying that the corresponding URLs correctly rendered the expected content. Protected routes were tested using real authentication flow, where the user's data and role are now retrieved directly from the database upon login. Access control is enforced through the ProtectedRoutes component, which validates user permissions based on server-issued authentication tokens. The system correctly restricted or granted access to pages according to the user’s role, and routing behavior worked as intended.
 
 * #### Admin interface
-     Verified if all button working correctly, CRUD operations on categories and products(a little bit with users because it needs a lot the backend), if the changes being made in the management section were really acting through the entire site.
+  
+The admin interface was tested to ensure that all buttons and interactions functioned correctly. Full CRUD operations were validated for products, categories, and users. Each change made through the management interface was reflected consistently across the entire application. This includes updating product stock and highlight status, managing category visibility, and editing user roles and information. All administrative features operated as expected during testing.
 
-  - [Mock data developed](/src/arcaNetFront/src/tests/mockData.jsx)
+### 🧪 Back-end
+The backend was tested across all core modules responsible for authentication, user management, product and category control, cart integration, and discount generation. Below are the main areas evaluated:
 
-### Back-end
+* #### Authentication & Authorization
+The authentication system was tested using real user credentials stored in the users collection. Login requests return a JWT token and set a secure HTTP-only cookie containing session information. The backend validates this token for all protected routes, ensuring users cannot access or perform actions beyond their assigned roles.
+- Admins and clients were tested with valid and invalid credentials.
+- Token expiration and malformed tokens were correctly rejected.
+- Route-level authorization was validated through middleware to restrict admin-only routes.
 
-## How To Build
-    
-    To run this project locally, follow the steps below:
-    If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
-    
-    sudo apt update
-    sudo apt install nodejs npm
+* #### User Management
+CRUD operations for users were tested through the admin interface and verified via direct API calls. Admins can:
+- View the list of users.
+- Update user information and roles.
+- Delete users from the database.
+All operations triggered appropriate MongoDB changes and returned meaningful HTTP status codes.
 
-    after that you can download our github repository as a zip extract it
-    in terminal go to arcanet-shop-main/src/arcaNetFront
-    when in this directory use
-    
-    npm i
-    
-    to install the packages and dependencies, and use
+* #### Product & Category Management
+Products and categories are fully manageable through the API. The backend ensures:
+- Product creation includes required fields (title, description, price, stock, etc.).
+- Stock constraints are enforced: a product cannot be purchased if it’s out of stock.
+- Categories can be toggled as "active" or "inactive", affecting their visibility on the frontend.
+- Relationships between products and categories are preserved during updates and deletions.
+All endpoints were tested via API clients (e.g., Postman) and integrated successfully with the frontend.
 
-    npm run dev 
-    
-    to start the server and project itself 
-    open the url http://localhost:5173/
-    and thats it.
+* #### Wheel of Fortune / Discount Logic
+The Wheel of Fortune feature assigns a daily discount to users. The backend ensures:
+- A user receives only one discount per day.
 
+
+* #### Cart Handling (Preparation for Full Integration)
+Although the cart currently functions client-side, backend endpoints are prepared to support future integration. This includes:
+- Validations to prevent out-of-stock purchases.
+
+* #### General API Testing
+All routes were tested for:
+- Proper HTTP status codes (200, 400, 401, 403, 404, 500).
+- Error handling via centralized error middleware.
+- Input validation using request body schemas (where applicable).
+- Cross-Origin Resource Sharing (CORS) configuration to enable secure frontend-backend communication.
 
 Project still under construction :)

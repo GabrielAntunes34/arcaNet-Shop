@@ -1,0 +1,165 @@
+/* ProductListPage.module.css */
+
+.pageContainer {
+  max-width: 90%;
+  margin: 0;
+  padding: 30px 20px 60px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  flex: 0 0 260px;
+  padding: 25px 20px;
+  background-color: var(--color-background-section-subtle);
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(var(--color-shadow-accent-hint-rgb), 0.06);
+  border: 1px solid var(--color-border-card); /* Borda lavanda muito clara */
+}
+
+.sidebar h3 {
+  /* font-family: var(--font-family-headings); (Herdado globalmente) */
+  color: var(--color-text-headings);
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border-divider);
+}
+
+.sidebar h3:not(:first-of-type) { margin-top: 30px; }
+
+.categoryLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: var(--color-text-default);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.categoryLabel:hover { color: var(--color-accent-primary); }
+
+.categoryLabel input[type="checkbox"] {
+  margin-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--color-accent-secondary);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -1px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  background-color: var(--color-background-content-box);
+}
+
+.categoryLabel input[type="checkbox"]:checked {
+  background-color: var(--color-accent-secondary);
+  border-color: var(--color-accent-primary); /* Borda mais escura quando marcado */
+}
+
+.categoryLabel input[type="checkbox"]:checked::after {
+  content: '✔';
+  color: var(--color-text-on-accent);
+  font-size: 12px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+}
+
+.priceFilter { margin-bottom: 15px; }
+.priceFilter label { display: block; font-size: 0.9rem; color: var(--color-text-default); margin-bottom: 8px; }
+
+.priceFilter input[type="range"] {
+  width: 100%; height: 8px;
+  -webkit-appearance: none; appearance: none;
+  background: var(--color-accent-tertiary); /* Trilho lavanda claro */
+  border-radius: 5px; cursor: pointer; outline: none;
+}
+.priceFilter input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px;
+  background: var(--color-accent-primary); /* Ameixa */
+  border-radius: 50%; border: 2px solid var(--color-background-content-box);
+  box-shadow: 0 0 3px rgba(var(--color-shadow-soft-rgb), 0.2);
+  margin-top: -5px;
+}
+.priceFilter input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  background: var(--color-accent-primary);
+  border-radius: 50%; border: 2px solid var(--color-background-content-box);
+  box-shadow: 0 0 3px rgba(var(--color-shadow-soft-rgb), 0.2);
+  cursor: pointer;
+}
+.priceFilter input[type="range"]::-moz-range-track {
+  width: 100%; height: 8px;
+  background: var(--color-accent-tertiary);
+  border-radius: 5px; cursor: pointer;
+}
+
+.noFilters { font-size: 0.9rem; color: var(--color-text-subtle); font-style: italic; }
+
+.mainContent { 
+  flex-grow: 1; 
+  padding: 0;
+}
+
+.mainContent > p { /* "No products found" */
+  text-align: center; font-size: 1.1rem; color: var(--color-text-subtle);
+  padding: 50px 20px; background-color: var(--color-background-section-subtle);
+  border-radius: 8px; border: 1px dashed var(--color-border-default);
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+  .sidebar {
+    flex: 0 0 220px; /* Sidebar um pouco mais estreita */
+  }
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    flex-direction: column; /* Empilha sidebar e conteúdo principal */
+    gap: 25px;
+    padding: 20px 15px 40px;
+  }
+
+  .sidebar {
+    flex-basis: auto; /* Permite que a sidebar ocupe a largura necessária */
+    width: 100%; /* Sidebar ocupa toda a largura */
+    margin-bottom: 0; /* Removido pois o gap do flex-container cuida disso */
+  }
+
+  .mainContent :global(.searchBarContainer),
+  .mainContent > input[type="search"] {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+    .pageContainer {
+        padding: 15px 10px 30px;
+    }
+    .sidebar {
+        padding: 20px 15px;
+    }
+    .sidebar h3 {
+        font-size: 1.15rem;
+    }
+    .categoryLabel {
+        font-size: 0.9rem;
+    }
+    .categoryLabel input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+    .categoryLabel input[type="checkbox"]:checked::after {
+        font-size: 10px;
+    }
+}
