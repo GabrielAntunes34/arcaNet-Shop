@@ -170,25 +170,59 @@ Every feature has it's own page, which may or not need to use specific states. I
 
 ## How To Build
     
-    To run this project locally, follow the steps below:
-    If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
-    
-    sudo apt update
-    sudo apt install nodejs npm
+To run this project locally, follow the steps below: 
 
-    after that you can download our github repository as a zip extract it
-    in terminal go to arcanet-shop-main/src/arcaNetFront
-    when in this directory use
-    
-    npm i
-    
-    to install the packages and dependencies, and use
+If you're on a Debian-based system (like Ubuntu), you can install Node.js with:
+```bash
+sudo apt update
+sudo apt install nodejs npm
+```
 
-    npm run dev 
+After that you can clone our github repository with
+```bash
+git clone https://github.com/GabrielAntunes34/arcaNet-Shop/
+cd ./arcaNet-Shop
+```
+
+### Setting up MongoDB
+The database of this project was delevoped using a local MongoDB database, called 'arcanet', running it with docker. The visual interface is run by Mongo Express. The configuration file of those services are present on mongo.yaml
+
+To run those, you will need first to install the dependecies:
+```bash
+sudo apt install docker docker-compose
+```
+
+Then run:
+```bash
+docker compose -f mongo.yaml up --build -d
+```
+
+After ~1min, the services will be up and ready to go, to visualize the database via mongo express. In your web browser access [localhost:8081](http://localhost:8081). 
+- user: admin
+- password: pass
+
+After you finalize the tests, if you want to remove the container, run:
+```bash
+docker compose -f mongo.yaml down -v
+```
+
+### Running the backend
+After you run the MongoDB, go to the backend folder and initialize the app.js server with:
+```bash
+cd ./src/arcaNetBackAPI
+node app.js
+```
+
+### Running the Frontend
+After the backend is up, go to the root directory and then to the frontend folder, after that run:
+
+```bash
+cd ./src/arcaNetBackAPI
+npm install
+npm run dev
+```
     
-    to start the server and project itself 
-    open the url http://localhost:5173/
-    and thats it.
+To see the project itself, then open the url [http://localhost:5173/](http://localhost:5173/). And thats it.
 
 
 Project still under construction :)
