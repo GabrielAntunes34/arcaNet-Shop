@@ -1,17 +1,17 @@
 # arcaNet-Shop
 
-## Group and members
+## 👥 Group and members
 Group 7
 
 * Gabriel Antunes Afonso de Araujo - 14571077
 * Thales Sena de Queiroz - 14608873
 * Thiago Zero Araujo - 11814183
 
-## Introduction
+## 📍 Introduction
 
 This project is the final assignment for the discipline SCC0219-2025 (Introduction to Web Development) and aims to develop an Online Store as a full web application where customers can view, interact and buy products of a given theme. In order to make things more interesting, we chose to create a Tarot Card and supplies store.
 
-## Requirements
+## 📥 Requirements
 
 As an online store, this system is required to be developed as a Web Application with intuitive and accessible user interfaces, as well as many functionalities to manage, buy and view products; login and register new users; complete purchases in a chard with valid Card Numbers. In the following is a detailed list of this requirements:
 
@@ -39,7 +39,7 @@ As an online store, this system is required to be developed as a Web Application
     - Interfaces must be accessible and user friendly.
     - System must be responsive.
 
-## Project Description
+## 📖 Project Description
 The project will be structured following the MVC and SPA patterns, using Java Script as front-end and back-end languages. In this section we will present it's components, functionalities and Interfaces, also using diagrams and mock ups
 
 1. Functionalities
@@ -68,7 +68,7 @@ The project will be structured following the MVC and SPA patterns, using Java Sc
    The following diagram represent how the data will be modeled:
    - [BD Diagram](https://github.com/GabrielAntunes34/arcaNet-Shop/blob/main/docs/dataBaseDiagram.pdf)
     
-## Code Comments
+## 💻 Code Comments
 
 ### Front-end
 
@@ -132,7 +132,7 @@ Every feature has it's own page, which may or not need to use specific states. I
 
 ### Back-end
 
-## Test Plan/Results
+## 🔍 Test Plan/Results
 
 ### Front-end
 
@@ -168,7 +168,7 @@ Every feature has it's own page, which may or not need to use specific states. I
 
 ### Back-end
 
-## How To Build
+## 🛠️ How To Build
     
 To run this project locally, follow the steps below: 
 
