@@ -56,14 +56,24 @@ const read_product_id = async (req, res, next) => {
 
 // Creates a new product at the database from the data passed at the requisition's body
 const create_product = async (req, res, next) => {
-    const {name, description, price, stock, sold, highlighted, categories, photo} = req.body;
+    const {name, description, price, stock, sold, highlighted, categories } = req.body;
 
-    //console.log(req.body);
+    console.log(req.body);
 
-    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-    
-    //console.log('Image URL:', imageUrl);
+    // Converting categories back to a list of strings
+    let categoryIds = [];
     try {
+        categoryIds = JSON.parse(categories);  // Converte a string JSON de volta para um array
+    } catch (err) {
+        return res.status(400).json({ message: 'Invalid categories format' });
+    }
+
+    // Saving the new data
+    try {
+        console.log('aquiiiiiii');
+        const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+        console.log('Image URL:', imageUrl);
+        
         const newProd = new Product({
             name: name,
             description: description,
@@ -72,7 +82,7 @@ const create_product = async (req, res, next) => {
             stock: stock,
             sold: sold,
             highlighted: highlighted,
-            categories: categories
+            categories: categoryIds
         });
 
         console.log('New Product:', newProd);
