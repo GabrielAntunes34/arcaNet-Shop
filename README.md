@@ -45,17 +45,12 @@ If MongoDB is not running:
 ```bash
 sudo systemctl start mongod
 ```
-After you run the MongoDB, go to the backend folder and initialize the app.js server with:
+After you run the MongoDB, go to the backend folder and initialize the app.js server with, there is seed.js integrated that will populate de database:
 ```bash
 cd ./src/arcaNetBackAPI
 npm install
 node app.js
 ```
-Populate the database
-```bash
-node seed.js
-```
-
 ### Running the Frontend
 After the backend is up, go to the root directory and then to the frontend folder, after that run:
 
