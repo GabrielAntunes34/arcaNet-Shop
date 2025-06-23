@@ -12,10 +12,15 @@ require('dotenv').config();
 const read_user = async (req, res, next) => {
     try {
         // Selecting all users without it's password
+        console.log("AAAAAAAAAAAAAAAH");
         const allUsers = await User.find({}, { password:0 }).sort({ createdAt: -1 });
+
+        console.log(allUsers);
+
         res.json({ message:'Success', data:allUsers, details:'' });
     }
     catch(err) {
+        console.log(err.message);
         const errMess = new ErrorMessage('User', -1, 500, err.message);
         return next(errMess);
     }

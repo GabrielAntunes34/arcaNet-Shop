@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
+// Mock to populate our database
+const { generateData } = require('./mockData/seed');
+
 //================================
 // SERVER CONFIGURATION
 //================================
@@ -28,11 +31,13 @@ const DB_URI = process.env.DB_URI;
 const app = express();
 mongoose
   .connect(DB_URI)
-  .then(() => {
+  .then(async () => {
     console.log('Database connection established');
     app.listen(PORT, () => {
       console.log(`API listening on port ${PORT}`);
     });
+
+    await generateData();
   })
   .catch((err) => {
     console.log('!-- ERROR --!');

@@ -9,7 +9,7 @@ const AddProductPage = () => {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
   const [description, setDescription] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageFile, setImageFile] = useState(null);  // Novo estado para o arquivo de imagem
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [availableCategories, setAvailableCategories] = useState([]);
@@ -44,6 +44,11 @@ const AddProductPage = () => {
     );
   };
 
+  // Handle image file selection
+  const handleImageChange = (event) => {
+    setImageFile(event.target.files[0]);  // Salva o arquivo da imagem selecionada
+  };
+
   // Submit new product
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -67,27 +72,45 @@ const AddProductPage = () => {
       stock: stockNumber,
       sold: 0, // Default value for new products
       description,
-      photo: imageUrl || 'https://via.placeholder.com/150?text=No+Image',
       isHighlighted,
       categories: selectedCategories, // Category IDs
     };
 
+    // Criar um objeto FormData para enviar os dados e a imagem
+    const formData = new FormData();
+    formData.append('name', productName);
+    formData.append('price', priceNumber);
+    formData.append('stock', stockNumber);
+    formData.append('sold', 0);  // Default value
+    formData.append('description', description);
+    formData.append('highlighted', isHighlighted);
+    formData.append('categories', JSON.stringify(selectedCategories)); // Enviando a lista de categorias como JSON
+    if (imageFile) {
+      formData.append('productImage', imageFile); // Anexando o arquivo de imagem
+    }
+
     try {
+      console.log(formData);
+
       const response = await fetch('http://localhost:3000/product', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          // Não é necessário definir o Content-Type, o fetch fará isso automaticamente
         },
         credentials: 'include',
-        body: JSON.stringify(newProduct),
+        body: formData, // Envia o FormData com todos os campos e o arquivo
       });
 
-      if (!response.ok) throw new Error('Failed to add product.');
+      if (!response.ok)  {
+        console.log(response);
+        throw new Error('Failed to add product.')
+      };
 
       alert(`Product "${productName}" added successfully!`);
       navigate('/admin/products');
     } catch (error) {
-      console.error('Error creating product:', error);
+      console.log(error.message);
+      console.error('Error creating product:', error.message);
       alert('Failed to add product. See console for details.');
     }
   };
@@ -155,13 +178,13 @@ const AddProductPage = () => {
         </div>
 
         <div className={styles.formGroup}>
-          <label htmlFor="imageUrl">Image URL</label>
+          <label htmlFor="productImage">Product Image *</label>
           <input
-            type="url"
-            id="imageUrl"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="https://example.com/image.jpg"
+            type="file"
+            id="productImage"
+            onChange={handleImageChange} // Lida com a seleção da imagem
+            accept="image/*" // Aceita apenas arquivos de imagem
+            required
             className={styles.input}
           />
         </div>

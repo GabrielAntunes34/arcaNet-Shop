@@ -37,6 +37,7 @@ const authorize = (role) => {
         if(tokenRole === role || tokenRole === 'admin') {
             return next();
         }
+
         res.status(403).json({message:'Forbidden', data:null, details:''});
     }
 }

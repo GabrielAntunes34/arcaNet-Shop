@@ -50,6 +50,10 @@ const draw_fortune = async (req, res, next) => {
             {upsert:true, new: true}
         );
 
+        console.log(updatedCupon);
+
+        console.log(cards);
+
         // Returning the cards that need to be shown in the interface
         res.json({message: 'Success', data: cards, details: null});
     }
@@ -72,8 +76,8 @@ const claim_cupon = async (req, res, next) => {
 
         // Checking it the cupon is valid
         if(!cupon.valid) {
-            return res.status(403).json({
-                message: 'You didn\'t won a cupon this time. Try again later',
+            return res.json({
+                message: 'You wasn\'t lucky this time... Try again later',
                 data: null,
                 details: ''
             }) 
@@ -82,10 +86,11 @@ const claim_cupon = async (req, res, next) => {
         // Instanciating a cookie to activate the discount
         const token = generateCuponToken(cupon._id, cupon.discount, cupon.used);
         res.cookie('cuponToken', token, COOKIE_OPTIONS);
-        res.json({message:'Success', data:null, details:''});
+        res.json({message:'Congratulations. You\'ve won you\'re reward', data:null, details:''});
 
     }
     catch(err) {
+        console.log(err.message);
         const errMess = new ErrorMessage('Cupon', -1, 500, err.message);
         return next(errMess); 
     }

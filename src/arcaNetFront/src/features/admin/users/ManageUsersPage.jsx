@@ -23,6 +23,7 @@ const ManageUsersPage = () => {
                 });
 
                 if (!response.ok) {
+                    console.log(response);
                     throw new Error('Failed to fetch users');
                 }
 
@@ -31,6 +32,7 @@ const ManageUsersPage = () => {
 
                 setUsers(Array.isArray(data) ? data : []);
             } catch (error) {
+                console.log(error.message);
                 console.error('Error fetching users from API:', error);
                 setUsers([]);
             } finally {
