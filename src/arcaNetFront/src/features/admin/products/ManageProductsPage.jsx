@@ -18,8 +18,9 @@ const ManageProductsPage = () => {
         const fetchData = async () => {
             try {
                 const prodRes = await fetch('http://localhost:3000/product', {
+                    method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include',
+                    credentials: 'include'
                 });
                 const prodData = await prodRes.json();
                 setProducts(Array.isArray(prodData.data) ? prodData.data : []);

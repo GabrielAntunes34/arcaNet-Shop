@@ -60,14 +60,14 @@ const create_product = async (req, res, next) => {
 
     //console.log(req.body);
 
-    //const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
     
     //console.log('Image URL:', imageUrl);
     try {
         const newProd = new Product({
             name: name,
             description: description,
-            image: photo,
+            image: imageUrl,
             price: price,
             stock: stock,
             sold: sold,
