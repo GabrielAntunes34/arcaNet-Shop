@@ -1,6 +1,7 @@
 // Card.jsx
 import React from 'react';
 import verso from '../../assets/backCard.jpg';
+import card0Img from '../../assets/carta0.png'
 import card1Img from '../../assets/carta1.jpg';  
 import card2Img from '../../assets/carta2.jpg';
 import card3Img from '../../assets/carta3.jpg';  
@@ -14,6 +15,7 @@ import card9Img from '../../assets/carta9.jpg';
 import './Card.css';
 
 const frontImageMap = {
+    0: card0Img,
     1: card1Img,
     2: card2Img,
     3: card3Img,

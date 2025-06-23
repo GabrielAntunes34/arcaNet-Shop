@@ -26,7 +26,7 @@ const canPlayFortune = async (req, res, next) => {
 
         res.status(403).json({
             message: 'You\'re out of chances to day, go back in the future',
-            data: {hours, min},
+            data: [0, 0, 0],
             details: ''
         });
 

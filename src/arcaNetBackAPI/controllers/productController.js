@@ -58,8 +58,6 @@ const read_product_id = async (req, res, next) => {
 const create_product = async (req, res, next) => {
     const {name, description, price, stock, sold, highlighted, categories } = req.body;
 
-    console.log(req.body);
-
     // Converting categories back to a list of strings
     let categoryIds = [];
     try {
@@ -70,9 +68,7 @@ const create_product = async (req, res, next) => {
 
     // Saving the new data
     try {
-        console.log('aquiiiiiii');
         const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-        console.log('Image URL:', imageUrl);
         
         const newProd = new Product({
             name: name,

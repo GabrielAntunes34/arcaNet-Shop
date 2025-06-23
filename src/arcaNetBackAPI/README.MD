@@ -106,7 +106,7 @@ This route will release the payment of an authenticated user who's buying some p
 | GET    | /draw | Nothing | List of three card numbers | Yes |
 | GET    | /claim | Nothing | Cupon JWT token | Yes |
 
-This are the routes to play Wheel Of Fortune game. The first one choose three random numbers from 1 to 9 and if the three of them are equal, we update the user's cupon to a valid one with the number's discount times 5. The second, checks if the user dosen't already have a cupon token and, if his cupon is valid, generates it's token to applay in the total value of a purchase.
+This are the routes to play Wheel Of Fortune game. The first one choose three random numbers from 1 to 9 and if the three of them are equal, we update the user's cupon to a valid one with the number's discount times 5. The second, checks if the user dosen't already have a cupon token and, if his cupon is valid, generates it's token to apply in the total value of a purchase.
 
 The game (and this code) has some rules:
 - Every user has **only one** cupon.
