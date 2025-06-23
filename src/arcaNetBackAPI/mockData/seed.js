@@ -1,14 +1,11 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const User = require('./models/User');         
-const Category = require('./models/Category'); 
-const Product = require('./models/Product');   
+const bcrypt = require('bcryptjs');
+const User = require('../models/user');         
+const Category = require('../models/category'); 
+const Product = require('../models/product');   
 
-async function main() {
-  // 1) Connect & drop the database
-  await mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-  console.log('Connected to MongoDB, dropping database...');
+const generateData = async () => {
   await mongoose.connection.dropDatabase();
 
   // 2) Create categories
@@ -65,10 +62,12 @@ async function main() {
     { name: 'The Lovers',          categories: ['Major Arcana', 'Love'] }
   ];
 
+  const imgName = 'http://localhost:3000/uploads/prod1.png';
+
   const products = await Product.insertMany(productsData.map(p => ({
     name:        p.name,
     description: `Tarot card: ${p.name}`,
-    image:       "name",             // as requested, use the card name string
+    image:       imgName,             // as requested, use the card name string
     price:       Math.floor(Math.random() * 50) + 10, // random between $10–59
     stock:       100,
     sold:        0,
@@ -78,12 +77,15 @@ async function main() {
 
   console.log(`Inserted ${products.length} products.`);
 
-  // 7) Finish up
-  await mongoose.disconnect();
-  console.log('Seeding complete; disconnected from MongoDB.');
 }
 
+module.exports = {
+    generateData
+};
+
+/*
 main().catch(err => {
   console.error('Error during seeding:', err);
   process.exit(1);
 });
+*/

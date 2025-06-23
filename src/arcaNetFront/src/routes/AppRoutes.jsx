@@ -50,10 +50,10 @@ const AppRoutes = () => {
 
 				<Route path='cart' element={<CartPage />} />
 
-				<Route path='Wheel-of-fortune' element={<WheelOfFortunePage />} />
 
 				{/* Routes protected for logged Users*/}
 				<Route element={<ProtectedRoutes allowedUsers={['admin', 'client']} />}>
+					<Route path='Wheel-of-fortune' element={<WheelOfFortunePage />} />
 					<Route path='profile' element={<ProfilePage />} />
 					<Route path='payment' element={<PaymentPage />} />
 				</Route>
