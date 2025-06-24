@@ -41,7 +41,7 @@ const FortuneProvider = ({ children }) => {
                 console.log(data.data);
 
                 setNumbers(data.data);
-                setAlreadyPlayed(true);
+                setAlreadyPlayed(false);
             }
             catch(err) {
                 console.log(err.message);
