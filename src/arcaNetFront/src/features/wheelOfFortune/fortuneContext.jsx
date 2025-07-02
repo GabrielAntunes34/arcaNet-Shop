@@ -13,8 +13,8 @@ const FortuneProvider = ({ children }) => {
     const [gameMessage, setGameMessage] = useState('');
     const [alreadyPlayed, setAlreadyPlayed] = useState(false);
 
-    // Draw fetch, if the user is logged and it's the first time playint
-    useEffect(() => {
+    // Draw fetch, if the user is logged and it's the first time playing
+    const drawCupon = async () => {
         const fetchCards = async () => {
             try {
                 const response = await fetch('http://localhost:3000/fortune/draw', {
@@ -27,7 +27,6 @@ const FortuneProvider = ({ children }) => {
 
                 // Verifying the response
                 if(!response.ok) {
-                    console.log('aquiiii');
                     console.log(response);
                 }
                 const data = await response.json();
@@ -38,10 +37,7 @@ const FortuneProvider = ({ children }) => {
                     setGameMessage(data.message)
                 }
 
-                console.log(data.data);
-
                 setNumbers(data.data);
-                setAlreadyPlayed(false);
             }
             catch(err) {
                 console.log(err.message);
@@ -50,24 +46,8 @@ const FortuneProvider = ({ children }) => {
         };
 
         // Draw cards if user hasn't played yet
-        if(user && !alreadyPlayed) {
+        if(user) {
             fetchCards();
-        }
-    }, [user]);
-
-    // Defining a local login function --> Should become our real logic
-    const login = async (email, password) => {
-        try {
-            const newUser = await makeLogin(email, password);
-            if(!newUser) {
-                return false;
-            }
-
-            setUser(newUser);
-            return true;
-        } catch (error) {
-            console.error('Login error:', error);
-            return false;
         }
     }
 
@@ -93,7 +73,7 @@ const FortuneProvider = ({ children }) => {
 
     return (
         <>
-            <fortuneContext.Provider value={{ numbers, gameMessage, claimCupon, alreadyPlayed}}>
+            <fortuneContext.Provider value={{ numbers, gameMessage, drawCupon, claimCupon}}>
                 {children}
             </fortuneContext.Provider>
         </>
